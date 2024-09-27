@@ -1,39 +1,55 @@
 import { withAuth } from "@workos-inc/authkit-nextjs";
-import { createCompany } from "../actions/workosActions";
+import { createCompany } from "@/app/actions/workosActions";
+import { redirect } from "next/navigation";
+import { Button } from "@/app/components/ui/button";
+import { Input } from "@/app/components/ui/input";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/app/components/ui/card";
 
 export default async function NewCompanyPage() {
   const { user } = await withAuth();
-  async function handleNewCompanyFormSubmit(data: FormData) {
+
+  if (!user) {
+    redirect("/login");
+  }
+
+  async function handleNewCompanyFormSubmit(formData: FormData) {
     "use server";
-    if (user) {
-      await createCompany(data.get("newCompanyName") as string, user.id);
+    const newCompanyName = formData.get("newCompanyName") as string;
+    if (newCompanyName) {
+      await createCompany(newCompanyName, user.id);
+      redirect("/new-listing");
     }
   }
 
-  if (!user) {
-    <h1>Login to use this page</h1>;
-  }
-
   return (
-    <div className="container">
-      <h2 className="text-lg mt-6">Yeni bir şirket oluştur</h2>
-      <p className="text-gray-500 text-sm mb-2">
-        Bir iş ilanı oluşturmak için şirketinizi oluşturun
-      </p>
-      <form action={handleNewCompanyFormSubmit} className="flex gap-2">
-        <input
-          name="newCompanyName"
-          type="text"
-          placeholder="Şirket ismi gir"
-          className="p-2 border border-gray-400 rounded-md"
-        />
-        <button
-          type="submit"
-          className="flex gap-2 items-center bg-orange-400 px-4 py-2 rounded-md text-white"
-        >
-          Şirket oluştur
-        </button>
-      </form>
+    <div className="container max-w-md mx-auto py-8">
+      <Card>
+        <CardHeader>
+          <CardTitle>Yeni bir şirket oluştur</CardTitle>
+          <CardDescription>
+            Bir iş ilanı oluşturmak için şirketinizi oluşturun
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form action={handleNewCompanyFormSubmit} className="space-y-4">
+            <Input
+              name="newCompanyName"
+              type="text"
+              placeholder="Şirket ismi gir"
+              required
+            />
+            <Button type="submit" className="w-full">
+              Şirket oluştur
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
     </div>
   );
 }

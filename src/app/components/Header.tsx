@@ -9,12 +9,12 @@ export default async function Header() {
     <header>
       <div className="flex items-center justify-between mx-auto">
         <div>
-          <Link href={"/"} className="font-extrabold text-2xl">
-            yükyolu
+          <Link href={"/"} className="font-bold text-2xl text-primary/90">
+            Yük Yolu
           </Link>
         </div>
         <nav className="flex gap-4">
-          {/* Login Button */}
+          {/* Login button */}
           {!user && (
             <Link
               href={signInUrl}
@@ -24,7 +24,7 @@ export default async function Header() {
             </Link>
           )}
 
-          {/* Logout Button */}
+          {/* Logout button */}
           {user && (
             <form
               action={async () => {
@@ -41,7 +41,7 @@ export default async function Header() {
             </form>
           )}
 
-          {/* Post a Job Button */}
+          {/* Job post button */}
           <Link
             href={"/new-listing"}
             className="bg-yellow-400 text-white rounded-lg px-4 py-2 font-bold"

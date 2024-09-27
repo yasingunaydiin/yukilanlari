@@ -1,19 +1,29 @@
-"use server";
-
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { withAuth } from "@workos-inc/authkit-nextjs";
 import { WorkOS } from "@workos-inc/node";
 import Link from "next/link";
+import { ArrowRight, Building2 } from "lucide-react";
+import { Button } from "@/app/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/app/components/ui/card";
+import { Alert, AlertDescription } from "@/app/components/ui/alert";
+
+const workos = new WorkOS(process.env.WORKOS_API_KEY!);
 
 export default async function NewListingPage() {
-  const workos = new WorkOS(process.env.WORKOS_API_KEY);
-
-  const { user } = await withAuth(); //getUser();
+  const { user } = await withAuth();
 
   if (!user) {
     return (
-      <div className="container mt-6">İş ilanı vermek için giriş yapın</div>
+      <div className="container mt-6">
+        <Alert>
+          <AlertDescription>İş ilanı vermek için giriş yapın</AlertDescription>
+        </Alert>
+      </div>
     );
   }
 
@@ -36,46 +46,48 @@ export default async function NewListingPage() {
   }
 
   return (
-    <div className="container">
-      <div>
-        <h1 className="text-lg mt-6">Şirketleriniz</h1>
-        <p className="text-gray-500 text-sm mb-2">
-          İş oluşturmak için bir şirket seçin
-        </p>
-        <div>
-          <div className="border inline-block rounded-md">
-            {Object.keys(organizationsNames).map((orgId) => (
-              // eslint-disable-next-line react/jsx-key
-              <Link
-                href={"/new-listing/" + orgId}
-                className={
-                  "py-2 px-4 flex gap-2 items-center " +
-                  (Object.keys(organizationsNames)[0] === orgId
-                    ? ""
-                    : "border-t")
-                }
-              >
-                {organizationsNames[orgId]}
-                <FontAwesomeIcon className="h-4" icon={faArrowRight} />
-              </Link>
-            ))}
+    <div className="container max-w-2xl mx-auto py-8">
+      <Card>
+        <CardHeader>
+          <CardTitle>Şirketleriniz</CardTitle>
+          <CardDescription>İş oluşturmak için bir şirket seçin</CardDescription>
+        </CardHeader>
+        <CardContent>
+          {Object.keys(organizationsNames).length > 0 ? (
+            <div className="space-y-2">
+              {Object.entries(organizationsNames).map(([orgId, orgName]) => (
+                <Link
+                  key={orgId}
+                  href={`/new-listing/${orgId}`}
+                  className="block"
+                >
+                  <Button variant="outline" className="w-full justify-between">
+                    <span className="flex items-center">
+                      <Building2 className="mr-2 h-4 w-4" />
+                      {orgName}
+                    </span>
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <Alert variant="warning">
+              <AlertDescription>
+                Kullanıcınıza atanmış şirket bulunmuyor
+              </AlertDescription>
+            </Alert>
+          )}
+          <div className="mt-6">
+            <Link href="/new-company">
+              <Button className="w-full">
+                Şirket oluştur
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
           </div>
-        </div>
-
-        {organizationMemberships.data.length === 0 && (
-          <div className="border border-yellow-400 bg-yellow-50 p-4 rounded-md">
-            Kullanıcınıza atanmış şirket bulunmuyor
-          </div>
-        )}
-
-        <Link
-          href={"/new-company"}
-          className="inline-flex gap-2 items-center bg-orange-400 text-white px-4 py-2 rounded-md mt-6"
-        >
-          Şirket oluştur
-          <FontAwesomeIcon className="h-4" icon={faArrowRight} />
-        </Link>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
