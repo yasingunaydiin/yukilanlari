@@ -10,7 +10,7 @@ export default async function Header() {
       <div className="flex items-center justify-between mx-auto">
         <div>
           <Link href={"/"} className="font-bold text-2xl text-primary/90">
-            Yük Yolu
+            Yük Bul
           </Link>
         </div>
         <nav className="flex gap-4">
