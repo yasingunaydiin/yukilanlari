@@ -21,7 +21,7 @@ export default function Hero() {
 
   return (
     <section className="container my-16">
-      <div className="flex flex-col text-4xl lg:text-5xl md:text-5xl font-bold text-center items-center">
+      <div className="flex flex-col text-4xl lg:text-6xl md:text-5xl font-bold text-center items-center">
         <h1>Bir sonraki</h1>
         <div className="flex gap-2">
           <motion.h1

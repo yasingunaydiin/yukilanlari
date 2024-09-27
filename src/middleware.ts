@@ -3,4 +3,4 @@ import { authkitMiddleware } from "@workos-inc/authkit-nextjs";
 export default authkitMiddleware();
 
 // Apply middleware to all routes
-export const config = { matcher: "/:path*" };
+export const config = { matcher: ["/:path*", "/new-listing", "/new-company"] };
