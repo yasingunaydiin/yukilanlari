@@ -1,8 +1,3 @@
-import Image from "next/image";
-import bmcLogo from "@/images/bmc-logo.png"; // Adjust the path based on your folder structure
-// import asyalaleLogo from "@/images/asyalale-logo.jpg"; // Adjust the path based on your folder structure
-// import konyacimentoLogo from "@/images/konyacimento-logo.png"; // Adjust the path based on your folder structure
-
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -15,12 +10,7 @@ export default function JobRow() {
         </div>
         <div className="flex grow gap-4">
           <div className="content-center">
-            <Image
-              src={bmcLogo}
-              alt="BMC"
-              width={48} // Set image dimensions explicitly
-              height={48}
-            />
+            {/*Add emoji here from the category*/}
           </div>
           <div className="grow sm:flex">
             <div className="grow">
