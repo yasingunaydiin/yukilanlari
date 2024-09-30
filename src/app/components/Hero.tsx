@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { textVariant } from "/Users/yasingunaydin/Documents/GitHub/yuk-yolu-full-stack-app/utils/motion.js";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
 
 const textArray = [
   { title: "yükünü", color: "rgb(250 204 21)" },
@@ -40,14 +42,14 @@ export default function Hero() {
       </div>
 
       <form className="flex gap-2 mt-14 max-w-xl mx-auto">
-        <input
+        <Input
           type="search"
-          className="border border-gray-400 w-full py-2 px-3 rounded-md"
+          className="border border-gray-300 w-full py-2 px-3 rounded-md"
           placeholder="Ara..."
         />
-        <button className="bg-yellow-400 text-white py-2 px-4 rounded-md">
+        <Button className="bg-yellow-400 text-white py-2 px-4 rounded-md">
           Ara
-        </button>
+        </Button>
       </form>
     </section>
   );

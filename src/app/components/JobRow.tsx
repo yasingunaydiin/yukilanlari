@@ -27,7 +27,8 @@ export default function JobRow() {
               <div className="text-gray-500 text-sm">BMC</div>
               <div className="font-bold">Teker</div>
               <div className="text-gray-500 text-sm">
-                Şehirlerarası &middot; Istanbul, Turkiye
+                Parçalar &middot; 10 Ton &middot; Istanbul, Turkiye &#62; Konya,
+                Turkiye
               </div>
             </div>
             <div className="content-end text-gray-500 text-sm">2 weeks ago</div>

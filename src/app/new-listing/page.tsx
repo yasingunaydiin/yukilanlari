@@ -72,7 +72,7 @@ export default async function NewListingPage() {
               ))}
             </div>
           ) : (
-            <Alert variant="warning">
+            <Alert variant="default">
               <AlertDescription>
                 Kullanıcınıza atanmış şirket bulunmuyor
               </AlertDescription>
