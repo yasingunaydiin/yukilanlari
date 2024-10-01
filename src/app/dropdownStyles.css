@@ -7,6 +7,9 @@
   border-radius: 5px; /* Keep border-radius if needed, else remove this line */
   font-family: "Poppins", sans-serif; /* Apply Poppins to the dropdown container */
   border: none; /* Remove border */
+  font-size: 15px !important;
+  border: 1px solid #e5e5e5 !important;
+  border-radius: 0.375rem !important;
 }
 
 .stdropdown-menu {
@@ -15,11 +18,11 @@
   width: 100%;
   border-radius: 5px; /* Keep border-radius if needed, else remove this line */
   overflow: auto;
-  max-height: 150px;
   background-color: #fff;
   z-index: 99;
   border: none; /* Remove border */
   font-family: "Rubik", sans-serif; /* Apply Rubik to the dropdown menu */
+  max-height: 250px !important;
 }
 
 .stdropdown-input {
@@ -31,10 +34,14 @@
   cursor: pointer;
   font-family: "Poppins", sans-serif; /* Apply Poppins to the input */
   border: none; /* Remove border */
+  height: 2.5rem !important;
 }
 
+/*Inside part */
 .stdropdown-item {
-  padding: 10px; /* Increased padding for better touch targets */
+  padding: 10px !important; /* Increased padding for better touch targets */
+  margin: 3px;
+
   cursor: pointer;
   font-family: "Poppins", sans-serif; /* Apply Poppins to the dropdown items */
   transition: background-color 0.2s ease; /* Smooth transition for hover effects */
@@ -42,7 +49,8 @@
 }
 
 .stdropdown-item:hover {
-  background-color: rgba(159, 195, 248, 0.439);
+  background-color: #e5e7eb !important;
+  border-radius: 0.375rem !important;
 }
 
 .stdropdown-item.selected {
@@ -59,7 +67,6 @@
 .stdropdown-tag-item {
   background-color: #ddd;
   padding: 2px 4px;
-  border-radius: 2px;
   display: flex;
   align-items: center;
   font-family: "Poppins", sans-serif; /* Apply Poppins to tag items */
@@ -74,13 +81,23 @@
   width: 100%;
   box-sizing: border-box;
   padding: 5px;
-  border: 1px solid #ccc; /* Keep this if you want a border on the search box */
-  border-radius: 5px; /* Keep border-radius if needed, else remove this line */
-  font-family: "Poppins", sans-serif; /* Apply Poppins to search box input */
+  border: 1px solid white !important;
+  border-radius: 5px;
+  font-family: "Poppins", sans-serif;
 }
 
 .stdropdown-item.selected {
-  background-color: #676767 !important; /* Ensures this rule is applied */
-  color: orange !important; /* Ensures this rule is applied */
+  background-color: #ffdf52 !important; /* Ensures this rule is applied */
+  color: white !important; /* Ensures this rule is applied */
+  font-weight: 600 !important;
+  border-radius: 0.375rem !important;
 }
 /* <link rel="stylesheet" href="src/app/dropdownStyles.css" /> */
+
+.stdropdown-tool {
+  fill: #a5a7aa;
+}
+
+.stdropdown-item span {
+  margin-right: 16px !important; /* Adjust this value to control spacing */
+}

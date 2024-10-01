@@ -49,7 +49,7 @@ export function JobForm({ orgId }: { orgId: string }) {
 
           <div className="space-y-4">
             <div className="flex gap-4">
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 w-full">
                 <Label>Nereden</Label>
                 <CountrySelect
                   onChange={(e: {
@@ -59,10 +59,10 @@ export function JobForm({ orgId }: { orgId: string }) {
                     setCountryId(e.id);
                     setCountryFromName(e.name);
                   }}
-                  placeHolder="Select Country"
+                  placeHolder="Ülke Seç"
                 />
               </div>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 w-full">
                 <Label>Nereye</Label>
                 <CountrySelect
                   onChange={(e: {
@@ -72,13 +72,13 @@ export function JobForm({ orgId }: { orgId: string }) {
                     setCountryId(e.id);
                     setCountryToName(e.name);
                   }}
-                  placeHolder="Select Country"
+                  placeHolder="Ülke Seç"
                 />
               </div>
             </div>
 
             <div className="flex gap-4">
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 w-full">
                 <Label>Nereden</Label>
                 <StateSelect
                   countryid={countryId}
@@ -89,11 +89,11 @@ export function JobForm({ orgId }: { orgId: string }) {
                     setStateId(e.id);
                     setStateFromName(e.name);
                   }}
-                  placeHolder="Select State"
+                  placeHolder="Şehir Seç"
                 />
               </div>
 
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 w-full">
                 <Label>Nereye</Label>
                 <StateSelect
                   countryid={countryId}
@@ -104,7 +104,7 @@ export function JobForm({ orgId }: { orgId: string }) {
                     setStateId(e.id);
                     setStateToName(e.name);
                   }}
-                  placeHolder="Select State"
+                  placeHolder="Şehir Seç"
                 />
               </div>
             </div>
