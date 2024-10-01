@@ -5,32 +5,33 @@ import { Input } from "@/app/components/ui/input";
 import { Textarea } from "@/app/components/ui/textarea";
 import { Label } from "@/app/components/ui/label";
 import { Button } from "@/app/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectSeparator,
-  SelectTrigger,
-  SelectValue,
-} from "@/app/components/ui/select";
-import useCities from "turkey-cities-towns";
-import EuropeanCapitals from "@/app/new-listing/[orgId]/EuropeanCapitals";
-import EuropeanCountries from "@/app/new-listing/[orgId]/EuropeanCountries";
 import TransportCategories from "@/app/new-listing/[orgId]/TransportCategories";
+import { SetStateAction, useState } from "react";
+import { redirect } from "next/navigation";
+import { saveJobAction } from "../actions/jobActions";
+import "react-country-state-city/dist/react-country-state-city.css";
+import { CountrySelect, StateSelect } from "react-country-state-city";
 
-// eslint-disable-next-line react-hooks/rules-of-hooks
-const { cities } = useCities();
+export function JobForm({ orgId }: { orgId: string }) {
+  const [countryId, setCountryId] = useState(0);
+  const [, setStateId] = useState(0);
+  const [countryFromName, setCountryFromName] = useState("");
+  const [stateFromName, setStateFromName] = useState("");
+  const [countryToName, setCountryToName] = useState("");
+  const [stateToName, setStateToName] = useState("");
 
-function saveJob(data: FormData, countryId: string, cityId: number) {
-  data.set("countryId", countryId.toString());
-  data.set("cityId", cityId.toString());
-}
+  async function handleSaveJob(data: FormData) {
+    data.set("countryFrom", countryFromName.toString());
+    data.set("stateFrom", stateFromName.toString());
+    data.set("countryTo", countryToName.toString());
+    data.set("stateTo", stateToName.toString());
+    data.set("orgId", orgId);
+    const jobDoc = await saveJobAction(data);
+    redirect(`/jobs/${jobDoc.orgId}`);
+  }
 
-export function JobForm() {
   return (
-    <form action={saveJob} className="container mt-6">
+    <form action={handleSaveJob} className="container mt-6">
       <Card>
         <CardContent className="flex flex-col gap-4 p-5">
           <div className="space-y-2">
@@ -50,123 +51,61 @@ export function JobForm() {
             <div className="flex gap-4">
               <div className="flex flex-col gap-2">
                 <Label>Nereden</Label>
-                <Select>
-                  <SelectTrigger name="country-from" className="w-[300px]">
-                    <SelectValue placeholder="Başlangıç ülkeni seç" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectLabel>Popüler Ülkeler</SelectLabel>
-                      <SelectItem value="tr">🇹🇷 Türkiye</SelectItem>
-                    </SelectGroup>
-                    <EuropeanCountries />
-                  </SelectContent>
-                </Select>
+                <CountrySelect
+                  onChange={(e: {
+                    id: SetStateAction<number>;
+                    name: SetStateAction<string>;
+                  }) => {
+                    setCountryId(e.id);
+                    setCountryFromName(e.name);
+                  }}
+                  placeHolder="Select Country"
+                />
               </div>
               <div className="flex flex-col gap-2">
                 <Label>Nereye</Label>
-                <Select>
-                  <SelectTrigger name="country-to" className="w-[300px]">
-                    <SelectValue placeholder="Varış ülkeni seç" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectLabel>Popüler Ülkeler</SelectLabel>
-                      <SelectItem value="tr">🇹🇷 Türkiye</SelectItem>
-                    </SelectGroup>
-                    <EuropeanCountries />
-                  </SelectContent>
-                </Select>
+                <CountrySelect
+                  onChange={(e: {
+                    id: SetStateAction<number>;
+                    name: SetStateAction<string>;
+                  }) => {
+                    setCountryId(e.id);
+                    setCountryToName(e.name);
+                  }}
+                  placeHolder="Select Country"
+                />
               </div>
             </div>
 
             <div className="flex gap-4">
               <div className="flex flex-col gap-2">
                 <Label>Nereden</Label>
-                <Select>
-                  <SelectTrigger name="city-from" className="w-[300px]">
-                    <SelectValue placeholder="Başlangıç şehiri seç" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectLabel>Popüler Şehirler</SelectLabel>
-                      <SelectItem value="istanbul">Istanbul</SelectItem>
-                      <SelectItem value="ankara">Ankara</SelectItem>
-                      <SelectItem value="izmir">Izmir</SelectItem>
-                      <SelectItem value="bursa">Bursa</SelectItem>
-                      <SelectItem value="antalya">Antalya</SelectItem>
-                      <SelectItem value="konya">Konya</SelectItem>
-                      <SelectItem value="adana">Adana</SelectItem>
-                      <SelectItem value="sanliurfa">Şanlıurfa</SelectItem>
-                      <SelectItem value="gaziantep">Gaziantep</SelectItem>
-                      <SelectItem value="kocaeli">Kocaeli</SelectItem>
-                      <SelectItem value="mersin">Mersin</SelectItem>
-                      <SelectItem value="diyarbakir">Diyarbakır</SelectItem>
-                      <SelectItem value="hatay">Hatay</SelectItem>
-                      <SelectItem value="kayseri">Kayseri</SelectItem>
-                      <SelectItem value="samsun">Samsun</SelectItem>
-                      <SelectItem value="balikesir">Balıkesir</SelectItem>
-                      <SelectItem value="tekirdag">Tekirdağ</SelectItem>
-                      <SelectItem value="aydin">Aydın</SelectItem>
-                      <SelectItem value="van">Van</SelectItem>
-                    </SelectGroup>
-
-                    <SelectSeparator />
-                    <SelectGroup>
-                      <SelectLabel>Tüm Şehirler</SelectLabel>
-                      {cities.map((city: { plate: number; name: string }) => (
-                        <SelectItem key={city.plate} value={city.name}>
-                          {city.name}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                    <EuropeanCapitals />
-                  </SelectContent>
-                </Select>
+                <StateSelect
+                  countryid={countryId}
+                  onChange={(e: {
+                    id: SetStateAction<number>;
+                    name: SetStateAction<string>;
+                  }) => {
+                    setStateId(e.id);
+                    setStateFromName(e.name);
+                  }}
+                  placeHolder="Select State"
+                />
               </div>
 
               <div className="flex flex-col gap-2">
                 <Label>Nereye</Label>
-                <Select>
-                  <SelectTrigger name="city-to" className="w-[300px]">
-                    <SelectValue placeholder="Başlangıç şehiri seç" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectLabel>Popüler Şehirler</SelectLabel>
-                      <SelectItem value="istanbul">Istanbul</SelectItem>
-                      <SelectItem value="ankara">Ankara</SelectItem>
-                      <SelectItem value="izmir">Izmir</SelectItem>
-                      <SelectItem value="bursa">Bursa</SelectItem>
-                      <SelectItem value="antalya">Antalya</SelectItem>
-                      <SelectItem value="konya">Konya</SelectItem>
-                      <SelectItem value="adana">Adana</SelectItem>
-                      <SelectItem value="sanliurfa">Şanlıurfa</SelectItem>
-                      <SelectItem value="gaziantep">Gaziantep</SelectItem>
-                      <SelectItem value="kocaeli">Kocaeli</SelectItem>
-                      <SelectItem value="mersin">Mersin</SelectItem>
-                      <SelectItem value="diyarbakir">Diyarbakır</SelectItem>
-                      <SelectItem value="hatay">Hatay</SelectItem>
-                      <SelectItem value="kayseri">Kayseri</SelectItem>
-                      <SelectItem value="samsun">Samsun</SelectItem>
-                      <SelectItem value="balikesir">Balıkesir</SelectItem>
-                      <SelectItem value="tekirdag">Tekirdağ</SelectItem>
-                      <SelectItem value="aydin">Aydın</SelectItem>
-                      <SelectItem value="van">Van</SelectItem>
-                    </SelectGroup>
-
-                    <SelectSeparator />
-                    <SelectGroup>
-                      <SelectLabel>Tüm Şehirler</SelectLabel>
-                      {cities.map((city: { plate: number; name: string }) => (
-                        <SelectItem key={city.plate} value={city.name}>
-                          {city.name}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                    <EuropeanCapitals />
-                  </SelectContent>
-                </Select>
+                <StateSelect
+                  countryid={countryId}
+                  onChange={(e: {
+                    id: SetStateAction<number>;
+                    name: SetStateAction<string>;
+                  }) => {
+                    setStateId(e.id);
+                    setStateToName(e.name);
+                  }}
+                  placeHolder="Select State"
+                />
               </div>
             </div>
           </div>

@@ -26,8 +26,8 @@ const transportCategoriesArray = [
 
 const TransportCategories = () => {
   return (
-    <Select>
-      <SelectTrigger name="category" className="w-[300px]">
+    <Select name="category">
+      <SelectTrigger className="w-[300px]">
         <SelectValue placeholder="Kategori" />
       </SelectTrigger>
       <SelectContent>
