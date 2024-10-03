@@ -1,7 +1,7 @@
 import { withAuth } from "@workos-inc/authkit-nextjs";
 import { WorkOS } from "@workos-inc/node";
 import { JobForm } from "@/app/components/JobForm";
-import "react-country-state-city/dist/react-country-state-city.css";
+import "react-country-state-city-new/dist/react-country-state-city.css";
 
 type PageProps = {
   params: {

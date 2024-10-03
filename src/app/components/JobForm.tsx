@@ -9,8 +9,8 @@ import TransportCategories from "@/app/new-listing/[orgId]/TransportCategories";
 import { SetStateAction, useState } from "react";
 import { redirect } from "next/navigation";
 import { saveJobAction } from "../actions/jobActions";
-import "react-country-state-city/dist/react-country-state-city.css";
-import { CountrySelect, StateSelect } from "react-country-state-city";
+import "react-country-state-city-new/dist/react-country-state-city.css";
+import { CountrySelect, StateSelect } from "react-country-state-city-new";
 
 export function JobForm({ orgId }: { orgId: string }) {
   const [countryId, setCountryId] = useState(0);
