@@ -15,7 +15,10 @@ import { useState } from "react";
 export function JobForm({ orgId }: { orgId: string }) {
   const [countryFrom, setCountryFrom] = useState<string | undefined>();
   const [countryTo, setCountryTo] = useState<string | undefined>();
-  const [selectedCountryId, setSelectedCountryId] = useState<
+  const [selectedCountryIdFrom, setSelectedCountryIdFrom] = useState<
+    number | undefined
+  >();
+  const [selectedCountryIdTo, setSelectedCountryIdTo] = useState<
     number | undefined
   >();
   const [cityFrom, setCityFrom] = useState<string | undefined>();
@@ -23,9 +26,9 @@ export function JobForm({ orgId }: { orgId: string }) {
 
   async function handleSaveJob(data: FormData) {
     data.set("countryFrom", countryFrom ?? "");
-    data.set("cityFrom", cityFrom ?? ""); // Ensure you are saving the city here
+    data.set("cityFrom", cityFrom ?? "");
     data.set("countryTo", countryTo ?? "");
-    data.set("cityTo", cityTo ?? ""); // Ensure you are saving the city here
+    data.set("cityTo", cityTo ?? "");
     data.set("orgId", orgId);
     const jobDoc = await saveJobAction(data);
     redirect(`/jobs/${jobDoc.orgId}`);
@@ -54,37 +57,44 @@ export function JobForm({ orgId }: { orgId: string }) {
 
           <div className="space-y-4">
             <div className="flex gap-4">
+              {/* Origin Country Selection */}
               <div className="flex flex-col gap-2 w-full">
                 <Label>Nereden</Label>
                 <CountrySelect
-                  setCountry={(countryName) => {
-                    setCountryFrom(countryName);
-                    setSelectedCountryId(225); // Assuming Turkey ID is 225
+                  setCountry={(countryId, countryName) => {
+                    setCountryFrom(countryName); // Use countryName here if needed
+                    setSelectedCountryIdFrom(countryId); // Set countryId separately
                   }}
                 />
               </div>
+
+              {/* Destination Country Selection */}
               <div className="flex flex-col gap-2 w-full">
-                <Label>Nereden</Label>
+                <Label>Nereye</Label>
                 <CountrySelect
-                  setCountry={(countryName) => {
-                    setCountryTo(countryName);
-                    setSelectedCountryId(225); // Assuming Turkey ID is 225
+                  setCountry={(countryId, countryName) => {
+                    setCountryTo(countryName); // Use countryName here if needed
+                    setSelectedCountryIdTo(countryId); // Set countryId separately
                   }}
                 />
               </div>
             </div>
+
             <div className="flex gap-4">
+              {/* Origin City Selection */}
               <div className="flex flex-col gap-2 w-full">
-                <Label>Şehir</Label>
+                <Label>Şehir (Nereden)</Label>
                 <CitySelect
-                  selectedCountryId={selectedCountryId}
+                  selectedCountryId={selectedCountryIdFrom}
                   setCity={setCityFrom}
                 />
               </div>
+
+              {/* Destination City Selection */}
               <div className="flex flex-col gap-2 w-full">
-                <Label>Şehir</Label>
+                <Label>Şehir (Nereye)</Label>
                 <CitySelect
-                  selectedCountryId={selectedCountryId}
+                  selectedCountryId={selectedCountryIdTo}
                   setCity={setCityTo}
                 />
               </div>

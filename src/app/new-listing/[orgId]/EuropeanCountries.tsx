@@ -906,34 +906,39 @@ const EuropeanCountriesArray = [
     emoji: "🇽🇰",
   },
 ];
-
-// Change the function signature to accept setCountry function as a prop
 export default function CountrySelect({
   setCountry,
 }: {
-  setCountry: (countryId: string) => void;
+  setCountry: (countryId: number, countryName: string) => void; // Updated signature to accept two arguments
 }) {
-  const [selectedCountry, setSelectedCountry] = useState<string | undefined>();
+  const [selectedCountryId, setSelectedCountryId] = useState<
+    string | undefined
+  >();
 
   const handleSelectCountry = (value: string) => {
-    setSelectedCountry(value);
-    setCountry(value); // Use the passed setCountry function
+    const selectedCountry = EuropeanCountriesArray.find(
+      (c) => c.id.toString() === value
+    );
+    if (selectedCountry) {
+      setSelectedCountryId(value);
+      setCountry(selectedCountry.id, selectedCountry.name); // Pass both id and name
+    }
   };
 
   return (
-    <Select onValueChange={handleSelectCountry} value={selectedCountry}>
+    <Select onValueChange={handleSelectCountry} value={selectedCountryId}>
       <SelectTrigger className="w-[280px]">
-        <SelectValue placeholder="Select a country" />
+        <SelectValue placeholder="Bir ülke seç" />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectLabel>All Countries</SelectLabel>
+          <SelectLabel>Tüm Ülkeler</SelectLabel>
           {EuropeanCountriesArray.sort((a, b) =>
             a.name.localeCompare(b.name)
           ).map((country) => (
             <SelectItem
               key={country.id}
-              value={country.name.toString()}
+              value={country.id.toString()}
               className="flex items-center"
             >
               <span className="mr-2">{country.emoji}</span>

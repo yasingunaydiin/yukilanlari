@@ -812,7 +812,7 @@ export default function CitySelect({
   return (
     <Select onValueChange={handleSelectCity} value={selectedCity}>
       <SelectTrigger className="w-[280px]">
-        <SelectValue placeholder="Select a city" />
+        <SelectValue placeholder="Bir şehir seç" />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
