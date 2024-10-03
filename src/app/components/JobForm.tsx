@@ -6,25 +6,26 @@ import { Textarea } from "@/app/components/ui/textarea";
 import { Label } from "@/app/components/ui/label";
 import { Button } from "@/app/components/ui/button";
 import TransportCategories from "@/app/new-listing/[orgId]/TransportCategories";
-import { SetStateAction, useState } from "react";
 import { redirect } from "next/navigation";
 import { saveJobAction } from "../actions/jobActions";
-import "react-country-state-city-new/dist/react-country-state-city.css";
-import { CountrySelect, StateSelect } from "react-country-state-city-new";
+import CountrySelect from "@/app/new-listing/[orgId]/EuropeanCountries";
+import CitySelect from "@/app/new-listing/[orgId]/EuropeanCities";
+import { useState } from "react";
 
 export function JobForm({ orgId }: { orgId: string }) {
-  const [countryId, setCountryId] = useState(0);
-  const [, setStateId] = useState(0);
-  const [countryFromName, setCountryFromName] = useState("");
-  const [stateFromName, setStateFromName] = useState("");
-  const [countryToName, setCountryToName] = useState("");
-  const [stateToName, setStateToName] = useState("");
+  const [countryFrom, setCountryFrom] = useState<string | undefined>();
+  const [countryTo, setCountryTo] = useState<string | undefined>();
+  const [selectedCountryId, setSelectedCountryId] = useState<
+    number | undefined
+  >();
+  const [cityFrom, setCityFrom] = useState<string | undefined>();
+  const [cityTo, setCityTo] = useState<string | undefined>();
 
   async function handleSaveJob(data: FormData) {
-    data.set("countryFrom", countryFromName.toString());
-    data.set("stateFrom", stateFromName.toString());
-    data.set("countryTo", countryToName.toString());
-    data.set("stateTo", stateToName.toString());
+    data.set("countryFrom", countryFrom ?? "");
+    data.set("cityFrom", cityFrom ?? ""); // Ensure you are saving the city here
+    data.set("countryTo", countryTo ?? "");
+    data.set("cityTo", cityTo ?? ""); // Ensure you are saving the city here
     data.set("orgId", orgId);
     const jobDoc = await saveJobAction(data);
     redirect(`/jobs/${jobDoc.orgId}`);
@@ -37,9 +38,13 @@ export function JobForm({ orgId }: { orgId: string }) {
           <div className="space-y-2">
             <Label>İletişim</Label>
             <div className="flex gap-4">
-              <Input name="contact-name" placeholder="İsim" />
-              <Input name="contact-email" placeholder="E-mail" />
-              <Input name="contact-number" placeholder="Telefon Numarası" />
+              <Input name="contactName" placeholder="İsim" />
+              <Input name="contactEmail" type="email" placeholder="E-mail" />
+              <Input
+                name="contactPhone"
+                type="tel"
+                placeholder="Telefon Numarası"
+              />
             </div>
           </div>
           <Input name="title" placeholder="Başlık" />
@@ -52,59 +57,35 @@ export function JobForm({ orgId }: { orgId: string }) {
               <div className="flex flex-col gap-2 w-full">
                 <Label>Nereden</Label>
                 <CountrySelect
-                  onChange={(e: {
-                    id: SetStateAction<number>;
-                    name: SetStateAction<string>;
-                  }) => {
-                    setCountryId(e.id);
-                    setCountryFromName(e.name);
+                  setCountry={(countryName) => {
+                    setCountryFrom(countryName);
+                    setSelectedCountryId(225); // Assuming Turkey ID is 225
                   }}
-                  placeHolder="Ülke Seç"
                 />
               </div>
               <div className="flex flex-col gap-2 w-full">
-                <Label>Nereye</Label>
+                <Label>Nereden</Label>
                 <CountrySelect
-                  onChange={(e: {
-                    id: SetStateAction<number>;
-                    name: SetStateAction<string>;
-                  }) => {
-                    setCountryId(e.id);
-                    setCountryToName(e.name);
+                  setCountry={(countryName) => {
+                    setCountryTo(countryName);
+                    setSelectedCountryId(225); // Assuming Turkey ID is 225
                   }}
-                  placeHolder="Ülke Seç"
                 />
               </div>
             </div>
-
             <div className="flex gap-4">
               <div className="flex flex-col gap-2 w-full">
-                <Label>Nereden</Label>
-                <StateSelect
-                  countryid={countryId}
-                  onChange={(e: {
-                    id: SetStateAction<number>;
-                    name: SetStateAction<string>;
-                  }) => {
-                    setStateId(e.id);
-                    setStateFromName(e.name);
-                  }}
-                  placeHolder="Şehir Seç"
+                <Label>Şehir</Label>
+                <CitySelect
+                  selectedCountryId={selectedCountryId}
+                  setCity={setCityFrom}
                 />
               </div>
-
               <div className="flex flex-col gap-2 w-full">
-                <Label>Nereye</Label>
-                <StateSelect
-                  countryid={countryId}
-                  onChange={(e: {
-                    id: SetStateAction<number>;
-                    name: SetStateAction<string>;
-                  }) => {
-                    setStateId(e.id);
-                    setStateToName(e.name);
-                  }}
-                  placeHolder="Şehir Seç"
+                <Label>Şehir</Label>
+                <CitySelect
+                  selectedCountryId={selectedCountryId}
+                  setCity={setCityTo}
                 />
               </div>
             </div>
@@ -112,7 +93,7 @@ export function JobForm({ orgId }: { orgId: string }) {
         </CardContent>
       </Card>
       <div className="flex justify-center p-4">
-        <Button>Kaydet</Button>
+        <Button type="submit">Kaydet</Button>
       </div>
     </form>
   );
