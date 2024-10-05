@@ -1,6 +1,5 @@
-"use client";
+'use client';
 
-import { useState } from "react";
 import {
   Select,
   SelectContent,
@@ -9,7 +8,8 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/app/components/ui/select";
+} from '@/app/components/ui/select';
+import { useState } from 'react';
 
 const CitiesArray = [
   {
@@ -17,408 +17,408 @@ const CitiesArray = [
     states: [
       {
         id: 2212,
-        name: "Adana",
-        state_code: "01",
+        name: 'Adana',
+        state_code: '01',
       },
       {
         id: 2155,
-        name: "Adıyaman",
-        state_code: "02",
+        name: 'Adıyaman',
+        state_code: '02',
       },
       {
         id: 2179,
-        name: "Afyonkarahisar",
-        state_code: "03",
+        name: 'Afyonkarahisar',
+        state_code: '03',
       },
       {
         id: 2193,
-        name: "Ağrı",
-        state_code: "04",
+        name: 'Ağrı',
+        state_code: '04',
       },
       {
         id: 2210,
-        name: "Aksaray",
-        state_code: "68",
+        name: 'Aksaray',
+        state_code: '68',
       },
       {
         id: 2161,
-        name: "Amasya",
-        state_code: "05",
+        name: 'Amasya',
+        state_code: '05',
       },
       {
         id: 2217,
-        name: "Ankara",
-        state_code: "06",
+        name: 'Ankara',
+        state_code: '06',
       },
       {
         id: 2169,
-        name: "Antalya",
-        state_code: "07",
+        name: 'Antalya',
+        state_code: '07',
       },
       {
         id: 2185,
-        name: "Ardahan",
-        state_code: "75",
+        name: 'Ardahan',
+        state_code: '75',
       },
       {
         id: 2191,
-        name: "Artvin",
-        state_code: "08",
+        name: 'Artvin',
+        state_code: '08',
       },
       {
         id: 2187,
-        name: "Aydın",
-        state_code: "09",
+        name: 'Aydın',
+        state_code: '09',
       },
       {
         id: 2175,
-        name: "Balıkesir",
-        state_code: "10",
+        name: 'Balıkesir',
+        state_code: '10',
       },
       {
         id: 2148,
-        name: "Bartın",
-        state_code: "74",
+        name: 'Bartın',
+        state_code: '74',
       },
       {
         id: 2194,
-        name: "Batman",
-        state_code: "72",
+        name: 'Batman',
+        state_code: '72',
       },
       {
         id: 2177,
-        name: "Bayburt",
-        state_code: "69",
+        name: 'Bayburt',
+        state_code: '69',
       },
       {
         id: 2221,
-        name: "Bilecik",
-        state_code: "11",
+        name: 'Bilecik',
+        state_code: '11',
       },
       {
         id: 2153,
-        name: "Bingöl",
-        state_code: "12",
+        name: 'Bingöl',
+        state_code: '12',
       },
       {
         id: 2215,
-        name: "Bitlis",
-        state_code: "13",
+        name: 'Bitlis',
+        state_code: '13',
       },
       {
         id: 2172,
-        name: "Bolu",
-        state_code: "14",
+        name: 'Bolu',
+        state_code: '14',
       },
       {
         id: 2209,
-        name: "Burdur",
-        state_code: "15",
+        name: 'Burdur',
+        state_code: '15',
       },
       {
         id: 2163,
-        name: "Bursa",
-        state_code: "16",
+        name: 'Bursa',
+        state_code: '16',
       },
       {
         id: 2216,
-        name: "Çanakkale",
-        state_code: "17",
+        name: 'Çanakkale',
+        state_code: '17',
       },
       {
         id: 2168,
-        name: "Çankırı",
-        state_code: "18",
+        name: 'Çankırı',
+        state_code: '18',
       },
       {
         id: 2173,
-        name: "Çorum",
-        state_code: "19",
+        name: 'Çorum',
+        state_code: '19',
       },
       {
         id: 2157,
-        name: "Denizli",
-        state_code: "20",
+        name: 'Denizli',
+        state_code: '20',
       },
       {
         id: 2226,
-        name: "Diyarbakır",
-        state_code: "21",
+        name: 'Diyarbakır',
+        state_code: '21',
       },
       {
         id: 2202,
-        name: "Düzce",
-        state_code: "81",
+        name: 'Düzce',
+        state_code: '81',
       },
       {
         id: 2151,
-        name: "Edirne",
-        state_code: "22",
+        name: 'Edirne',
+        state_code: '22',
       },
       {
         id: 2159,
-        name: "Elazığ",
-        state_code: "23",
+        name: 'Elazığ',
+        state_code: '23',
       },
       {
         id: 2160,
-        name: "Erzincan",
-        state_code: "24",
+        name: 'Erzincan',
+        state_code: '24',
       },
       {
         id: 2165,
-        name: "Erzurum",
-        state_code: "25",
+        name: 'Erzurum',
+        state_code: '25',
       },
       {
         id: 2164,
-        name: "Eskişehir",
-        state_code: "26",
+        name: 'Eskişehir',
+        state_code: '26',
       },
       {
         id: 2203,
-        name: "Gaziantep",
-        state_code: "27",
+        name: 'Gaziantep',
+        state_code: '27',
       },
       {
         id: 2186,
-        name: "Giresun",
-        state_code: "28",
+        name: 'Giresun',
+        state_code: '28',
       },
       {
         id: 2204,
-        name: "Gümüşhane",
-        state_code: "29",
+        name: 'Gümüşhane',
+        state_code: '29',
       },
       {
         id: 2190,
-        name: "Hakkâri",
-        state_code: "30",
+        name: 'Hakkâri',
+        state_code: '30',
       },
       {
         id: 2211,
-        name: "Hatay",
-        state_code: "31",
+        name: 'Hatay',
+        state_code: '31',
       },
       {
         id: 2166,
-        name: "Iğdır",
-        state_code: "76",
+        name: 'Iğdır',
+        state_code: '76',
       },
       {
         id: 2222,
-        name: "Isparta",
-        state_code: "32",
+        name: 'Isparta',
+        state_code: '32',
       },
       {
         id: 2170,
-        name: "İstanbul",
-        state_code: "34",
+        name: 'İstanbul',
+        state_code: '34',
       },
       {
         id: 2205,
-        name: "İzmir",
-        state_code: "35",
+        name: 'İzmir',
+        state_code: '35',
       },
       {
         id: 2227,
-        name: "Kahramanmaraş",
-        state_code: "46",
+        name: 'Kahramanmaraş',
+        state_code: '46',
       },
       {
         id: 2223,
-        name: "Karabük",
-        state_code: "78",
+        name: 'Karabük',
+        state_code: '78',
       },
       {
         id: 2184,
-        name: "Karaman",
-        state_code: "70",
+        name: 'Karaman',
+        state_code: '70',
       },
       {
         id: 2208,
-        name: "Kars",
-        state_code: "36",
+        name: 'Kars',
+        state_code: '36',
       },
       {
         id: 2197,
-        name: "Kastamonu",
-        state_code: "37",
+        name: 'Kastamonu',
+        state_code: '37',
       },
       {
         id: 2200,
-        name: "Kayseri",
-        state_code: "38",
+        name: 'Kayseri',
+        state_code: '38',
       },
       {
         id: 2154,
-        name: "Kilis",
-        state_code: "79",
+        name: 'Kilis',
+        state_code: '79',
       },
       {
         id: 2178,
-        name: "Kırıkkale",
-        state_code: "71",
+        name: 'Kırıkkale',
+        state_code: '71',
       },
       {
         id: 2176,
-        name: "Kırklareli",
-        state_code: "39",
+        name: 'Kırklareli',
+        state_code: '39',
       },
       {
         id: 2180,
-        name: "Kırşehir",
-        state_code: "40",
+        name: 'Kırşehir',
+        state_code: '40',
       },
       {
         id: 2195,
-        name: "Kocaeli",
-        state_code: "41",
+        name: 'Kocaeli',
+        state_code: '41',
       },
       {
         id: 2171,
-        name: "Konya",
-        state_code: "42",
+        name: 'Konya',
+        state_code: '42',
       },
       {
         id: 2149,
-        name: "Kütahya",
-        state_code: "43",
+        name: 'Kütahya',
+        state_code: '43',
       },
       {
         id: 2158,
-        name: "Malatya",
-        state_code: "44",
+        name: 'Malatya',
+        state_code: '44',
       },
       {
         id: 2198,
-        name: "Manisa",
-        state_code: "45",
+        name: 'Manisa',
+        state_code: '45',
       },
       {
         id: 2224,
-        name: "Mardin",
-        state_code: "47",
+        name: 'Mardin',
+        state_code: '47',
       },
       {
         id: 2156,
-        name: "Mersin",
-        state_code: "33",
+        name: 'Mersin',
+        state_code: '33',
       },
       {
         id: 2182,
-        name: "Muğla",
-        state_code: "48",
+        name: 'Muğla',
+        state_code: '48',
       },
       {
         id: 2162,
-        name: "Muş",
-        state_code: "49",
+        name: 'Muş',
+        state_code: '49',
       },
       {
         id: 2196,
-        name: "Nevşehir",
-        state_code: "50",
+        name: 'Nevşehir',
+        state_code: '50',
       },
       {
         id: 2189,
-        name: "Niğde",
-        state_code: "51",
+        name: 'Niğde',
+        state_code: '51',
       },
       {
         id: 2174,
-        name: "Ordu",
-        state_code: "52",
+        name: 'Ordu',
+        state_code: '52',
       },
       {
         id: 2214,
-        name: "Osmaniye",
-        state_code: "80",
+        name: 'Osmaniye',
+        state_code: '80',
       },
       {
         id: 2219,
-        name: "Rize",
-        state_code: "53",
+        name: 'Rize',
+        state_code: '53',
       },
       {
         id: 2150,
-        name: "Sakarya",
-        state_code: "54",
+        name: 'Sakarya',
+        state_code: '54',
       },
       {
         id: 2220,
-        name: "Samsun",
-        state_code: "55",
+        name: 'Samsun',
+        state_code: '55',
       },
       {
         id: 2183,
-        name: "Şanlıurfa",
-        state_code: "63",
+        name: 'Şanlıurfa',
+        state_code: '63',
       },
       {
         id: 2207,
-        name: "Siirt",
-        state_code: "56",
+        name: 'Siirt',
+        state_code: '56',
       },
       {
         id: 4854,
-        name: "Sinop",
-        state_code: "57",
+        name: 'Sinop',
+        state_code: '57',
       },
       {
         id: 2181,
-        name: "Sivas",
-        state_code: "58",
+        name: 'Sivas',
+        state_code: '58',
       },
       {
         id: 2225,
-        name: "Şırnak",
-        state_code: "73",
+        name: 'Şırnak',
+        state_code: '73',
       },
       {
         id: 2167,
-        name: "Tekirdağ",
-        state_code: "59",
+        name: 'Tekirdağ',
+        state_code: '59',
       },
       {
         id: 2199,
-        name: "Tokat",
-        state_code: "60",
+        name: 'Tokat',
+        state_code: '60',
       },
       {
         id: 2206,
-        name: "Trabzon",
-        state_code: "61",
+        name: 'Trabzon',
+        state_code: '61',
       },
       {
         id: 2192,
-        name: "Tunceli",
-        state_code: "62",
+        name: 'Tunceli',
+        state_code: '62',
       },
       {
         id: 2201,
-        name: "Uşak",
-        state_code: "64",
+        name: 'Uşak',
+        state_code: '64',
       },
       {
         id: 2152,
-        name: "Van",
-        state_code: "65",
+        name: 'Van',
+        state_code: '65',
       },
       {
         id: 2218,
-        name: "Yalova",
-        state_code: "77",
+        name: 'Yalova',
+        state_code: '77',
       },
       {
         id: 2188,
-        name: "Yozgat",
-        state_code: "66",
+        name: 'Yozgat',
+        state_code: '66',
       },
       {
         id: 2213,
-        name: "Zonguldak",
-        state_code: "67",
+        name: 'Zonguldak',
+        state_code: '67',
       },
     ],
   },
@@ -427,8 +427,8 @@ const CitiesArray = [
     states: [
       {
         id: 1,
-        name: "Tirana",
-        state_code: "AL",
+        name: 'Tirana',
+        state_code: 'AL',
       },
     ],
   },
@@ -437,8 +437,8 @@ const CitiesArray = [
     states: [
       {
         id: 2,
-        name: "Andorra la Vella",
-        state_code: "AD",
+        name: 'Andorra la Vella',
+        state_code: 'AD',
       },
     ],
   },
@@ -447,8 +447,8 @@ const CitiesArray = [
     states: [
       {
         id: 3,
-        name: "Vienna",
-        state_code: "AT",
+        name: 'Vienna',
+        state_code: 'AT',
       },
     ],
   },
@@ -457,8 +457,8 @@ const CitiesArray = [
     states: [
       {
         id: 4,
-        name: "Brussels",
-        state_code: "BE",
+        name: 'Brussels',
+        state_code: 'BE',
       },
     ],
   },
@@ -467,8 +467,8 @@ const CitiesArray = [
     states: [
       {
         id: 5,
-        name: "Sofia",
-        state_code: "BG",
+        name: 'Sofia',
+        state_code: 'BG',
       },
     ],
   },
@@ -477,8 +477,8 @@ const CitiesArray = [
     states: [
       {
         id: 6,
-        name: "Zagreb",
-        state_code: "HR",
+        name: 'Zagreb',
+        state_code: 'HR',
       },
     ],
   },
@@ -487,13 +487,13 @@ const CitiesArray = [
     states: [
       {
         id: 7,
-        name: "Cyprus",
-        state_code: "CY",
+        name: 'Cyprus',
+        state_code: 'CY',
       },
       {
         id: 37,
-        name: "Nicosia",
-        state_code: "CY",
+        name: 'Nicosia',
+        state_code: 'CY',
       },
     ],
   },
@@ -502,8 +502,8 @@ const CitiesArray = [
     states: [
       {
         id: 8,
-        name: "Prague",
-        state_code: "CZ",
+        name: 'Prague',
+        state_code: 'CZ',
       },
     ],
   },
@@ -512,8 +512,8 @@ const CitiesArray = [
     states: [
       {
         id: 9,
-        name: "Copenhagen",
-        state_code: "DK",
+        name: 'Copenhagen',
+        state_code: 'DK',
       },
     ],
   },
@@ -522,8 +522,8 @@ const CitiesArray = [
     states: [
       {
         id: 10,
-        name: "Tallinn",
-        state_code: "EE",
+        name: 'Tallinn',
+        state_code: 'EE',
       },
     ],
   },
@@ -532,8 +532,8 @@ const CitiesArray = [
     states: [
       {
         id: 11,
-        name: "Helsinki",
-        state_code: "FI",
+        name: 'Helsinki',
+        state_code: 'FI',
       },
     ],
   },
@@ -542,8 +542,8 @@ const CitiesArray = [
     states: [
       {
         id: 12,
-        name: "Paris",
-        state_code: "FR",
+        name: 'Paris',
+        state_code: 'FR',
       },
     ],
   },
@@ -552,8 +552,8 @@ const CitiesArray = [
     states: [
       {
         id: 13,
-        name: "Berlin",
-        state_code: "DE",
+        name: 'Berlin',
+        state_code: 'DE',
       },
     ],
   },
@@ -562,8 +562,8 @@ const CitiesArray = [
     states: [
       {
         id: 14,
-        name: "Athens",
-        state_code: "GR",
+        name: 'Athens',
+        state_code: 'GR',
       },
     ],
   },
@@ -572,8 +572,8 @@ const CitiesArray = [
     states: [
       {
         id: 15,
-        name: "Budapest",
-        state_code: "HU",
+        name: 'Budapest',
+        state_code: 'HU',
       },
     ],
   },
@@ -582,8 +582,8 @@ const CitiesArray = [
     states: [
       {
         id: 16,
-        name: "Reykjavik",
-        state_code: "IS",
+        name: 'Reykjavik',
+        state_code: 'IS',
       },
     ],
   },
@@ -592,8 +592,8 @@ const CitiesArray = [
     states: [
       {
         id: 17,
-        name: "Dublin",
-        state_code: "IE",
+        name: 'Dublin',
+        state_code: 'IE',
       },
     ],
   },
@@ -602,8 +602,8 @@ const CitiesArray = [
     states: [
       {
         id: 18,
-        name: "Rome",
-        state_code: "IT",
+        name: 'Rome',
+        state_code: 'IT',
       },
     ],
   },
@@ -612,8 +612,8 @@ const CitiesArray = [
     states: [
       {
         id: 19,
-        name: "Pristina",
-        state_code: "XK",
+        name: 'Pristina',
+        state_code: 'XK',
       },
     ],
   },
@@ -622,8 +622,8 @@ const CitiesArray = [
     states: [
       {
         id: 20,
-        name: "Riga",
-        state_code: "LV",
+        name: 'Riga',
+        state_code: 'LV',
       },
     ],
   },
@@ -632,8 +632,8 @@ const CitiesArray = [
     states: [
       {
         id: 21,
-        name: "Vilnius",
-        state_code: "LT",
+        name: 'Vilnius',
+        state_code: 'LT',
       },
     ],
   },
@@ -642,8 +642,8 @@ const CitiesArray = [
     states: [
       {
         id: 22,
-        name: "Luxembourg City",
-        state_code: "LU",
+        name: 'Luxembourg City',
+        state_code: 'LU',
       },
     ],
   },
@@ -652,8 +652,8 @@ const CitiesArray = [
     states: [
       {
         id: 23,
-        name: "Valletta",
-        state_code: "MT",
+        name: 'Valletta',
+        state_code: 'MT',
       },
     ],
   },
@@ -662,8 +662,8 @@ const CitiesArray = [
     states: [
       {
         id: 24,
-        name: "Amsterdam",
-        state_code: "NL",
+        name: 'Amsterdam',
+        state_code: 'NL',
       },
     ],
   },
@@ -672,8 +672,8 @@ const CitiesArray = [
     states: [
       {
         id: 25,
-        name: "Oslo",
-        state_code: "NO",
+        name: 'Oslo',
+        state_code: 'NO',
       },
     ],
   },
@@ -682,8 +682,8 @@ const CitiesArray = [
     states: [
       {
         id: 26,
-        name: "Lisbon",
-        state_code: "PT",
+        name: 'Lisbon',
+        state_code: 'PT',
       },
     ],
   },
@@ -692,8 +692,8 @@ const CitiesArray = [
     states: [
       {
         id: 27,
-        name: "Bucharest",
-        state_code: "RO",
+        name: 'Bucharest',
+        state_code: 'RO',
       },
     ],
   },
@@ -702,8 +702,8 @@ const CitiesArray = [
     states: [
       {
         id: 28,
-        name: "Moscow",
-        state_code: "RU",
+        name: 'Moscow',
+        state_code: 'RU',
       },
     ],
   },
@@ -712,8 +712,8 @@ const CitiesArray = [
     states: [
       {
         id: 29,
-        name: "San Marino",
-        state_code: "SM",
+        name: 'San Marino',
+        state_code: 'SM',
       },
     ],
   },
@@ -722,8 +722,8 @@ const CitiesArray = [
     states: [
       {
         id: 30,
-        name: "Belgrade",
-        state_code: "RS",
+        name: 'Belgrade',
+        state_code: 'RS',
       },
     ],
   },
@@ -732,8 +732,8 @@ const CitiesArray = [
     states: [
       {
         id: 31,
-        name: "Bratislava",
-        state_code: "SK",
+        name: 'Bratislava',
+        state_code: 'SK',
       },
     ],
   },
@@ -742,8 +742,8 @@ const CitiesArray = [
     states: [
       {
         id: 32,
-        name: "Ljubljana",
-        state_code: "SI",
+        name: 'Ljubljana',
+        state_code: 'SI',
       },
     ],
   },
@@ -752,8 +752,8 @@ const CitiesArray = [
     states: [
       {
         id: 33,
-        name: "Stockholm",
-        state_code: "SE",
+        name: 'Stockholm',
+        state_code: 'SE',
       },
     ],
   },
@@ -762,8 +762,8 @@ const CitiesArray = [
     states: [
       {
         id: 34,
-        name: "Bern",
-        state_code: "CH",
+        name: 'Bern',
+        state_code: 'CH',
       },
     ],
   },
@@ -772,8 +772,8 @@ const CitiesArray = [
     states: [
       {
         id: 35,
-        name: "Kyiv",
-        state_code: "UA",
+        name: 'Kyiv',
+        state_code: 'UA',
       },
     ],
   },
@@ -782,8 +782,8 @@ const CitiesArray = [
     states: [
       {
         id: 36,
-        name: "London",
-        state_code: "GB",
+        name: 'London',
+        state_code: 'GB',
       },
     ],
   },
@@ -811,8 +811,8 @@ export default function CitySelect({
 
   return (
     <Select onValueChange={handleSelectCity} value={selectedCity}>
-      <SelectTrigger className="w-[280px]">
-        <SelectValue placeholder="Bir şehir seç" />
+      <SelectTrigger className='w-full'>
+        <SelectValue placeholder='Bir şehir seç' />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
@@ -821,7 +821,7 @@ export default function CitySelect({
             <SelectItem
               key={city.id}
               value={city.name} // Set value to the city name
-              className="flex items-center"
+              className='flex items-center'
             >
               {city.name}
             </SelectItem>

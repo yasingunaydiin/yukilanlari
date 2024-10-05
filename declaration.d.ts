@@ -1,1 +1,1 @@
-declare module "turkey-cities-towns";
+declare module 'react-timeago';

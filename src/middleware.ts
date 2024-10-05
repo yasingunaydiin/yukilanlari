@@ -1,6 +1,16 @@
-import { authkitMiddleware } from "@workos-inc/authkit-nextjs";
+import { authkitMiddleware } from '@workos-inc/authkit-nextjs';
 
 export default authkitMiddleware();
 
-// Apply middleware to all routes
-export const config = { matcher: ["/:path*"] };
+// Match against pages that require authentication
+// Leave this out if you want authentication on every page in your application
+export const config = {
+  matcher: [
+    '/',
+    '/:path*',
+    '/new-listing',
+    '/new-listing/:orgId*',
+    '/new-company',
+    '/jobs/:orgId*',
+  ],
+};

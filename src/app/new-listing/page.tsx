@@ -1,7 +1,4 @@
-import { withAuth } from "@workos-inc/authkit-nextjs";
-import { WorkOS } from "@workos-inc/node";
-import Link from "next/link";
-import { ArrowRight, Building2 } from "lucide-react";
+import { Alert, AlertDescription } from "@/app/components/ui/alert";
 import { Button } from "@/app/components/ui/button";
 import {
   Card,
@@ -10,11 +7,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/app/components/ui/card";
-import { Alert, AlertDescription } from "@/app/components/ui/alert";
-
-const workos = new WorkOS(process.env.WORKOS_API_KEY!);
+import { withAuth } from "@workos-inc/authkit-nextjs";
+import { WorkOS } from "@workos-inc/node";
+import { ArrowRight, Building2 } from "lucide-react";
+import Link from "next/link";
 
 export default async function NewListingPage() {
+  const workos = new WorkOS(process.env.WORKOS_API_KEY);
   const { user } = await withAuth();
 
   if (!user) {

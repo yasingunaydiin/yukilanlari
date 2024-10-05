@@ -1,8 +1,5 @@
-import { withAuth } from "@workos-inc/authkit-nextjs";
 import { createCompany } from "@/app/actions/workosActions";
-import { redirect } from "next/navigation";
 import { Button } from "@/app/components/ui/button";
-import { Input } from "@/app/components/ui/input";
 import {
   Card,
   CardContent,
@@ -10,6 +7,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/app/components/ui/card";
+import { Input } from "@/app/components/ui/input";
+import { withAuth } from "@workos-inc/authkit-nextjs";
+import { redirect } from "next/navigation";
 
 export default async function NewCompanyPage() {
   const { user } = await withAuth();
