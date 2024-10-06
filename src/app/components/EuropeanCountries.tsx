@@ -906,6 +906,7 @@ const EuropeanCountriesArray = [
     emoji: '🇽🇰',
   },
 ];
+
 export default function CountrySelect({
   setCountry,
 }: {

@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
-import { textVariant } from "/Users/yasingunaydin/Documents/GitHub/yuk-yolu-full-stack-app/utils/motion.js";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
+import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
+import { textVariant } from '/Users/yasingunaydin/Documents/GitHub/yuk-yolu-full-stack-app/utils/motion.js';
 
 const textArray = [
-  { title: "yükünü", color: "rgb(250 204 21)" },
-  { title: "tırını", color: "rgb(249, 115, 22)" },
+  { title: 'yükünü', color: 'rgb(250 204 21)' },
+  { title: 'tırını', color: 'rgb(249, 115, 22)' },
 ];
 
 export default function Hero() {
@@ -22,10 +22,11 @@ export default function Hero() {
   });
 
   return (
-    <section className="container my-16">
-      <div className="flex flex-col text-4xl lg:text-6xl md:text-5xl font-bold text-center items-center">
+    <section className='container my-16'>
+      <div className='absolute z-[-1] bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_80%)]'></div>
+      <div className='bg-gradient-to-r from-gray-600 to-gray-900 text-transparent bg-clip-text flex flex-col text-4xl lg:text-6xl md:text-5xl font-bold text-center items-center'>
         <h1>Bir sonraki</h1>
-        <div className="flex gap-2">
+        <div className='flex gap-2'>
           <motion.h1
             key={currentText}
             initial={{ opacity: 0, y: 50 }}
@@ -41,13 +42,13 @@ export default function Hero() {
         </div>
       </div>
 
-      <form className="flex gap-2 mt-14 max-w-xl mx-auto">
+      <form className='flex gap-2 mt-14 max-w-xl mx-auto'>
         <Input
-          type="search"
-          className="border border-gray-300 w-full py-2 px-3 rounded-md"
-          placeholder="Ara..."
+          type='search'
+          className='border border-gray-300 w-full py-2 px-3 rounded-md'
+          placeholder='Ara...'
         />
-        <Button className="bg-yellow-400 text-white py-2 px-4 rounded-md">
+        <Button className='bg-yellow-400 text-white py-2 px-4 rounded-md'>
           Ara
         </Button>
       </form>

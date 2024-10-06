@@ -1,7 +1,10 @@
+'use client';
 import TimeAgo from '@/app/components/TimeAgo';
 import type { Job } from '@/models/Job';
 import { faArrowRight, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import axios from 'axios';
+import Link from 'next/link';
 
 //If something doesnt work with the emojis, put it in teh translportcategories component.
 
@@ -31,6 +34,13 @@ const getEmojiForCategory = (category: string): string => {
 
 export default function JobRow({ jobInfo }: { jobInfo: Job }) {
   const categoryEmoji = getEmojiForCategory(jobInfo.category);
+  const formatLocation = (
+    country: string | undefined,
+    city: string
+  ): string => {
+    if (!country) return ''; // Return an empty string or handle the undefined case
+    return country.toLowerCase() === 'türkiye' ? city : country;
+  };
 
   return (
     <>
@@ -42,17 +52,39 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
           <div className='content-center text-3xl'>{categoryEmoji}</div>
           <div className='grow sm:flex'>
             <div className='grow'>
-              <div className='text-gray-500 text-sm'>{jobInfo.orgName}</div>{' '}
+              <Link
+                href={`/jobs/${jobInfo.orgId}`}
+                className='text-gray-500 text-sm'
+              >
+                {jobInfo.orgName}
+              </Link>{' '}
               {/*The guy added extra code at 5:09:16, if something with the company name goes wrong or doesnt change check this.*/}
               <div className='font-bold'>{jobInfo.title}</div>
-              <div className='text-gray-500 text-sm flex '>
+              <div className='text-gray-500 text-sm flex items-center'>
                 {jobInfo.category} &middot; {jobInfo.tonaj} &middot;{' '}
-                {jobInfo.cityFrom}, {jobInfo.countryFrom}
+                {formatLocation(jobInfo.countryFrom, jobInfo.cityFrom)}
                 <FontAwesomeIcon
-                  className='size-5 text-gray-800 p-1'
+                  className='size-4 text-gray-800 p-1'
                   icon={faArrowRight}
                 />
-                {jobInfo.cityTo}, {jobInfo.countryTo}
+                {formatLocation(jobInfo.countryTo, jobInfo.cityTo)}
+                {jobInfo.isAdmin && (
+                  <>
+                    &nbsp; &middot; &nbsp;{' '}
+                    <Link href={'/jobs/edit/' + jobInfo._id}>Düzenle</Link>
+                    &nbsp; &middot; &nbsp;{' '}
+                    <a
+                      className='cursor-pointer'
+                      type='button'
+                      onClick={async () => {
+                        await axios.delete('/api/jobs?id=' + jobInfo._id);
+                        window.location.reload();
+                      }}
+                    >
+                      Sil
+                    </a>
+                  </>
+                )}
               </div>
             </div>
             {jobInfo.createdAt && (

@@ -12,5 +12,6 @@ export const config = {
     '/new-listing/:orgId*',
     '/new-company',
     '/jobs/:orgId*',
+    '/jobs/edit/:jobId*',
   ],
 };

@@ -24,9 +24,13 @@ const transportCategoriesArray = [
   { value: 'Diğer', label: 'Diğer', emoji: '🏷️' },
 ];
 
-const TransportCategories = () => {
+const TransportCategories = ({
+  defaultValue = '',
+}: {
+  defaultValue: string;
+}) => {
   return (
-    <Select name='category'>
+    <Select name='category' defaultValue={defaultValue}>
       <SelectTrigger className='w-full'>
         <SelectValue placeholder='Kategori' />
       </SelectTrigger>
