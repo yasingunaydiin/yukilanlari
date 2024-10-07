@@ -8,6 +8,7 @@ import {
 } from '@/app/components/ui/select';
 
 const transportCategoriesArray = [
+  { value: 'Diğer', label: 'Diğer', emoji: '🏷️' },
   { value: 'Araç Kurtarma', label: 'Araç Kurtarma', emoji: '🚗' },
   { value: 'Gıda', label: 'Gıda', emoji: '🍽️' },
   { value: 'Giysi', label: 'Giysi', emoji: '👗' },
@@ -22,16 +23,11 @@ const transportCategoriesArray = [
   { value: 'İnşaat Ekipmanları', label: 'İnşaat Ekipmanları', emoji: '🧰' },
   { value: 'Bitki', label: 'Bitki', emoji: '🌱' },
   { value: 'Çiçek', label: 'Çiçek', emoji: '🌸' },
-  { value: 'Diğer', label: 'Diğer', emoji: '🏷️' },
 ];
 
-const TransportCategories = ({
-  defaultValue = '',
-}: {
-  defaultValue: string;
-}) => {
+const TransportCategories = () => {
   return (
-    <Select name='category' defaultValue={defaultValue}>
+    <Select name='category' required>
       <SelectTrigger className='w-full'>
         <SelectValue placeholder='Kategori' />
       </SelectTrigger>

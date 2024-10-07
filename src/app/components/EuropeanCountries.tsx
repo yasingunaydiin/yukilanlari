@@ -927,7 +927,11 @@ export default function CountrySelect({
   };
 
   return (
-    <Select onValueChange={handleSelectCountry} value={selectedCountryId}>
+    <Select
+      onValueChange={handleSelectCountry}
+      value={selectedCountryId}
+      required
+    >
       <SelectTrigger className='w-full'>
         <SelectValue placeholder='Bir ülke seç' />
       </SelectTrigger>

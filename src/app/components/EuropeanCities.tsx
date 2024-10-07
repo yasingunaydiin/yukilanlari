@@ -810,7 +810,7 @@ export default function CitySelect({
     [];
 
   return (
-    <Select onValueChange={handleSelectCity} value={selectedCity}>
+    <Select onValueChange={handleSelectCity} value={selectedCity} required>
       <SelectTrigger className='w-full'>
         <SelectValue placeholder='Bir şehir seç' />
       </SelectTrigger>

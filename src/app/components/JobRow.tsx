@@ -8,6 +8,7 @@ import Link from 'next/link';
 //If something doesnt work with the emojis, put it in teh translportcategories component.
 
 const transportCategoriesArray = [
+  { value: 'Diğer', label: 'Diğer', emoji: '🏷️' },
   { value: 'Araç Kurtarma', label: 'Araç Kurtarma', emoji: '🚗' },
   { value: 'Gıda', label: 'Gıda', emoji: '🍽️' },
   { value: 'Giysi', label: 'Giysi', emoji: '👗' },
@@ -22,7 +23,6 @@ const transportCategoriesArray = [
   { value: 'İnşaat Ekipmanları', label: 'İnşaat Ekipmanları', emoji: '🧰' },
   { value: 'Bitki', label: 'Bitki', emoji: '🌱' },
   { value: 'Çiçek', label: 'Çiçek', emoji: '🌸' },
-  { value: 'Diğer', label: 'Diğer', emoji: '🏷️' },
 ];
 
 const getEmojiForCategory = (category: string): string => {
@@ -54,7 +54,7 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
 
   const handleDeleteClick = async (e: React.MouseEvent) => {
     e.preventDefault();
-    if (confirm('Bu işi silmek istediğinizden emin misiniz??')) {
+    if (confirm('Bu işi silmek istediğinizden emin misiniz?')) {
       try {
         await axios.delete('/api/jobs?id=' + jobInfo._id);
         window.location.reload();

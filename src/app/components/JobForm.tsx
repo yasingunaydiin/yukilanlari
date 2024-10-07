@@ -47,6 +47,7 @@ export function JobForm({ orgId, jobInfo }: { orgId: string; jobInfo?: Job }) {
                 placeholder='İsim'
                 className='flex-1'
                 defaultValue={jobInfo?.contactName || ''}
+                required
               />
               <Input
                 name='contactEmail'
@@ -54,6 +55,7 @@ export function JobForm({ orgId, jobInfo }: { orgId: string; jobInfo?: Job }) {
                 placeholder='E-mail'
                 className='flex-1'
                 defaultValue={jobInfo?.contactEmail || ''}
+                required
               />
               <Input
                 name='contactPhone'
@@ -61,6 +63,7 @@ export function JobForm({ orgId, jobInfo }: { orgId: string; jobInfo?: Job }) {
                 placeholder='Telefon Numarası'
                 className='flex-1'
                 defaultValue={jobInfo?.contactPhone || ''}
+                required
               />
             </div>
           </div>
@@ -68,17 +71,20 @@ export function JobForm({ orgId, jobInfo }: { orgId: string; jobInfo?: Job }) {
             name='title'
             placeholder='Başlık'
             defaultValue={jobInfo?.title || ''}
+            required
           />
           <Input
             name='tonaj'
             placeholder='Tonaj'
             defaultValue={jobInfo?.tonaj || ''}
+            required
           />
-          <TransportCategories defaultValue={jobInfo?.category || ''} />
+          <TransportCategories />
           <Textarea
             name='description'
             placeholder='Açıklama'
             defaultValue={jobInfo?.description || ''}
+            required
           />
           <div className='space-y-4'>
             <div className='flex flex-col sm:flex-row gap-4'>
