@@ -10,7 +10,10 @@ export default async function Header() {
     <header>
       <div className='flex items-center justify-between mx-auto'>
         <div>
-          <Link href={'/'} className='font-bold text-2xl text-primary/90'>
+          <Link
+            href={'/'}
+            className='bg-gradient-to-r from-gray-600 to-gray-900 text-transparent bg-clip-text font-bold text-2xl'
+          >
             Yük Bul
           </Link>
         </div>

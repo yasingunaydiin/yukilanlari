@@ -1,6 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useMotionValueEvent, useScroll } from 'framer-motion';
+import { CircleArrowDown } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -13,12 +14,25 @@ const textArray = [
 
 export default function Hero() {
   const [currentText, setCurrentText] = useState(0);
+  const [visible, setVisible] = useState(true);
+  const { scrollY } = useScroll(); // Icon hide on scroll
+
   useEffect(() => {
     const interval = setInterval(
       () => setCurrentText((textTitle) => (textTitle + 1) % textArray.length),
       3500
     );
     return () => clearInterval(interval);
+  }, []);
+
+  useMotionValueEvent(scrollY, 'change', (latest) => {
+    const previous = scrollY.getPrevious();
+
+    if (latest > previous && latest > 50) {
+      setVisible(false);
+    } else if (latest < previous && latest <= 50) {
+      setVisible(true);
+    }
   });
 
   return (
@@ -45,13 +59,24 @@ export default function Hero() {
       <form className='flex gap-2 mt-14 max-w-xl mx-auto'>
         <Input
           type='search'
-          className='border border-gray-300 w-full py-2 px-3 rounded-md'
+          className='border border-gray-300 w-full py-2 px-3 rounded-md '
           placeholder='Ara...'
         />
         <Button className='bg-yellow-400 text-white py-2 px-4 rounded-md'>
           Ara
         </Button>
       </form>
+      <motion.div
+        initial={{ opacity: 1 }}
+        animate={{ opacity: visible ? 1 : 0 }}
+        transition={{ duration: 0.3 }}
+        className='fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50'
+      >
+        <CircleArrowDown className='text-3xl animate-bounce text-yellow-400' />
+      </motion.div>
+      <div className=''>
+        <Button>Daha fazla</Button>
+      </div>
     </section>
   );
 }

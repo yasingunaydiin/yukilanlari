@@ -49,6 +49,8 @@ const JobSchema = new Schema(
   }
 );
 
+export const JobModel = models?.Job || model('Job', JobSchema);
+
 export async function addOrgAndUserData(jobsInfo: Job[], user: User | null) {
   jobsInfo = JSON.parse(JSON.stringify(jobsInfo));
   await mongoose.connect(process.env.MONGO_URI as string);
@@ -68,5 +70,3 @@ export async function addOrgAndUserData(jobsInfo: Job[], user: User | null) {
   }
   return jobsInfo;
 }
-
-export const JobModel = models?.Job || model('Job', JobSchema);

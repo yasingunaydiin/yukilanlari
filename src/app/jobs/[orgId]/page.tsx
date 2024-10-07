@@ -1,7 +1,16 @@
 import Jobs from '@/app/components/Jobs';
-import { addOrgAndUserData, JobModel } from '@/models/Job';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@/app/components/ui/card';
+import { connectToDB } from '@/lib/dbConnect';
+import { Company, CompanyModel } from '@/models/Company';
+import { Job, JobModel, addOrgAndUserData } from '@/models/Job';
 import { withAuth } from '@workos-inc/authkit-nextjs';
 import { WorkOS } from '@workos-inc/node';
+import { Globe, Mail, Map, Phone, User } from 'lucide-react';
 
 type PageProps = {
   params: {
@@ -9,24 +18,87 @@ type PageProps = {
   };
 };
 
-export default async function CompanyJobsPage(props: PageProps) {
+export default async function CompanyJobsPage({ params }: PageProps) {
+  await connectToDB();
   const workos = new WorkOS(process.env.WORKOS_API_KEY);
-  const org = await workos.organizations.getOrganization(props.params.orgId);
+
   const { user } = await withAuth();
-  let jobsInfo = JSON.parse(
-    JSON.stringify(await JobModel.find({ orgId: org.id }))
-  );
-  jobsInfo = await addOrgAndUserData(jobsInfo, user);
+  if (!user) {
+    throw new Error('User not authenticated');
+  }
+
+  const org = await workos.organizations.getOrganization(params.orgId);
+
+  // Fetch jobs associated with the organization
+  const jobsInfo = await JobModel.find({ orgId: org.id }).lean();
+  const jobsWithData = await addOrgAndUserData(jobsInfo as Job[], user);
+
+  // Fetch company details
+  const companyDetails = (await CompanyModel.findOne({
+    organizationId: org.id,
+  }).lean()) as Company | null;
 
   return (
-    <div>
-      <div className='container'>
-        <h1 className='text-xl my-6'>{org.name} Jobs</h1>
+    <div className='container my-6 max-w-3xl mx-auto'>
+      <Card>
+        <CardHeader>
+          <CardTitle className='text-3xl font-bold'>{org.name}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className='space-y-4'>
+            <div>
+              <h2 className='text-xl font-semibold mb-2'>İletişim Bilgileri</h2>
+              {companyDetails ? (
+                <div className='space-y-2'>
+                  <div className='flex items-center'>
+                    <User className='w-5 h-5 mr-2 text-muted-foreground' />
+                    <span className='capitalize'>
+                      {companyDetails.newCompanyContactName}
+                    </span>
+                  </div>
+                  <div className='flex items-center'>
+                    <Mail className='w-5 h-5 mr-2 text-muted-foreground' />
+                    <span>{companyDetails.newCompanyEmail}</span>
+                  </div>
+                  <div className='flex items-center'>
+                    <Phone className='w-5 h-5 mr-2 text-muted-foreground' />
+                    <span>{companyDetails.newCompanyPhone}</span>
+                  </div>
+                  <div className='flex items-center'>
+                    <Map className='w-5 h-5 mr-2 text-muted-foreground' />
+                    <span>{companyDetails.newCompanyLocation}</span>
+                  </div>
+                  {companyDetails.newCompanyWebsite && (
+                    <div className='flex items-center'>
+                      <Globe className='w-5 h-5 mr-2 text-muted-foreground' />
+                      <a
+                        href={companyDetails.newCompanyWebsite}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        className='text-blue-500 hover:underline'
+                      >
+                        {companyDetails.newCompanyWebsite}
+                      </a>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <p>Company details are not available at this time.</p>
+              )}
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      <div className='mt-8'>
+        <h2 className='text-2xl font-bold mb-4'>
+          {org.name} tarafından paylaşılan işler
+        </h2>
+        <Jobs
+          jobs={jobsWithData}
+          header={`${org.name} tarafından paylaşılan işler`}
+        />
       </div>
-      <Jobs
-        jobs={jobsInfo}
-        header={org.name + ' Tarafından paylaşılan işler'}
-      />
     </div>
   );
 }

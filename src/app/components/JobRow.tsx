@@ -1,14 +1,14 @@
 'use client';
 import TimeAgo from '@/app/components/TimeAgo';
 import type { Job } from '@/models/Job';
-import { faArrowRight, faHeart } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
+import { ArrowRight, Heart } from 'lucide-react';
 import Link from 'next/link';
 
 //If something doesnt work with the emojis, put it in teh translportcategories component.
 
 const transportCategoriesArray = [
+  { value: 'Araç Kurtarma', label: 'Araç Kurtarma', emoji: '🚗' },
   { value: 'Gıda', label: 'Gıda', emoji: '🍽️' },
   { value: 'Giysi', label: 'Giysi', emoji: '👗' },
   { value: 'Mobilya', label: 'Mobilya', emoji: '🛋️' },
@@ -46,7 +46,7 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
     <>
       <div className='bg-white p-4 rounded-lg shadow-sm relative'>
         <div className='absolute top-4 cursor-pointer right-4'>
-          <FontAwesomeIcon className='size-5 text-gray-400' icon={faHeart} />
+          <Heart className='size-5 text-gray-400' />
         </div>
         <div className='flex grow gap-4'>
           <div className='content-center text-3xl'>{categoryEmoji}</div>
@@ -54,27 +54,33 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
             <div className='grow'>
               <Link
                 href={`/jobs/${jobInfo.orgId}`}
-                className='text-gray-500 text-sm'
+                className='text-gray-500 text-sm hover:underline'
               >
                 {jobInfo.orgName}
               </Link>{' '}
               {/*The guy added extra code at 5:09:16, if something with the company name goes wrong or doesnt change check this.*/}
-              <div className='font-bold'>{jobInfo.title}</div>
-              <div className='text-gray-500 text-sm flex items-center'>
+              <div className='font-bold'>
+                <Link className='hover:underline' href={'/show/' + jobInfo._id}>
+                  {jobInfo.title}
+                </Link>
+              </div>
+              <div className='text-gray-500 text-sm flex items-center capitalize'>
                 {jobInfo.category} &middot; {jobInfo.tonaj} &middot;{' '}
                 {formatLocation(jobInfo.countryFrom, jobInfo.cityFrom)}
-                <FontAwesomeIcon
-                  className='size-4 text-gray-800 p-1'
-                  icon={faArrowRight}
-                />
+                <ArrowRight className='text-gray-800 p-1' />
                 {formatLocation(jobInfo.countryTo, jobInfo.cityTo)}
                 {jobInfo.isAdmin && (
                   <>
                     &nbsp; &middot; &nbsp;{' '}
-                    <Link href={'/jobs/edit/' + jobInfo._id}>Düzenle</Link>
+                    <Link
+                      className='hover:underline'
+                      href={'/jobs/edit/' + jobInfo._id}
+                    >
+                      Düzenle
+                    </Link>
                     &nbsp; &middot; &nbsp;{' '}
                     <a
-                      className='cursor-pointer'
+                      className='cursor-pointer hover:underline'
                       type='button'
                       onClick={async () => {
                         await axios.delete('/api/jobs?id=' + jobInfo._id);

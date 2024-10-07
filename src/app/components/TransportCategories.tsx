@@ -8,6 +8,7 @@ import {
 } from '@/app/components/ui/select';
 
 const transportCategoriesArray = [
+  { value: 'Araç Kurtarma', label: 'Araç Kurtarma', emoji: '🚗' },
   { value: 'Gıda', label: 'Gıda', emoji: '🍽️' },
   { value: 'Giysi', label: 'Giysi', emoji: '👗' },
   { value: 'Mobilya', label: 'Mobilya', emoji: '🛋️' },

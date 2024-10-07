@@ -1,34 +1,61 @@
-import { createCompany } from "@/app/actions/workosActions";
-import { Button } from "@/app/components/ui/button";
+import { createCompany } from '@/app/actions/workosActions';
+import { Button } from '@/app/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/app/components/ui/card";
-import { Input } from "@/app/components/ui/input";
-import { withAuth } from "@workos-inc/authkit-nextjs";
-import { redirect } from "next/navigation";
+} from '@/app/components/ui/card';
+import { Input } from '@/app/components/ui/input';
+import { withAuth } from '@workos-inc/authkit-nextjs';
+import { User } from '@workos-inc/node';
+import { redirect } from 'next/navigation';
 
 export default async function NewCompanyPage() {
   const { user } = await withAuth();
 
   if (!user) {
-    redirect("/login");
+    redirect('/login');
   }
 
+  // Type assertion to assure TypeScript that user exists
+  const authenticatedUser = user as User;
+
   async function handleNewCompanyFormSubmit(formData: FormData) {
-    "use server";
-    const newCompanyName = formData.get("newCompanyName") as string;
-    if (newCompanyName) {
-      await createCompany(newCompanyName, user.id);
-      redirect("/new-listing");
+    'use server';
+    const newCompanyName = formData.get('newCompanyName') as string;
+    const newCompanyContactName = formData.get(
+      'newCompanyContactName'
+    ) as string;
+    const newCompanyPhone = formData.get('newCompanyPhone') as string;
+    const newCompanyEmail = formData.get('newCompanyEmail') as string;
+    const newCompanyLocation = formData.get('newCompanyLocation') as string;
+    const newCompanyWebsite = formData.get('newCompanyWebsite') as string;
+
+    if (
+      newCompanyName &&
+      newCompanyContactName &&
+      newCompanyPhone &&
+      newCompanyEmail &&
+      newCompanyLocation &&
+      newCompanyWebsite
+    ) {
+      await createCompany(
+        newCompanyName,
+        newCompanyContactName,
+        newCompanyPhone,
+        newCompanyEmail,
+        newCompanyLocation,
+        newCompanyWebsite,
+        authenticatedUser.id
+      );
+      redirect('/new-listing');
     }
   }
 
   return (
-    <div className="container max-w-md mx-auto py-8">
+    <div className='container max-w-md mx-auto py-8'>
       <Card>
         <CardHeader>
           <CardTitle>Yeni bir şirket oluştur</CardTitle>
@@ -37,14 +64,44 @@ export default async function NewCompanyPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form action={handleNewCompanyFormSubmit} className="space-y-4">
+          <form action={handleNewCompanyFormSubmit} className='space-y-4'>
             <Input
-              name="newCompanyName"
-              type="text"
-              placeholder="Şirket ismi gir"
+              name='newCompanyName'
+              type='text'
+              placeholder='Şirket ismi gir'
               required
             />
-            <Button type="submit" className="w-full">
+            <Input
+              name='newCompanyContactName'
+              type='text'
+              placeholder='İsim gir'
+              required
+            />
+            <Input
+              name='newCompanyPhone'
+              type='text'
+              placeholder='Telefon numarası gir'
+              required
+            />
+            <Input
+              name='newCompanyEmail'
+              type='email'
+              placeholder='E-posta adresi gir'
+              required
+            />
+            <Input
+              name='newCompanyLocation'
+              type='text'
+              placeholder='Konum gir'
+              required
+            />
+            <Input
+              name='newCompanyWebsite'
+              type='text'
+              placeholder='Website adresini gir'
+              required
+            />
+            <Button type='submit' className='w-full'>
               Şirket oluştur
             </Button>
           </form>
