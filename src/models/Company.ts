@@ -6,6 +6,7 @@ export interface Company extends Document {
   newCompanyEmail: string;
   newCompanyLocation: string;
   newCompanyWebsite?: string;
+  newCompanySocialFacebook?: string;
   organizationId: string; // Add this field
 }
 
@@ -15,6 +16,7 @@ const CompanySchema = new Schema<Company>({
   newCompanyEmail: { type: String, required: true },
   newCompanyLocation: { type: String, required: true },
   newCompanyWebsite: { type: String },
+  newCompanySocialFacebook: { type: String },
   organizationId: { type: String, required: true }, // Include the organizationId field
 });
 

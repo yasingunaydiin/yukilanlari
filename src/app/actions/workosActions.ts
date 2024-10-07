@@ -16,6 +16,7 @@ export async function createCompany(
   newCompanyEmail: string,
   newCompanyLocation: string,
   newCompanyWebsite: string,
+  newCompanySocialFacebook: string,
   userId: string
 ) {
   // Connect to MongoDB
@@ -40,6 +41,7 @@ export async function createCompany(
     newCompanyEmail: newCompanyEmail,
     newCompanyLocation: newCompanyLocation,
     newCompanyWebsite: newCompanyWebsite,
+    newCompanySocialFacebook: newCompanySocialFacebook,
     organizationId: org.id, // Add this line to save the WorkOS organization ID
   });
 

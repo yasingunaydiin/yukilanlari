@@ -10,7 +10,7 @@ import { Company, CompanyModel } from '@/models/Company';
 import { Job, JobModel, addOrgAndUserData } from '@/models/Job';
 import { withAuth } from '@workos-inc/authkit-nextjs';
 import { WorkOS } from '@workos-inc/node';
-import { Globe, Mail, Map, Phone, User } from 'lucide-react';
+import { Facebook, Globe, Mail, Map, Phone, User } from 'lucide-react';
 
 type PageProps = {
   params: {
@@ -23,9 +23,6 @@ export default async function CompanyJobsPage({ params }: PageProps) {
   const workos = new WorkOS(process.env.WORKOS_API_KEY);
 
   const { user } = await withAuth();
-  if (!user) {
-    throw new Error('User not authenticated');
-  }
 
   const org = await workos.organizations.getOrganization(params.orgId);
 
@@ -68,7 +65,7 @@ export default async function CompanyJobsPage({ params }: PageProps) {
                     <Map className='w-5 h-5 mr-2 text-muted-foreground' />
                     <span>{companyDetails.newCompanyLocation}</span>
                   </div>
-                  {companyDetails.newCompanyWebsite && (
+                  {companyDetails.newCompanyWebsite && ( //If the user has not added a website
                     <div className='flex items-center'>
                       <Globe className='w-5 h-5 mr-2 text-muted-foreground' />
                       <a
@@ -78,6 +75,19 @@ export default async function CompanyJobsPage({ params }: PageProps) {
                         className='text-blue-500 hover:underline'
                       >
                         {companyDetails.newCompanyWebsite}
+                      </a>
+                    </div>
+                  )}
+                  {companyDetails.newCompanySocialFacebook && ( //If the user has not added a website
+                    <div className='flex items-center'>
+                      <Facebook className='w-5 h-5 mr-2 text-muted-foreground' />
+                      <a
+                        href={companyDetails.newCompanySocialFacebook}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        className='text-blue-500 hover:underline'
+                      >
+                        {companyDetails.newCompanySocialFacebook}
                       </a>
                     </div>
                   )}

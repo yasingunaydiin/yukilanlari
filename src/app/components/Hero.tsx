@@ -19,21 +19,15 @@ export default function Hero() {
 
   useEffect(() => {
     const interval = setInterval(
-      () => setCurrentText((textTitle) => (textTitle + 1) % textArray.length),
+      () => setCurrentText((prev) => (prev + 1) % textArray.length),
       3500
     );
     return () => clearInterval(interval);
   }, []);
 
-  useMotionValueEvent(scrollY, 'change', (latest) => {
-    const previous = scrollY.getPrevious();
-
-    if (latest > previous && latest > 50) {
-      setVisible(false);
-    } else if (latest < previous && latest <= 50) {
-      setVisible(true);
-    }
-  });
+  useMotionValueEvent(scrollY, 'change', (latest) =>
+    setVisible(latest <= (scrollY.getPrevious() ?? 0) || latest <= 50)
+  );
 
   return (
     <section className='container my-16'>
@@ -74,9 +68,6 @@ export default function Hero() {
       >
         <CircleArrowDown className='text-3xl animate-bounce text-yellow-400' />
       </motion.div>
-      <div className=''>
-        <Button>Daha fazla</Button>
-      </div>
     </section>
   );
 }

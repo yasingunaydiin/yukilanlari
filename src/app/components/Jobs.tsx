@@ -1,5 +1,6 @@
 import JobRow from '@/app/components/JobRow';
 import type { Job } from '@/models/Job';
+import { Button } from './ui/button';
 import { Card } from './ui/card';
 
 export default function Jobs({
@@ -16,6 +17,11 @@ export default function Jobs({
         {!jobs?.length && <div>İş bulunamadı</div>}
         {jobs && jobs.map((job) => <JobRow jobInfo={job} />)}
         {/*Could also use this if there are issues deploying or buuldig: {jobs && jobs.map((job, index) => <JobRow key={index} jobInfo={job} />)}*/}
+      </div>
+      <div className='flex justify-center mt-3'>
+        <Button className='bg-yellow-400 text-white rounded-md'>
+          Daha fazla
+        </Button>
       </div>
     </Card>
   );

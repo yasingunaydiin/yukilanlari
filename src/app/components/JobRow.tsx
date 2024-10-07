@@ -44,7 +44,7 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
 
   return (
     <>
-      <div className='bg-white p-4 rounded-lg shadow-sm relative'>
+      <div className='bg-white p-4 rounded-lg shadow-sm relative transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-white duration-300'>
         <div className='absolute top-4 cursor-pointer right-4'>
           <Heart className='size-5 text-gray-400' />
         </div>
@@ -58,7 +58,6 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
               >
                 {jobInfo.orgName}
               </Link>{' '}
-              {/*The guy added extra code at 5:09:16, if something with the company name goes wrong or doesnt change check this.*/}
               <div className='font-bold'>
                 <Link className='hover:underline' href={'/show/' + jobInfo._id}>
                   {jobInfo.title}

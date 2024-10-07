@@ -1,4 +1,4 @@
-import { createCompany } from '@/app/actions/workosActions';
+import { createCompany } from '@/app/actions/workosActions'; //Change this to companyactions.ts
 import { Button } from '@/app/components/ui/button';
 import {
   Card,
@@ -32,6 +32,9 @@ export default async function NewCompanyPage() {
     const newCompanyEmail = formData.get('newCompanyEmail') as string;
     const newCompanyLocation = formData.get('newCompanyLocation') as string;
     const newCompanyWebsite = formData.get('newCompanyWebsite') as string;
+    const newCompanySocialFacebook = formData.get(
+      'newCompanySocialFacebook'
+    ) as string;
 
     if (
       newCompanyName &&
@@ -39,7 +42,8 @@ export default async function NewCompanyPage() {
       newCompanyPhone &&
       newCompanyEmail &&
       newCompanyLocation &&
-      newCompanyWebsite
+      newCompanyWebsite &&
+      newCompanySocialFacebook
     ) {
       await createCompany(
         newCompanyName,
@@ -48,6 +52,7 @@ export default async function NewCompanyPage() {
         newCompanyEmail,
         newCompanyLocation,
         newCompanyWebsite,
+        newCompanySocialFacebook,
         authenticatedUser.id
       );
       redirect('/new-listing');
@@ -99,6 +104,12 @@ export default async function NewCompanyPage() {
               name='newCompanyWebsite'
               type='text'
               placeholder='Website adresini gir'
+              required
+            />
+            <Input
+              name='newCompanySocialFacebook'
+              type='text'
+              placeholder='Facebook adresini gir'
               required
             />
             <Button type='submit' className='w-full'>
