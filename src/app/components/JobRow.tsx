@@ -42,52 +42,66 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
     return country.toLowerCase() === 'türkiye' ? city : country;
   };
 
+  const handleOrgClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.location.href = `/jobs/${jobInfo.orgId}`;
+  };
+
+  const handleEditClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.location.href = `/jobs/edit/${jobInfo._id}`;
+  };
+
+  const handleDeleteClick = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (confirm('Bu işi silmek istediğinizden emin misiniz??')) {
+      try {
+        await axios.delete('/api/jobs?id=' + jobInfo._id);
+        window.location.reload();
+      } catch (error) {
+        console.error('İş silme hatası:', error);
+        alert('İş silinirken bir hata oluştu. Lütfen tekrar deneyin.');
+      }
+    }
+  };
+
   return (
-    <>
-      <div className='bg-white p-4 rounded-lg shadow-sm relative transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-white duration-300'>
-        <div className='absolute top-4 cursor-pointer right-4'>
+    <div className='relative bg-white p-4 rounded-lg shadow-sm transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-white duration-300 cursor-pointer'>
+      <Link href={`/show/${jobInfo._id}`}>
+        <div className='absolute top-4 right-4 z-10'>
           <Heart className='size-5 text-gray-400' />
         </div>
+
         <div className='flex grow gap-4'>
           <div className='content-center text-3xl'>{categoryEmoji}</div>
           <div className='grow sm:flex'>
             <div className='grow'>
-              <Link
-                href={`/jobs/${jobInfo.orgId}`}
+              <button
+                onClick={handleOrgClick}
                 className='text-gray-500 text-sm hover:underline'
               >
                 {jobInfo.orgName}
-              </Link>{' '}
-              <div className='font-bold'>
-                <Link className='hover:underline' href={'/show/' + jobInfo._id}>
-                  {jobInfo.title}
-                </Link>
-              </div>
-              <div className='text-gray-500 text-sm flex items-center capitalize'>
+              </button>
+              <div className='font-bold'>{jobInfo.title}</div>
+              <div className='text-gray-500 text-sm flex items-center capitalize gap-2'>
                 {jobInfo.category} &middot; {jobInfo.tonaj} &middot;{' '}
                 {formatLocation(jobInfo.countryFrom, jobInfo.cityFrom)}
                 <ArrowRight className='text-gray-800 p-1' />
                 {formatLocation(jobInfo.countryTo, jobInfo.cityTo)}
                 {jobInfo.isAdmin && (
                   <>
-                    &nbsp; &middot; &nbsp;{' '}
-                    <Link
-                      className='hover:underline'
-                      href={'/jobs/edit/' + jobInfo._id}
+                    <button
+                      onClick={handleEditClick}
+                      className='inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10 z-10'
                     >
                       Düzenle
-                    </Link>
-                    &nbsp; &middot; &nbsp;{' '}
-                    <a
-                      className='cursor-pointer hover:underline'
-                      type='button'
-                      onClick={async () => {
-                        await axios.delete('/api/jobs?id=' + jobInfo._id);
-                        window.location.reload();
-                      }}
+                    </button>
+                    <button
+                      onClick={handleDeleteClick}
+                      className='cursor-pointer inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10 z-10'
                     >
                       Sil
-                    </a>
+                    </button>
                   </>
                 )}
               </div>
@@ -99,7 +113,7 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
             )}
           </div>
         </div>
-      </div>
-    </>
+      </Link>
+    </div>
   );
 }

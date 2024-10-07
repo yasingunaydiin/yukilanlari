@@ -1,4 +1,4 @@
-// actions/workosActions.ts
+// actions/workosActions.ts and companyactions.ts
 
 'use server';
 import { connectToDB } from '@/lib/dbConnect'; // Import the database connection
