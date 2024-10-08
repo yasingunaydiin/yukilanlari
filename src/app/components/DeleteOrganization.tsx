@@ -5,10 +5,12 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 type DeleteOrganizationProps = {
-  orgId: string;
+  organizationId: string;
 };
 
-export default function DeleteOrganization({ orgId }: DeleteOrganizationProps) {
+export default function DeleteOrganization({
+  organizationId,
+}: DeleteOrganizationProps) {
   const [isDeleting, setIsDeleting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
@@ -25,8 +27,7 @@ export default function DeleteOrganization({ orgId }: DeleteOrganizationProps) {
     setError(null);
 
     try {
-      const response = await fetch(`/api/organizations/${orgId}`, {
-        //Changed organizationId to orgId
+      const response = await fetch(`/api/organizations/${organizationId}`, {
         method: 'DELETE',
       });
 
@@ -35,7 +36,7 @@ export default function DeleteOrganization({ orgId }: DeleteOrganizationProps) {
         throw new Error(error || 'Failed to delete organization');
       }
 
-      router.push('/new-listing');
+      router.push('/new-listing'); // Redirect after successful deletion
     } catch (err) {
       setError(`Failed to delete organization. ${(err as Error).message}`);
     } finally {
