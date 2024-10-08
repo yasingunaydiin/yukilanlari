@@ -94,7 +94,7 @@ export default async function CompanyJobsPage({ params }: PageProps) {
                   )}
                 </div>
               ) : (
-                <p>Company details are not available at this time.</p>
+                <p>Şirket bilgileri şu anda mevcut değil.</p>
               )}
             </div>
           </div>

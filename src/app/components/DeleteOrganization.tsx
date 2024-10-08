@@ -16,12 +16,7 @@ export default function DeleteOrganization({
   const router = useRouter();
 
   const handleDelete = async () => {
-    if (
-      !confirm(
-        'Are you sure you want to delete this organization? This action cannot be undone.'
-      )
-    )
-      return;
+    if (!confirm('Bu şirketi silmek istediğinizden emin misiniz?')) return;
 
     setIsDeleting(true);
     setError(null);
@@ -33,12 +28,12 @@ export default function DeleteOrganization({
 
       if (!response.ok) {
         const { error } = await response.json();
-        throw new Error(error || 'Failed to delete organization');
+        throw new Error(error || 'Şirket silinemedi');
       }
 
       router.push('/new-listing'); // Redirect after successful deletion
     } catch (err) {
-      setError(`Failed to delete organization. ${(err as Error).message}`);
+      setError(`Şirket silinemedi. ${(err as Error).message}`);
     } finally {
       setIsDeleting(false);
     }
@@ -51,7 +46,7 @@ export default function DeleteOrganization({
         disabled={isDeleting}
         variant='destructive'
       >
-        {isDeleting ? 'Deleting...' : 'Delete Organization'}
+        {isDeleting ? 'Siliniyor...' : 'Şirketi Sil'}
       </Button>
       {error && <p className='text-red-500 mt-2'>{error}</p>}
     </div>
