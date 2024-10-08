@@ -1,5 +1,4 @@
 import { createCompany } from '@/app/actions/workosActions'; //Change this to companyactions.ts
-import { Button } from '@/app/components/ui/button';
 import {
   Card,
   CardContent,
@@ -11,6 +10,7 @@ import { Input } from '@/app/components/ui/input';
 import { withAuth } from '@workos-inc/authkit-nextjs';
 import { User } from '@workos-inc/node';
 import { redirect } from 'next/navigation';
+import SpinningButton from '../components/spinningButton';
 
 export default async function NewCompanyPage() {
   const { user } = await withAuth();
@@ -41,9 +41,7 @@ export default async function NewCompanyPage() {
       newCompanyContactName &&
       newCompanyPhone &&
       newCompanyEmail &&
-      newCompanyLocation &&
-      newCompanyWebsite &&
-      newCompanySocialFacebook
+      newCompanyLocation
     ) {
       await createCompany(
         newCompanyName,
@@ -51,8 +49,8 @@ export default async function NewCompanyPage() {
         newCompanyPhone,
         newCompanyEmail,
         newCompanyLocation,
-        newCompanyWebsite,
-        newCompanySocialFacebook,
+        newCompanyWebsite || '',
+        newCompanySocialFacebook || '',
         authenticatedUser.id
       );
       redirect('/new-listing');
@@ -110,9 +108,7 @@ export default async function NewCompanyPage() {
               type='text'
               placeholder='Facebook adresini gir'
             />
-            <Button type='submit' className='w-full'>
-              Şirket oluştur
-            </Button>
+            <SpinningButton />
           </form>
         </CardContent>
       </Card>
