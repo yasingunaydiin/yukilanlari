@@ -99,7 +99,7 @@ export default async function CompanyJobsPage({ params }: PageProps) {
             </div>
           </div>
           <div className='mt-6'>
-            <DeleteOrganization organizationId={org.id} />
+            <DeleteOrganization orgId={org.id} />
           </div>
         </CardContent>
       </Card>

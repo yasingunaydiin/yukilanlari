@@ -7,12 +7,9 @@ export async function DELETE(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const id = params.id;
+  const orgId = params.id;
 
-  console.log('Received delete request for organization ID:', id);
-
-  if (!id) {
-    console.error('Invalid organization ID:', id);
+  if (!orgId) {
     return NextResponse.json(
       { error: 'Invalid organization ID' },
       { status: 400 }
@@ -20,42 +17,15 @@ export async function DELETE(
   }
 
   try {
-    // First, try to fetch the organization
-    console.log('Attempting to fetch organization details');
-    const org = await workos.organizations.getOrganization(id);
-    console.log('Organization found:', org.id);
-
-    // If fetch succeeds, proceed with deletion
-    console.log('Attempting to delete organization');
-    await workos.organizations.deleteOrganization(id);
-    console.log('Organization deleted successfully');
-    return NextResponse.json({ message: 'Organization deleted successfully' });
+    await workos.organizations.deleteOrganization(orgId);
+    return NextResponse.json(
+      { message: 'Organization deleted successfully' },
+      { status: 200 }
+    );
   } catch (error) {
-    console.error('Error in organization operation:', error);
-    if (error instanceof Error) {
-      console.log('Error message:', error.message);
-      console.log('Error name:', error.name);
-      if (error.message.includes('did not match the expected pattern')) {
-        return NextResponse.json(
-          { error: 'Invalid organization ID format: ' + error.message },
-          { status: 400 }
-        );
-      } else if (error.message.includes('not found')) {
-        return NextResponse.json(
-          { error: 'Organization not found: ' + error.message },
-          { status: 404 }
-        );
-      } else {
-        return NextResponse.json(
-          { error: 'Unexpected error: ' + error.message },
-          { status: 500 }
-        );
-      }
-    } else {
-      return NextResponse.json(
-        { error: 'An unknown error occurred' },
-        { status: 500 }
-      );
-    }
+    const errorMessage =
+      error instanceof Error ? error.message : 'An unknown error occurred';
+    const statusCode = errorMessage.includes('not found') ? 404 : 500;
+    return NextResponse.json({ error: errorMessage }, { status: statusCode });
   }
 }

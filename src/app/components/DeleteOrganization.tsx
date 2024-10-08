@@ -5,12 +5,10 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 type DeleteOrganizationProps = {
-  organizationId: string;
+  orgId: string;
 };
 
-export default function DeleteOrganization({
-  organizationId,
-}: DeleteOrganizationProps) {
+export default function DeleteOrganization({ orgId }: DeleteOrganizationProps) {
   const [isDeleting, setIsDeleting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
@@ -20,34 +18,26 @@ export default function DeleteOrganization({
       !confirm(
         'Are you sure you want to delete this organization? This action cannot be undone.'
       )
-    ) {
+    )
       return;
-    }
 
     setIsDeleting(true);
     setError(null);
 
-    console.log('Attempting to delete organization with ID:', organizationId);
-
     try {
-      const response = await fetch(`/api/organizations/${organizationId}`, {
+      const response = await fetch(`/api/organizations/${orgId}`, {
+        //Changed organizationId to orgId
         method: 'DELETE',
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to delete organization');
+        const { error } = await response.json();
+        throw new Error(error || 'Failed to delete organization');
       }
 
-      console.log('Organization deleted successfully');
-      router.push('/'); // Adjust this to your desired redirect path
+      router.push('/new-listing');
     } catch (err) {
-      console.error('Error deleting organization:', err);
-      setError(
-        `Failed to delete organization. ${
-          err instanceof Error ? err.message : 'Unknown error'
-        }`
-      );
+      setError(`Failed to delete organization. ${(err as Error).message}`);
     } finally {
       setIsDeleting(false);
     }
