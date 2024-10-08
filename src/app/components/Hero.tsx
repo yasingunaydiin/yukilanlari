@@ -25,9 +25,11 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, []);
 
-  useMotionValueEvent(scrollY, 'change', (latest) =>
-    setVisible(latest <= (scrollY.getPrevious() ?? 0) || latest <= 50)
-  );
+  useMotionValueEvent(scrollY, 'change', (latest) => {
+    const isBottom =
+      window.innerHeight + latest >= document.documentElement.scrollHeight;
+    setVisible(!isBottom);
+  });
 
   return (
     <section className='container my-16'>

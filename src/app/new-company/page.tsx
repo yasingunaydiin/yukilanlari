@@ -104,13 +104,11 @@ export default async function NewCompanyPage() {
               name='newCompanyWebsite'
               type='text'
               placeholder='Website adresini gir'
-              required
             />
             <Input
               name='newCompanySocialFacebook'
               type='text'
               placeholder='Facebook adresini gir'
-              required
             />
             <Button type='submit' className='w-full'>
               Şirket oluştur

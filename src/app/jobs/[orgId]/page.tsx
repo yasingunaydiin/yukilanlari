@@ -1,3 +1,4 @@
+import DeleteOrganization from '@/app/components/DeleteOrganization'; // Import the new component
 import Jobs from '@/app/components/Jobs';
 import {
   Card,
@@ -96,6 +97,9 @@ export default async function CompanyJobsPage({ params }: PageProps) {
                 <p>Company details are not available at this time.</p>
               )}
             </div>
+          </div>
+          <div className='mt-6'>
+            <DeleteOrganization organizationId={org.id} />
           </div>
         </CardContent>
       </Card>
