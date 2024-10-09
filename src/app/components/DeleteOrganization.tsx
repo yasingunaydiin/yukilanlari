@@ -54,3 +54,5 @@ export default function DeleteOrganization({
     </div>
   );
 }
+
+// NEED TO FIX THIS ONE BECAUSE EVERYONE CAN DELETE IT. ONLY PEOPLE THAT CREATED THIS SHOULD BE ABLE TO DELETE IT

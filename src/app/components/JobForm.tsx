@@ -1,5 +1,4 @@
 'use client'; // Directive indicating this is a client component
-import CompanyInfo from '@/app/components/CompanyInfo'; // Import the CompanyInfo component
 import CitySelect from '@/app/components/EuropeanCities';
 import CountrySelect from '@/app/components/EuropeanCountries';
 import TransportCategories from '@/app/components/TransportCategories';
@@ -41,8 +40,6 @@ export function JobForm({ orgId, jobInfo }: { orgId: string; jobInfo?: Job }) {
     <form action={handleSaveJob} className='container mt-6'>
       {/* Hidden input for job ID (used only when updating an existing job) */}
       {jobInfo && <input type='hidden' name='id' value={jobInfo?._id} />}
-
-      <CompanyInfo params={{ orgId }} />
 
       <Card>
         <CardContent className='flex flex-col gap-4 p-5'>
