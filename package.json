@@ -42,6 +42,7 @@
     "tailwindcss-animate": "^1.0.7",
     "turkey-cities-towns": "^1.0.2",
     "use-react-countries": "^2.0.1",
+    "vercel": "^37.7.0",
     "yarn": "^1.22.22"
   },
   "devDependencies": {
