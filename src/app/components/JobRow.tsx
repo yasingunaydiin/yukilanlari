@@ -76,8 +76,8 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
   return (
     <div className='bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300'>
       <Link href={`/show/${jobInfo._id}`} className='block p-4'>
-        <div className='flex items-start gap-4'>
-          <div className='text-4xl self-start'>{categoryEmoji}</div>
+        <div className='flex gap-4'>
+          <div className='content-center text-4xl'>{categoryEmoji}</div>
           <div className='grow'>
             <div className='flex justify-between items-start mb-2'>
               <button
