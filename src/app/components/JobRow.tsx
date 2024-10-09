@@ -2,7 +2,15 @@
 import TimeAgo from '@/app/components/TimeAgo';
 import type { Job } from '@/models/Job';
 import axios from 'axios';
-import { ArrowRight, Heart } from 'lucide-react';
+import {
+  Edit2,
+  Flag,
+  Heart,
+  MapPinHouse,
+  Package,
+  Trash2,
+  Weight,
+} from 'lucide-react';
 import Link from 'next/link';
 
 //If something doesnt work with the emojis, put it in teh translportcategories component.
@@ -66,51 +74,66 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
   };
 
   return (
-    <div className='relative bg-white p-4 rounded-lg shadow-sm transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-white duration-300 cursor-pointer'>
-      <Link href={`/show/${jobInfo._id}`}>
-        <div className='absolute top-4 right-4 z-10'>
-          <Heart className='size-5 text-gray-400' />
-        </div>
-
-        <div className='flex grow gap-4'>
-          <div className='content-center text-3xl'>{categoryEmoji}</div>
-          <div className='grow sm:flex'>
-            <div className='grow'>
+    <div className='bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300'>
+      <Link href={`/show/${jobInfo._id}`} className='block p-4'>
+        <div className='flex items-start gap-4'>
+          <div className='text-4xl self-start'>{categoryEmoji}</div>
+          <div className='grow'>
+            <div className='flex justify-between items-start mb-2'>
               <button
                 onClick={handleOrgClick}
-                className='text-gray-500 text-sm hover:underline'
+                className='text-primary text-sm font-medium hover:underline'
               >
                 {jobInfo.orgName}
               </button>
-              <div className='font-bold'>{jobInfo.title}</div>
-              <div className='text-gray-500 text-sm flex items-center capitalize gap-2'>
-                {jobInfo.category} &middot; {jobInfo.tonaj} &middot;{' '}
-                {formatLocation(jobInfo.countryFrom, jobInfo.cityFrom)}
-                <ArrowRight className='text-gray-800 p-1' />
-                {formatLocation(jobInfo.countryTo, jobInfo.cityTo)}
-                {jobInfo.isAdmin && (
-                  <>
-                    <button
-                      onClick={handleEditClick}
-                      className='inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10 z-10'
-                    >
-                      Düzenle
-                    </button>
-                    <button
-                      onClick={handleDeleteClick}
-                      className='cursor-pointer inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10 z-10'
-                    >
-                      Sil
-                    </button>
-                  </>
-                )}
+              <Heart className='size-5 text-gray-400 hover:text-red-500 transition-colors duration-300' />
+            </div>
+            <h2 className='text-lg font-bold mb-2'>{jobInfo.title}</h2>
+            <div className='flex flex-col sm:flex-row gap-y-2 sm:gap-x-4 text-sm text-gray-600'>
+              <div className='flex items-center gap-1'>
+                <Package className='size-4' />
+                <span className='capitalize'>Kategori:</span> {jobInfo.category}
+              </div>
+              <div className='flex items-center gap-1'>
+                <Weight className='size-4' />
+                <span className='font-medium'>Tonaj:</span> {jobInfo.tonaj}
+              </div>
+              <div className='flex items-center gap-1'>
+                <MapPinHouse className='size-4' />
+                <span>
+                  {formatLocation(jobInfo.countryFrom, jobInfo.cityFrom)}
+                </span>
+              </div>
+              <div className='flex items-center gap-1'>
+                <Flag className='size-4' />
+                <span>{formatLocation(jobInfo.countryTo, jobInfo.cityTo)}</span>
               </div>
             </div>
-            {jobInfo.createdAt && (
-              <div className='content-end text-gray-500 text-sm'>
-                <TimeAgo createdAt={jobInfo.createdAt} />
-              </div>
-            )}
+            <div className='mt-4 flex items-center justify-between'>
+              {jobInfo.createdAt && (
+                <div className='text-gray-500 text-sm'>
+                  <TimeAgo createdAt={jobInfo.createdAt} />
+                </div>
+              )}
+              {jobInfo.isAdmin && (
+                <div className='flex gap-2'>
+                  <button
+                    onClick={handleEditClick}
+                    className='inline-flex items-center gap-1 rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10 hover:bg-blue-100 transition-colors duration-300'
+                  >
+                    <Edit2 className='size-3' />
+                    Düzenle
+                  </button>
+                  <button
+                    onClick={handleDeleteClick}
+                    className='inline-flex items-center gap-1 rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10 hover:bg-red-100 transition-colors duration-300'
+                  >
+                    <Trash2 className='size-3' />
+                    Sil
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </Link>
