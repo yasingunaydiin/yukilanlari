@@ -3,9 +3,9 @@
 import { motion, useMotionValueEvent, useScroll } from 'framer-motion';
 import { CircleArrowDown } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { textVariant } from '../../../motion.js';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
-import { textVariant } from '/Users/yasingunaydin/Documents/GitHub/yuk-bul-full-stack-app/utils/motion.js';
 
 const textArray = [
   { title: 'yükünü', color: 'rgb(250 204 21)' },
