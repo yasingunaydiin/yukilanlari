@@ -33,6 +33,7 @@
     "lucide-react": "^0.446.0",
     "mongoose": "^8.7.0",
     "next": "14.2.13",
+    "next-auth": "^4.24.8",
     "react": "^18.3.1",
     "react-country-state-city-new": "file:../react-country-state-city-new",
     "react-dom": "^18.3.1",
