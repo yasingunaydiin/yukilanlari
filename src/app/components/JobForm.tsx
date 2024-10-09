@@ -1,4 +1,5 @@
-'use client';
+'use client'; // Directive indicating this is a client component
+import CompanyInfo from '@/app/components/CompanyInfo'; // Import the CompanyInfo component
 import CitySelect from '@/app/components/EuropeanCities';
 import CountrySelect from '@/app/components/EuropeanCountries';
 import TransportCategories from '@/app/components/TransportCategories';
@@ -13,6 +14,7 @@ import { useState } from 'react';
 import { saveJobAction } from '../actions/jobActions';
 
 export function JobForm({ orgId, jobInfo }: { orgId: string; jobInfo?: Job }) {
+  // State variables for tracking the form data and selected country/city information
   const [countryFrom, setCountryFrom] = useState<string | undefined>();
   const [countryTo, setCountryTo] = useState<string | undefined>();
   const [selectedCountryIdFrom, setSelectedCountryIdFrom] = useState<
@@ -24,19 +26,24 @@ export function JobForm({ orgId, jobInfo }: { orgId: string; jobInfo?: Job }) {
   const [cityFrom, setCityFrom] = useState<string | undefined>();
   const [cityTo, setCityTo] = useState<string | undefined>();
 
+  // Function to handle form submission and save the job data
   async function handleSaveJob(data: FormData) {
     data.set('countryFrom', countryFrom ?? '');
     data.set('cityFrom', cityFrom ?? '');
     data.set('countryTo', countryTo ?? '');
     data.set('cityTo', cityTo ?? '');
-    data.set('orgId', orgId);
-    const jobInfo = await saveJobAction(data);
-    redirect(`/jobs/${jobInfo.orgId}`);
+    data.set('orgId', orgId); // Set the organization ID
+    const jobInfo = await saveJobAction(data); // Call the save action
+    redirect(`/jobs/${jobInfo.orgId}`); // Redirect to the job's organization page after saving
   }
 
   return (
     <form action={handleSaveJob} className='container mt-6'>
+      {/* Hidden input for job ID (used only when updating an existing job) */}
       {jobInfo && <input type='hidden' name='id' value={jobInfo?._id} />}
+
+      <CompanyInfo params={{ orgId }} />
+
       <Card>
         <CardContent className='flex flex-col gap-4 p-5'>
           <div className='space-y-2'>
@@ -67,6 +74,7 @@ export function JobForm({ orgId, jobInfo }: { orgId: string; jobInfo?: Job }) {
               />
             </div>
           </div>
+
           <Input
             name='title'
             placeholder='Başlık'
@@ -80,12 +88,14 @@ export function JobForm({ orgId, jobInfo }: { orgId: string; jobInfo?: Job }) {
             required
           />
           <TransportCategories />
+
           <Textarea
             name='description'
             placeholder='Açıklama'
             defaultValue={jobInfo?.description || ''}
             required
           />
+
           <div className='space-y-4'>
             <div className='flex flex-col sm:flex-row gap-4'>
               <div className='flex flex-col gap-2 flex-1'>
@@ -107,6 +117,7 @@ export function JobForm({ orgId, jobInfo }: { orgId: string; jobInfo?: Job }) {
                 />
               </div>
             </div>
+
             <div className='flex flex-col sm:flex-row gap-4'>
               <div className='flex flex-col gap-2 flex-1'>
                 <Label>Şehir (Nereden)</Label>

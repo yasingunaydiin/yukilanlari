@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@/app/components/ui/button';
+import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -46,7 +47,8 @@ export default function DeleteOrganization({
         disabled={isDeleting}
         variant='destructive'
       >
-        {isDeleting ? 'Siliniyor...' : 'Şirketi Sil'}
+        Şirketi Sil
+        {isDeleting && <Loader2 className='ml-2 mr-2 h-4 w-4 animate-spin' />}
       </Button>
       {error && <p className='text-red-500 mt-2'>{error}</p>}
     </div>

@@ -21,7 +21,7 @@ export default function SpinningButton() {
         <button type='button' onClick={navigate}>
           Oluştur
         </button>
-        {isPending && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
+        {isPending && <Loader2 className='ml-2 mr-2 h-4 w-4 animate-spin' />}
       </Button>
     </div>
   );
