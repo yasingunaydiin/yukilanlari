@@ -10,7 +10,7 @@ import { Input } from '@/app/components/ui/input';
 import { withAuth } from '@workos-inc/authkit-nextjs';
 import { User } from '@workos-inc/node';
 import { redirect } from 'next/navigation';
-import SpinningButton from '../components/spinningButton';
+import SpinningButton from '../components/SpinningButton';
 
 export default async function NewCompanyPage() {
   const { user } = await withAuth();
