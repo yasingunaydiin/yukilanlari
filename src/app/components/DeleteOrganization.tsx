@@ -1,66 +1,62 @@
 'use client';
-
-import { Button } from '@/app/components/ui/button';
-import { Loader2 } from 'lucide-react';
+import { Loader2, Trash2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { Button } from './ui/button';
 
-// Define the props type for the DeleteOrganization component
 type DeleteOrganizationProps = {
-  organizationId: string; // ID of the organization to be deleted
-  isAdmin: boolean; // Boolean indicating if the current user is an admin
+  organizationId: string;
+  isAdmin: boolean;
+  orgType: 'company' | 'trucker';
 };
 
 export default function DeleteOrganization({
   organizationId,
   isAdmin,
+  orgType,
 }: DeleteOrganizationProps) {
-  // State to manage the deleting process
   const [isDeleting, setIsDeleting] = useState(false);
-  // State to manage error messages
   const [error, setError] = useState<string | null>(null);
-  // Hook to programmatically change routes
   const router = useRouter();
 
-  // Function to handle the deletion process
   const handleDelete = async () => {
-    // Check if the user is an admin
     if (!isAdmin) {
-      setError('You do not have permission to delete this organization');
+      setError('Bu organizasyonu silme izniniz yok');
       return;
     }
 
-    // Confirm deletion with the user
-    if (!confirm('Bu şirketi silmek istediğinizden emin misiniz?')) return;
+    const confirmMessage =
+      orgType === 'company'
+        ? 'Şirket veya sürücünüzü silmek istediğinizden emin misiniz? Bu şirket veya sürücünün tüm ilanları silinecektir.'
+        : 'Şirket veya sürücünüzü silmek istediğinizden emin misiniz? Bu şirket veya sürücünün tüm ilanları silinecektir.';
 
-    // Set deleting state to true and clear any previous errors
+    if (!confirm(confirmMessage)) return;
+
     setIsDeleting(true);
     setError(null);
 
     try {
-      // Send DELETE request to the API
       const response = await fetch(`/api/organizations/${organizationId}`, {
         method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ orgType }),
       });
 
-      // If the response is not ok, throw an error
       if (!response.ok) {
         const { error } = await response.json();
-        throw new Error(error || 'Şirket silinemedi');
+        throw new Error(error || 'Organizasyon silinemedi');
       }
 
-      // Redirect after successful deletion
       router.push('/new-listing');
     } catch (err) {
-      // Set error message if deletion fails
-      setError(`Şirket silinemedi. ${(err as Error).message}`);
+      setError(`Organizasyon silinemedi. ${(err as Error).message}`);
     } finally {
-      // Set deleting state back to false regardless of outcome
       setIsDeleting(false);
     }
   };
 
-  // If the user is not an admin, don't render the delete button
   if (!isAdmin) {
     return null;
   }
@@ -71,8 +67,10 @@ export default function DeleteOrganization({
         onClick={handleDelete}
         disabled={isDeleting}
         variant='destructive'
+        className='h-6 inline-flex items-center gap-1 rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10 hover:bg-red-100 transition-colors duration-300'
       >
-        Şirketi Sil
+        <Trash2 className='size-3' />
+        Sil
         {isDeleting && <Loader2 className='ml-2 mr-2 h-4 w-4 animate-spin' />}
       </Button>
       {error && <p className='text-red-500 mt-2'>{error}</p>}

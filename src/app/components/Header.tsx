@@ -49,7 +49,7 @@ export default async function Header() {
 
           <Link href={'/new-listing'}>
             <Button className='bg-yellow-400 text-white rounded-lg px-4 py-2 font-bold'>
-              İş ilanı ver
+              İlan oluştur
             </Button>
           </Link>
         </nav>

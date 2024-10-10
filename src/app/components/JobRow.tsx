@@ -73,13 +73,13 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
 
   const handleDeleteClick = async (e: React.MouseEvent) => {
     e.preventDefault();
-    if (confirm('Bu işi silmek istediğinizden emin misiniz?')) {
+    if (confirm('Bu ilanı silmek istediğinizden emin misiniz?')) {
       try {
         await axios.delete('/api/jobs?id=' + jobInfo._id);
         window.location.reload();
       } catch (error) {
-        console.error('İş silme hatası:', error);
-        alert('İş silinirken bir hata oluştu. Lütfen tekrar deneyin.');
+        console.error('İlan silme hatası:', error);
+        alert('İlan silinirken bir hata oluştu. Lütfen tekrar deneyin.');
       }
     }
   };

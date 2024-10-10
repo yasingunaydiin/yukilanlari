@@ -1,6 +1,7 @@
 import { connectToDB } from '@/lib/dbConnect';
 import { CompanyModel } from '@/models/Company';
 import { JobModel } from '@/models/Job';
+import { TruckerModel } from '@/models/Trucker'; // Add this import
 import { WorkOS } from '@workos-inc/node';
 import { NextResponse } from 'next/server';
 
@@ -12,7 +13,6 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   const organizationId = params.id;
-
   if (!organizationId) {
     return NextResponse.json(
       { error: 'Invalid organization ID' },
@@ -36,7 +36,7 @@ export async function DELETE(
       `Deleted ${resultJobDeletion.deletedCount} jobs from MongoDB for orgId: ${organizationId}`
     );
 
-    // 3. Delete the associated companies from MongoDB using `orgId`
+    // 3. Delete the associated companies from MongoDB using `organizationId`
     const resultCompanyDeletion = await CompanyModel.deleteMany({
       organizationId: organizationId,
     });
@@ -44,14 +44,25 @@ export async function DELETE(
       `Deleted ${resultCompanyDeletion.deletedCount} companies from MongoDB for orgId: ${organizationId}`
     );
 
-    // 4. Return success response with counts
+    // 4. Delete the associated truckers from MongoDB using `truckerId`
+    const resultTruckerDeletion = await TruckerModel.deleteMany({
+      truckerId: organizationId, // Ensure truckerId is used correctly here
+    });
+    console.log(
+      `Deleted ${resultTruckerDeletion.deletedCount} truckers from MongoDB for truckerId: ${organizationId}`
+    );
+
+    // 5. Return success response with counts
     return NextResponse.json({
-      message: `Organization deleted successfully along with ${resultJobDeletion.deletedCount} associated jobs and ${resultCompanyDeletion.deletedCount} associated companies.`,
+      message: `Organization deleted successfully along with ${resultJobDeletion.deletedCount} associated jobs, ${resultCompanyDeletion.deletedCount} associated companies, and ${resultTruckerDeletion.deletedCount} associated truckers.`,
     });
   } catch (error) {
     console.error('Error during deletion:', error);
     return NextResponse.json(
-      { error: 'Failed to delete organization and associated jobs/companies.' },
+      {
+        error:
+          'Failed to delete organization and associated jobs/companies/truckers.',
+      },
       { status: 500 }
     );
   }

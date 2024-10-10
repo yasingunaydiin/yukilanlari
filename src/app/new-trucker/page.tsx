@@ -1,4 +1,4 @@
-import { createCompany } from '@/app/actions/workosActions'; //Change this to companyactions.ts
+import { createTrucker } from '@/app/actions/workosActions';
 import {
   Card,
   CardContent,
@@ -12,7 +12,7 @@ import { User } from '@workos-inc/node';
 import { redirect } from 'next/navigation';
 import SpinningButton from '../components/SpinningButton';
 
-export default async function NewCompanyPage() {
+export default async function NewTruckerPage() {
   const { user } = await withAuth();
 
   if (!user) {
@@ -22,35 +22,35 @@ export default async function NewCompanyPage() {
   // Type assertion to assure TypeScript that user exists
   const authenticatedUser = user as User;
 
-  async function handleNewCompanyFormSubmit(formData: FormData) {
+  async function handleNewTruckerFormSubmit(formData: FormData) {
     'use server';
-    const newCompanyName = formData.get('newCompanyName') as string;
-    const newCompanyContactName = formData.get(
-      'newCompanyContactName'
+    const newTruckerName = formData.get('newTruckerName') as string;
+    const newTruckerContactName = formData.get(
+      'newTruckerContactName'
     ) as string;
-    const newCompanyPhone = formData.get('newCompanyPhone') as string;
-    const newCompanyEmail = formData.get('newCompanyEmail') as string;
-    const newCompanyLocation = formData.get('newCompanyLocation') as string;
-    const newCompanyWebsite = formData.get('newCompanyWebsite') as string;
-    const newCompanySocialFacebook = formData.get(
-      'newCompanySocialFacebook'
+    const newTruckerPhone = formData.get('newTruckerPhone') as string;
+    const newTruckerEmail = formData.get('newTruckerEmail') as string;
+    const newTruckerLocation = formData.get('newTruckerLocation') as string;
+    const newTruckerWebsite = formData.get('newTruckerWebsite') as string;
+    const newTruckerSocialFacebook = formData.get(
+      'newTruckerSocialFacebook'
     ) as string;
 
     if (
-      newCompanyName &&
-      newCompanyContactName &&
-      newCompanyPhone &&
-      newCompanyEmail &&
-      newCompanyLocation
+      newTruckerName &&
+      newTruckerContactName &&
+      newTruckerPhone &&
+      newTruckerEmail &&
+      newTruckerLocation
     ) {
-      await createCompany(
-        newCompanyName,
-        newCompanyContactName,
-        newCompanyPhone,
-        newCompanyEmail,
-        newCompanyLocation,
-        newCompanyWebsite || '',
-        newCompanySocialFacebook || '',
+      await createTrucker(
+        newTruckerName,
+        newTruckerContactName,
+        newTruckerPhone,
+        newTruckerEmail,
+        newTruckerLocation,
+        newTruckerWebsite || '',
+        newTruckerSocialFacebook || '',
         authenticatedUser.id
       );
       redirect('/new-listing');
@@ -61,50 +61,50 @@ export default async function NewCompanyPage() {
     <div className='container max-w-md mx-auto py-8'>
       <Card>
         <CardHeader>
-          <CardTitle>Yeni bir şirket oluştur</CardTitle>
+          <CardTitle>Yeni bir sürücü oluştur</CardTitle>
           <CardDescription>
-            Bir ilan oluşturmak için şirketinizi oluşturun
+            Bir ilan oluşturmak için sürücünüzü oluşturun
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form action={handleNewCompanyFormSubmit} className='space-y-4'>
+          <form action={handleNewTruckerFormSubmit} className='space-y-4'>
             <Input
-              name='newCompanyName'
+              name='newTruckerName'
               type='text'
-              placeholder='Şirket ismi gir'
+              placeholder='Sürücü ismi gir'
               required
             />
             <Input
-              name='newCompanyContactName'
+              name='newTruckerContactName'
               type='text'
               placeholder='İsim gir'
               required
             />
             <Input
-              name='newCompanyPhone'
+              name='newTruckerPhone'
               type='text'
               placeholder='Telefon numarası gir'
               required
             />
             <Input
-              name='newCompanyEmail'
+              name='newTruckerEmail'
               type='email'
               placeholder='E-posta adresi gir'
               required
             />
             <Input
-              name='newCompanyLocation'
+              name='newTruckerLocation'
               type='text'
               placeholder='Konum gir'
               required
             />
             <Input
-              name='newCompanyWebsite'
+              name='newTruckerWebsite'
               type='text'
               placeholder='Website adresini gir'
             />
             <Input
-              name='newCompanySocialFacebook'
+              name='newTruckerSocialFacebook'
               type='text'
               placeholder='Facebook adresini gir'
             />
