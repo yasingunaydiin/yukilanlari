@@ -13,7 +13,6 @@ import {
   Edit2,
   Facebook,
   Flag,
-  Heart,
   MapPinHouse,
   Package,
   Share2,
@@ -88,13 +87,15 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
   const [open, setOpen] = useState(false);
 
   const handleShare = (platform: string) => {
-    const jobLink = `/api/jobs?id=${jobInfo._id}`;
+    // Construct the full URL for sharing
+    const jobLink = `https://yuk-bul.vercel.app/show/${jobInfo._id}`;
     let shareUrl = '';
 
+    // Define the correct share URLs for each platform
     if (platform === 'Twitter') {
       shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
         jobLink
-      )}&text=Check%20out%20this%20job!`;
+      )}`;
     } else if (platform === 'Facebook') {
       shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
         jobLink
@@ -102,7 +103,7 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
     }
 
     if (shareUrl) {
-      window.open(shareUrl, '_blank');
+      window.open(shareUrl, '_blank', 'noopener,noreferrer');
       setOpen(false);
     }
   };
@@ -120,7 +121,12 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
               >
                 {jobInfo.orgName}
               </button>
-              <Heart className='size-5 text-gray-400 hover:text-red-500 transition-colors duration-300' />
+
+              {jobInfo.createdAt && (
+                <div className='text-gray-500 text-sm'>
+                  <TimeAgo createdAt={jobInfo.createdAt} />
+                </div>
+              )}
             </div>
             <h2 className='text-lg font-bold mb-2'>{jobInfo.title}</h2>
             <div className='flex flex-col sm:flex-row gap-y-2 sm:gap-x-4 text-sm text-gray-600'>
@@ -146,13 +152,7 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
           </div>
         </div>
       </Link>
-      <div className='mb-4 mr-4 flex items-center justify-end gap-5'>
-        {jobInfo.createdAt && (
-          <div className='text-gray-500 text-sm'>
-            <TimeAgo createdAt={jobInfo.createdAt} />
-          </div>
-        )}
-
+      <div className='mb-4 mr-4 flex items-center justify-end gap-2'>
         {jobInfo.isAdmin && (
           <div className='flex gap-2'>
             <button
@@ -178,9 +178,9 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
               Paylaş
             </button>
           </DialogTrigger>
-          <DialogContent className='sm:max-w-[425px]'>
+          <DialogContent className='sm:max-w-[425px] rounded-xl'>
             <DialogHeader>
-              <DialogTitle>Share on Social Media</DialogTitle>
+              <DialogTitle>Sosyal Medya`da Paylaş</DialogTitle>
             </DialogHeader>
             <div className='grid gap-4 py-4'>
               <Button
@@ -189,7 +189,7 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
                 onClick={() => handleShare('Twitter')}
               >
                 <Twitter className='h-4 w-4' />
-                Twitter`da paylaş
+                Twitter`da Paylaş
               </Button>
               <Button
                 variant='outline'
@@ -197,7 +197,7 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
                 onClick={() => handleShare('Facebook')}
               >
                 <Facebook className='h-4 w-4' />
-                Facebook`ta paylaş
+                Facebook`ta Paylaş
               </Button>
             </div>
           </DialogContent>
