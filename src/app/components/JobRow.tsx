@@ -1,17 +1,29 @@
 'use client';
 import TimeAgo from '@/app/components/TimeAgo';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/app/components/ui/dialog';
 import type { Job } from '@/models/Job';
 import axios from 'axios';
 import {
   Edit2,
+  Facebook,
   Flag,
   Heart,
   MapPinHouse,
   Package,
+  Share2,
   Trash2,
+  Twitter,
   Weight,
 } from 'lucide-react';
 import Link from 'next/link';
+import { useState } from 'react';
+import { Button } from './ui/button';
 
 //If something doesnt work with the emojis, put it in teh translportcategories component.
 
@@ -73,6 +85,13 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
     }
   };
 
+  const [open, setOpen] = useState(false);
+
+  const handleShare = (platform: string) => {
+    console.log(`Sharing on ${platform}`);
+    setOpen(false);
+  };
+
   return (
     <div className='bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300'>
       <Link href={`/show/${jobInfo._id}`} className='block p-4'>
@@ -109,12 +128,14 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
                 <span>{formatLocation(jobInfo.countryTo, jobInfo.cityTo)}</span>
               </div>
             </div>
-            <div className='mt-4 flex items-center justify-between'>
+
+            <div className='mt-4 flex items-center justify-end gap-5'>
               {jobInfo.createdAt && (
                 <div className='text-gray-500 text-sm'>
                   <TimeAgo createdAt={jobInfo.createdAt} />
                 </div>
               )}
+
               {jobInfo.isAdmin && (
                 <div className='flex gap-2'>
                   <button
@@ -133,6 +154,40 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
                   </button>
                 </div>
               )}
+              <Dialog open={open} onOpenChange={setOpen}>
+                <DialogTrigger asChild>
+                  <button
+                    className='inline-flex items-center gap-1 rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/10 hover:bg-green-100 transition-colors duration-300'
+                    onClick={(e) => e.stopPropagation()} // Prevent link navigation
+                  >
+                    <Share2 className='size-3' />
+                    Paylaş
+                  </button>
+                </DialogTrigger>
+                <DialogContent className='sm:max-w-[425px]'>
+                  <DialogHeader>
+                    <DialogTitle>Share on Social Media</DialogTitle>
+                  </DialogHeader>
+                  <div className='grid gap-4 py-4'>
+                    <Button
+                      variant='outline'
+                      className='flex items-center justify-start gap-2'
+                      onClick={() => handleShare('Twitter')}
+                    >
+                      <Twitter className='h-4 w-4' />
+                      Share on Twitter
+                    </Button>
+                    <Button
+                      variant='outline'
+                      className='flex items-center justify-start gap-2'
+                      onClick={() => handleShare('Facebook')}
+                    >
+                      <Facebook className='h-4 w-4' />
+                      Share on Facebook
+                    </Button>
+                  </div>
+                </DialogContent>
+              </Dialog>
             </div>
           </div>
         </div>
