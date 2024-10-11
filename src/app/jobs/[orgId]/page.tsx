@@ -7,9 +7,9 @@ import {
   CardTitle,
 } from '@/app/components/ui/card';
 import { connectToDB } from '@/lib/dbConnect';
+import { Chauffeur, ChauffeurModel } from '@/models/Chauffeur';
 import { Company, CompanyModel } from '@/models/Company';
 import { Job, JobModel, addOrgAndUserData } from '@/models/Job';
-import { Trucker, TruckerModel } from '@/models/Trucker';
 import { withAuth } from '@workos-inc/authkit-nextjs';
 import { WorkOS } from '@workos-inc/node';
 import { Facebook, Globe, Mail, Map, Phone, User } from 'lucide-react';
@@ -20,7 +20,7 @@ type PageProps = {
   };
 };
 
-type OrgDetails = Company | Trucker | null;
+type OrgDetails = Company | Chauffeur | null;
 
 export default async function OrganizationDetailsPage({ params }: PageProps) {
   await connectToDB();
@@ -39,11 +39,11 @@ export default async function OrganizationDetailsPage({ params }: PageProps) {
     organizationId: org.id,
   }).lean()) as Company | null;
 
-  const truckerDetails = (await TruckerModel.findOne({
-    truckerId: org.id,
-  }).lean()) as Trucker | null;
+  const chauffeurDetails = (await ChauffeurModel.findOne({
+    chauffeurId: org.id,
+  }).lean()) as Chauffeur | null;
 
-  const orgDetails: OrgDetails = companyDetails || truckerDetails;
+  const orgDetails: OrgDetails = companyDetails || chauffeurDetails;
 
   // Check if the user is an admin for this organization
   const isAdmin = jobsWithData.some((job) => job.isAdmin);
@@ -53,9 +53,10 @@ export default async function OrganizationDetailsPage({ params }: PageProps) {
       return (
         (companyDetails[`newCompany${key}` as keyof Company] as string) ?? null
       );
-    } else if (truckerDetails) {
+    } else if (chauffeurDetails) {
       return (
-        (truckerDetails[`newTrucker${key}` as keyof Trucker] as string) ?? null
+        (chauffeurDetails[`newChauffeur${key}` as keyof Chauffeur] as string) ??
+        null
       );
     }
     return null;
@@ -127,7 +128,7 @@ export default async function OrganizationDetailsPage({ params }: PageProps) {
             <DeleteOrganization
               organizationId={org.id}
               isAdmin={isAdmin}
-              orgType={org ? 'trucker' : 'company'} // Dynamically determine the type
+              orgType={org ? 'chauffeur' : 'company'} // Dynamically determine the type
             />
           </div>
         </CardContent>

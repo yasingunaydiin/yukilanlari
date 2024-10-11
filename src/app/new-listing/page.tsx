@@ -17,7 +17,7 @@ import { withAuth } from '@workos-inc/authkit-nextjs';
 import { WorkOS } from '@workos-inc/node';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import OrganizationIcon from '../components/CompanyTruckerIcon';
+import OrganizationIcon from '../components/CompanyChauffeurIcon';
 
 interface NewListingPageProps {
   searchParams: {
@@ -56,7 +56,7 @@ export default async function NewListingPage({
   );
 
   const organizationsNames: { [key: string]: string } = {};
-  const truckerNames: { [key: string]: string } = {};
+  const chauffeurNames: { [key: string]: string } = {};
 
   for (const activeMembership of activeOrganizationMemberships) {
     const organization = await workos.organizations.getOrganization(
@@ -66,10 +66,10 @@ export default async function NewListingPage({
   }
 
   for (const activeMembership of activeOrganizationMemberships) {
-    const trucker = await workos.organizations.getOrganization(
+    const chauffeur = await workos.organizations.getOrganization(
       activeMembership.organizationId // Keep organizationId
     );
-    truckerNames[trucker.id] = trucker.name;
+    chauffeurNames[chauffeur.id] = chauffeur.name;
   }
 
   return (
@@ -87,7 +87,7 @@ export default async function NewListingPage({
             <Link
               href={{ pathname: '/new-listing', query: { tab: 'chauffeur' } }}
             >
-              Sürücü Reklamı
+              Sürücü İlanı
             </Link>
           </TabsTrigger>
         </TabsList>
@@ -145,19 +145,19 @@ export default async function NewListingPage({
         <TabsContent value='chauffeur'>
           <Card>
             <CardHeader>
-              <CardTitle>Sürücü Reklamı Oluştur</CardTitle>
+              <CardTitle>Sürücü İlanı Oluştur</CardTitle>
               <CardDescription>
                 Kendinizi tanıtın ve iş fırsatlarını yakalayın.
               </CardDescription>
             </CardHeader>
             <CardContent>
-              {Object.keys(truckerNames).length > 0 ? (
+              {Object.keys(chauffeurNames).length > 0 ? (
                 <div className='space-y-2'>
-                  {Object.entries(truckerNames).map(
-                    ([truckerId, truckerName]) => (
+                  {Object.entries(chauffeurNames).map(
+                    ([chauffeurId, chauffeurName]) => (
                       <Link
-                        key={truckerId}
-                        href={`/new-listing/${truckerId}`}
+                        key={chauffeurId}
+                        href={`/new-listing/${chauffeurId}`}
                         className='block'
                       >
                         <Button
@@ -166,7 +166,7 @@ export default async function NewListingPage({
                         >
                           <span className='flex items-center'>
                             <OrganizationIcon orgType='chauffeur' />
-                            {truckerName}
+                            {chauffeurName}
                           </span>
                           <ArrowRight className='h-4 w-4' />
                         </Button>

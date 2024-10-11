@@ -2,8 +2,8 @@
 
 'use server';
 import { connectToDB } from '@/lib/dbConnect'; // Import the database connection
+import { ChauffeurModel } from '@/models/Chauffeur';
 import { CompanyModel } from '@/models/Company'; // Import the Company model
-import { TruckerModel } from '@/models/Trucker';
 import { WorkOS } from '@workos-inc/node';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
@@ -54,22 +54,22 @@ export async function createCompany(
   redirect('/new-listing');
 }
 
-export async function createTrucker(
-  truckerName: string,
-  newTruckerContactName: string,
-  newTruckerPhone: string,
-  newTruckerEmail: string,
-  newTruckerLocation: string,
-  newTruckerWebsite: string,
-  newTruckerSocialFacebook: string,
+export async function createChauffeur(
+  chauffeurName: string,
+  newChauffeurContactName: string,
+  newChauffeurPhone: string,
+  newChauffeurEmail: string,
+  newChauffeurLocation: string,
+  newChauffeurWebsite: string,
+  newChauffeurSocialFacebook: string,
   userId: string
 ) {
   // Connect to MongoDB
   await connectToDB();
 
-  // Create the organization in WorkOS (use the truckerName as organization name)
+  // Create the organization in WorkOS (use the ChauffeurName as organization name)
   const org = await workos.organizations.createOrganization({
-    name: truckerName,
+    name: chauffeurName,
   });
 
   // Create a membership for the user in the organization
@@ -79,19 +79,19 @@ export async function createTrucker(
     roleSlug: 'admin',
   });
 
-  // Create a new trucker document in MongoDB
-  const newTrucker = new TruckerModel({
-    newTruckerContactName: newTruckerContactName,
-    newTruckerPhone: newTruckerPhone,
-    newTruckerEmail: newTruckerEmail,
-    newTruckerLocation: newTruckerLocation,
-    newTruckerWebsite: newTruckerWebsite,
-    newTruckerSocialFacebook: newTruckerSocialFacebook,
-    truckerId: org.id, // Save the WorkOS organization ID as truckerId
+  // Create a new Chauffeur document in MongoDB
+  const newChauffeur = new ChauffeurModel({
+    newChauffeurContactName: newChauffeurContactName,
+    newChauffeurPhone: newChauffeurPhone,
+    newChauffeurEmail: newChauffeurEmail,
+    newChauffeurLocation: newChauffeurLocation,
+    newChauffeurWebsite: newChauffeurWebsite,
+    newChauffeurSocialFacebook: newChauffeurSocialFacebook,
+    chauffeurId: org.id, // Save the WorkOS organization ID as ChauffeurId
   });
 
-  // Save the trucker details to MongoDB
-  await newTrucker.save();
+  // Save the Chauffeur details to MongoDB
+  await newChauffeur.save();
 
   // Revalidate the path and redirect the user
   revalidatePath('/new-listing');

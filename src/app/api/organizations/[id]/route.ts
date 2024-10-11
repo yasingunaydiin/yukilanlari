@@ -1,7 +1,7 @@
 import { connectToDB } from '@/lib/dbConnect';
+import { ChauffeurModel } from '@/models/Chauffeur'; // Add this import
 import { CompanyModel } from '@/models/Company';
 import { JobModel } from '@/models/Job';
-import { TruckerModel } from '@/models/Trucker'; // Add this import
 import { WorkOS } from '@workos-inc/node';
 import { NextResponse } from 'next/server';
 
@@ -44,24 +44,24 @@ export async function DELETE(
       `Deleted ${resultCompanyDeletion.deletedCount} companies from MongoDB for orgId: ${organizationId}`
     );
 
-    // 4. Delete the associated truckers from MongoDB using `truckerId`
-    const resultTruckerDeletion = await TruckerModel.deleteMany({
-      truckerId: organizationId, // Ensure truckerId is used correctly here
+    // 4. Delete the associated Chauffeur from MongoDB using `ChauffeurId`
+    const resultChauffeurDeletion = await ChauffeurModel.deleteMany({
+      chauffeurId: organizationId, // Ensure ChauffeurId is used correctly here
     });
     console.log(
-      `Deleted ${resultTruckerDeletion.deletedCount} truckers from MongoDB for truckerId: ${organizationId}`
+      `Deleted ${resultChauffeurDeletion.deletedCount} Chauffeurs from MongoDB for ChauffeurId: ${organizationId}`
     );
 
     // 5. Return success response with counts
     return NextResponse.json({
-      message: `Organization deleted successfully along with ${resultJobDeletion.deletedCount} associated jobs, ${resultCompanyDeletion.deletedCount} associated companies, and ${resultTruckerDeletion.deletedCount} associated truckers.`,
+      message: `Organization deleted successfully along with ${resultJobDeletion.deletedCount} associated jobs, ${resultCompanyDeletion.deletedCount} associated companies, and ${resultChauffeurDeletion.deletedCount} associated Chauffeurs.`,
     });
   } catch (error) {
     console.error('Error during deletion:', error);
     return NextResponse.json(
       {
         error:
-          'Failed to delete organization and associated jobs/companies/truckers.',
+          'Failed to delete organization and associated jobs/companies/chauffeurs.',
       },
       { status: 500 }
     );

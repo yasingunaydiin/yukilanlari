@@ -7,7 +7,7 @@ import { Button } from './ui/button';
 type DeleteOrganizationProps = {
   organizationId: string;
   isAdmin: boolean;
-  orgType: 'company' | 'trucker';
+  orgType: 'company' | 'chauffeur';
 };
 
 export default function DeleteOrganization({

@@ -1,4 +1,4 @@
-import { createTrucker } from '@/app/actions/workosActions';
+import { createChauffeur } from '@/app/actions/workosActions';
 import {
   Card,
   CardContent,
@@ -12,7 +12,7 @@ import { User } from '@workos-inc/node';
 import { redirect } from 'next/navigation';
 import SpinningButton from '../components/SpinningButton';
 
-export default async function NewTruckerPage() {
+export default async function NewChauffeurPage() {
   const { user } = await withAuth();
 
   if (!user) {
@@ -22,35 +22,35 @@ export default async function NewTruckerPage() {
   // Type assertion to assure TypeScript that user exists
   const authenticatedUser = user as User;
 
-  async function handleNewTruckerFormSubmit(formData: FormData) {
+  async function handleNewChauffeurFormSubmit(formData: FormData) {
     'use server';
-    const newTruckerName = formData.get('newTruckerName') as string;
-    const newTruckerContactName = formData.get(
-      'newTruckerContactName'
+    const newChauffeurName = formData.get('newChauffeurName') as string;
+    const newChauffeurContactName = formData.get(
+      'newChauffeurContactName'
     ) as string;
-    const newTruckerPhone = formData.get('newTruckerPhone') as string;
-    const newTruckerEmail = formData.get('newTruckerEmail') as string;
-    const newTruckerLocation = formData.get('newTruckerLocation') as string;
-    const newTruckerWebsite = formData.get('newTruckerWebsite') as string;
-    const newTruckerSocialFacebook = formData.get(
-      'newTruckerSocialFacebook'
+    const newChauffeurPhone = formData.get('newChauffeurPhone') as string;
+    const newChauffeurEmail = formData.get('newChauffeurEmail') as string;
+    const newChauffeurLocation = formData.get('newChauffeurLocation') as string;
+    const newChauffeurWebsite = formData.get('newChauffeurWebsite') as string;
+    const newChauffeurSocialFacebook = formData.get(
+      'newChauffeurSocialFacebook'
     ) as string;
 
     if (
-      newTruckerName &&
-      newTruckerContactName &&
-      newTruckerPhone &&
-      newTruckerEmail &&
-      newTruckerLocation
+      newChauffeurName &&
+      newChauffeurContactName &&
+      newChauffeurPhone &&
+      newChauffeurEmail &&
+      newChauffeurLocation
     ) {
-      await createTrucker(
-        newTruckerName,
-        newTruckerContactName,
-        newTruckerPhone,
-        newTruckerEmail,
-        newTruckerLocation,
-        newTruckerWebsite || '',
-        newTruckerSocialFacebook || '',
+      await createChauffeur(
+        newChauffeurName,
+        newChauffeurContactName,
+        newChauffeurPhone,
+        newChauffeurEmail,
+        newChauffeurLocation,
+        newChauffeurWebsite || '',
+        newChauffeurSocialFacebook || '',
         authenticatedUser.id
       );
       redirect('/new-listing');
@@ -67,44 +67,44 @@ export default async function NewTruckerPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form action={handleNewTruckerFormSubmit} className='space-y-4'>
+          <form action={handleNewChauffeurFormSubmit} className='space-y-4'>
             <Input
-              name='newTruckerName'
+              name='newChauffeurName'
               type='text'
               placeholder='Sürücü ismi gir'
               required
             />
             <Input
-              name='newTruckerContactName'
+              name='newChauffeurContactName'
               type='text'
               placeholder='İsim gir'
               required
             />
             <Input
-              name='newTruckerPhone'
+              name='newChauffeurPhone'
               type='text'
               placeholder='Telefon numarası gir'
               required
             />
             <Input
-              name='newTruckerEmail'
+              name='newChauffeurEmail'
               type='email'
               placeholder='E-posta adresi gir'
               required
             />
             <Input
-              name='newTruckerLocation'
+              name='newChauffeurLocation'
               type='text'
               placeholder='Konum gir'
               required
             />
             <Input
-              name='newTruckerWebsite'
+              name='newChauffeurWebsite'
               type='text'
               placeholder='Website adresini gir'
             />
             <Input
-              name='newTruckerSocialFacebook'
+              name='newChauffeurSocialFacebook'
               type='text'
               placeholder='Facebook adresini gir'
             />
