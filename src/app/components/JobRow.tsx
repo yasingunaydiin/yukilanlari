@@ -44,6 +44,14 @@ const transportCategoriesArray = [
   { value: 'Çiçek', label: 'Çiçek', emoji: '🌸' },
 ];
 
+const UrgencyComponentArray = [
+  { value: 'Diğer', label: 'Diğer', emoji: '🏷️' }, // Tag icon
+  { value: 'Acil', label: 'Acil', emoji: '🚨' }, // Police car light (Urgent)
+  { value: 'Bu Hafta', label: 'Bu Hafta', emoji: '📅' }, // Calendar (This Week)
+  { value: 'Bu Ay', label: 'Bu Ay', emoji: '📆' }, // Calendar (This Month)
+  { value: 'Bugün', label: 'Bugün', emoji: '☀️' }, // Sun (Today)
+];
+
 const getEmojiForCategory = (category: string): string => {
   const categoryObj = transportCategoriesArray.find(
     (cat) => cat.value === category
@@ -51,8 +59,21 @@ const getEmojiForCategory = (category: string): string => {
   return categoryObj ? categoryObj.emoji : '🏷️';
 };
 
+const getUrgencyBadge = (urgency: string): string => {
+  const urgencyObj = UrgencyComponentArray.find((urg) => urg.value === urgency);
+  return urgencyObj ? urgencyObj.emoji : '🏷️';
+};
+
+const getUrgencyTitle = (urgency: string): string => {
+  const urgencyObj = UrgencyComponentArray.find((urg) => urg.value === urgency);
+  return urgencyObj ? urgencyObj.label : 'Diğer';
+};
+
 export default function JobRow({ jobInfo }: { jobInfo: Job }) {
   const categoryEmoji = getEmojiForCategory(jobInfo.category);
+  const urgencyBadge = getUrgencyBadge(jobInfo.urgency);
+  const urgencyTitle = getUrgencyTitle(jobInfo.urgency);
+
   const formatLocation = (
     country: string | undefined,
     city: string
@@ -114,7 +135,7 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
         <div className='flex gap-4'>
           <div className='content-center text-4xl'>{categoryEmoji}</div>
           <div className='grow'>
-            <div className='flex justify-between items-start mb-2'>
+            <div className='flex gap-5 items-center'>
               <button
                 onClick={handleOrgClick}
                 className='text-primary text-sm font-medium hover:underline'
@@ -122,11 +143,18 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
                 {jobInfo.orgName}
               </button>
 
-              {jobInfo.createdAt && (
-                <div className='text-gray-500 text-sm'>
-                  <TimeAgo createdAt={jobInfo.createdAt} />
-                </div>
-              )}
+              <div className='gap-1 inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10 hover:bg-red-100 transition-colors duration-300'>
+                <div>{urgencyBadge}</div>
+                <div>{urgencyTitle}</div>
+              </div>
+
+              <div className='ml-auto'>
+                {jobInfo.createdAt && (
+                  <div className='text-gray-500 text-sm'>
+                    <TimeAgo createdAt={jobInfo.createdAt} />
+                  </div>
+                )}
+              </div>
             </div>
             <h2 className='text-lg font-bold mb-2'>{jobInfo.title}</h2>
             <div className='flex flex-col sm:flex-row gap-y-2 sm:gap-x-4 text-sm text-gray-600'>

@@ -25,6 +25,7 @@ export type Job = {
   createdAt: string;
   updatedAt: string;
   isAdmin?: boolean;
+  urgency: string;
 };
 
 const JobSchema = new Schema(
@@ -43,6 +44,7 @@ const JobSchema = new Schema(
     contactPhone: { type: String, required: true },
     contactEmail: { type: String, required: true },
     isAdmin: { type: Boolean, default: false },
+    urgency: { type: String, required: false },
   },
   {
     timestamps: true,

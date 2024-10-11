@@ -11,6 +11,7 @@ import type { Job } from '@/models/Job';
 import { redirect } from 'next/navigation';
 import { useState } from 'react';
 import { saveJobAction } from '../actions/jobActions';
+import UrgencyComponent from './UrgencyComponent';
 
 export function JobForm({ orgId, jobInfo }: { orgId: string; jobInfo?: Job }) {
   // State variables for tracking the form data and selected country/city information
@@ -85,7 +86,7 @@ export function JobForm({ orgId, jobInfo }: { orgId: string; jobInfo?: Job }) {
             required
           />
           <TransportCategories />
-
+          <UrgencyComponent />
           <Textarea
             name='description'
             placeholder='Açıklama'
