@@ -13,7 +13,7 @@ import {
   TabsList,
   TabsTrigger,
 } from '@/app/components/ui/tabs';
-import { withAuth } from '@workos-inc/authkit-nextjs';
+import { getSignInUrl, withAuth } from '@workos-inc/authkit-nextjs';
 import { WorkOS } from '@workos-inc/node';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
@@ -30,13 +30,18 @@ export default async function NewListingPage({
 }: NewListingPageProps) {
   const workos = new WorkOS(process.env.WORKOS_API_KEY);
   const { user } = await withAuth();
+  const signInUrl = await getSignInUrl();
 
   if (!user) {
     return (
       <div className='container mt-6'>
         <Alert>
           <AlertDescription>
-            İş ilanı veya sürücü ilanı oluşturmak için giriş yapın
+            İş ilanı veya sürücü ilanı oluşturmak için
+            <Button className='m-1 text-yellow-400 inline-flex items-center gap-1 h-5 w-12 rounded-md bg-orange-50 px-2 py-1 text-xs font-medium ring-1 ring-inset ring-orange-600/10 hover:bg-orange-100 transition-colors duration-300'>
+              <Link href={signInUrl}>Giriş</Link>
+            </Button>
+            yapın
           </AlertDescription>
         </Alert>
       </div>
