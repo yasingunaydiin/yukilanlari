@@ -1,4 +1,4 @@
-import { createCompany } from '@/app/actions/workosActions'; //Change this to companyactions.ts
+import { createCompany } from '@/app/actions/workosActions';
 import {
   Card,
   CardContent,

@@ -1,4 +1,4 @@
-'use client'; // Directive indicating this is a client component
+'use client';
 import CitySelect from '@/app/components/EuropeanCities';
 import CountrySelect from '@/app/components/EuropeanCountries';
 import TransportCategories from '@/app/components/TransportCategories';

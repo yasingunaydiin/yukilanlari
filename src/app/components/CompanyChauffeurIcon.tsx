@@ -1,4 +1,3 @@
-// components/OrganizationIcon.tsx
 'use client';
 
 import { Building2, Truck } from 'lucide-react';

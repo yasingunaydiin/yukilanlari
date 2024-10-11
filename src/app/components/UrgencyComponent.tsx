@@ -8,11 +8,11 @@ import {
 } from '@/app/components/ui/select';
 
 const UrgencyComponentArray = [
-  { value: 'Diğer', label: 'Diğer', emoji: '🏷️' }, // Tag icon
-  { value: 'Acil', label: 'Acil', emoji: '🚨' }, // Police car light (Urgent)
-  { value: 'Bu Hafta', label: 'Bu Hafta', emoji: '📅' }, // Calendar (This Week)
-  { value: 'Bu Ay', label: 'Bu Ay', emoji: '📆' }, // Calendar (This Month)
-  { value: 'Bugün', label: 'Bugün', emoji: '☀️' }, // Sun (Today)
+  { value: 'Diğer', label: 'Diğer', emoji: '🏷️' },
+  { value: 'Acil', label: 'Acil', emoji: '🚨' },
+  { value: 'Bu Hafta', label: 'Bu Hafta', emoji: '📅' },
+  { value: 'Bu Ay', label: 'Bu Ay', emoji: '📆' },
+  { value: 'Bugün', label: 'Bugün', emoji: '☀️' },
 ];
 
 const UrgencyComponent = () => {

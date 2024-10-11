@@ -7,7 +7,7 @@ export interface Chauffeur extends Document {
   newChauffeurLocation: string;
   newChauffeurWebsite?: string;
   newChauffeurSocialFacebook?: string;
-  chauffeurId: string; // Add this field
+  chauffeurId: string;
 }
 
 const ChauffeurSchema = new Schema<Chauffeur>({
@@ -17,7 +17,7 @@ const ChauffeurSchema = new Schema<Chauffeur>({
   newChauffeurLocation: { type: String, required: true },
   newChauffeurWebsite: { type: String },
   newChauffeurSocialFacebook: { type: String },
-  chauffeurId: { type: String, required: true }, // Include the ChauffeurId field
+  chauffeurId: { type: String, required: true },
 });
 
 // Check if the model already exists in the `models` collection

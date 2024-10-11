@@ -7,7 +7,7 @@ export interface Company extends Document {
   newCompanyLocation: string;
   newCompanyWebsite?: string;
   newCompanySocialFacebook?: string;
-  organizationId: string; // Add this field
+  organizationId: string;
 }
 
 const CompanySchema = new Schema<Company>({
@@ -17,7 +17,7 @@ const CompanySchema = new Schema<Company>({
   newCompanyLocation: { type: String, required: true },
   newCompanyWebsite: { type: String },
   newCompanySocialFacebook: { type: String },
-  organizationId: { type: String, required: true }, // Include the organizationId field
+  organizationId: { type: String, required: true },
 });
 
 // Check if the model already exists in the `models` collection

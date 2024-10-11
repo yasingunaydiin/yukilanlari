@@ -1,9 +1,7 @@
-// actions/workosActions.ts and companyactions.ts
-
 'use server';
 import { connectToDB } from '@/lib/dbConnect'; // Import the database connection
 import { ChauffeurModel } from '@/models/Chauffeur';
-import { CompanyModel } from '@/models/Company'; // Import the Company model
+import { CompanyModel } from '@/models/Company';
 import { WorkOS } from '@workos-inc/node';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';

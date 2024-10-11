@@ -45,11 +45,11 @@ const transportCategoriesArray = [
 ];
 
 const UrgencyComponentArray = [
-  { value: 'Diğer', label: 'Diğer', emoji: '🏷️' }, // Tag icon
-  { value: 'Acil', label: 'Acil', emoji: '🚨' }, // Police car light (Urgent)
-  { value: 'Bu Hafta', label: 'Bu Hafta', emoji: '📅' }, // Calendar (This Week)
-  { value: 'Bu Ay', label: 'Bu Ay', emoji: '📆' }, // Calendar (This Month)
-  { value: 'Bugün', label: 'Bugün', emoji: '☀️' }, // Sun (Today)
+  { value: 'Diğer', label: 'Diğer', emoji: '🏷️' },
+  { value: 'Acil', label: 'Acil', emoji: '🚨' },
+  { value: 'Bu Hafta', label: 'Bu Hafta', emoji: '📅' },
+  { value: 'Bu Ay', label: 'Bu Ay', emoji: '📆' },
+  { value: 'Bugün', label: 'Bugün', emoji: '☀️' },
 ];
 
 const getEmojiForCategory = (category: string): string => {
@@ -108,11 +108,9 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
   const [open, setOpen] = useState(false);
 
   const handleShare = (platform: string) => {
-    // Construct the full URL for sharing
     const jobLink = `https://yuk-bul.vercel.app/show/${jobInfo._id}`;
     let shareUrl = '';
 
-    // Define the correct share URLs for each platform
     if (platform === 'Twitter') {
       shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
         jobLink

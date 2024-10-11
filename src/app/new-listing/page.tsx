@@ -72,7 +72,7 @@ export default async function NewListingPage({
 
   for (const activeMembership of activeOrganizationMemberships) {
     const chauffeur = await workos.organizations.getOrganization(
-      activeMembership.organizationId // Keep organizationId
+      activeMembership.organizationId
     );
     chauffeurNames[chauffeur.id] = chauffeur.name;
   }

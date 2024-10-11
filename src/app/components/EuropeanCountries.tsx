@@ -910,7 +910,7 @@ const EuropeanCountriesArray = [
 export default function CountrySelect({
   setCountry,
 }: {
-  setCountry: (countryId: number, countryName: string) => void; // Updated signature to accept two arguments
+  setCountry: (countryId: number, countryName: string) => void;
 }) {
   const [selectedCountryId, setSelectedCountryId] = useState<
     string | undefined
@@ -922,7 +922,7 @@ export default function CountrySelect({
     );
     if (selectedCountry) {
       setSelectedCountryId(value);
-      setCountry(selectedCountry.id, selectedCountry.name); // Pass both id and name
+      setCountry(selectedCountry.id, selectedCountry.name);
     }
   };
 

@@ -1,5 +1,5 @@
 import { connectToDB } from '@/lib/dbConnect';
-import { ChauffeurModel } from '@/models/Chauffeur'; // Add this import
+import { ChauffeurModel } from '@/models/Chauffeur';
 import { CompanyModel } from '@/models/Company';
 import { JobModel } from '@/models/Job';
 import { WorkOS } from '@workos-inc/node';
