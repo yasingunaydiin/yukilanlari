@@ -17,6 +17,7 @@ import { Textarea } from '@/app/components/ui/textarea';
 import { cn } from '@/lib/utils';
 import type { Job } from '@/models/Job';
 import { format } from 'date-fns';
+import { tr } from 'date-fns/locale';
 import { Calendar as CalendarIcon } from 'lucide-react';
 import { redirect } from 'next/navigation';
 import { useState } from 'react';
@@ -129,6 +130,7 @@ export function JobForm({ orgId, jobInfo }: { orgId: string; jobInfo?: Job }) {
                   selected={date}
                   onSelect={setDate}
                   initialFocus
+                  locale={tr}
                 />
               </PopoverContent>
             </Popover>
