@@ -223,7 +223,7 @@ const EuropeanCountriesArray = [
   },
   {
     id: 11,
-    name: 'Kıbrıs',
+    name: 'Güney Kıbrıs',
     iso3: 'CYP',
     iso2: 'CY',
     numeric_code: '196',

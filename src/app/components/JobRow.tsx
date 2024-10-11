@@ -9,7 +9,9 @@ import {
 } from '@/app/components/ui/dialog';
 import type { Job } from '@/models/Job';
 import axios from 'axios';
+import { format } from 'date-fns';
 import {
+  CalendarDays,
   Edit2,
   Facebook,
   Flag,
@@ -73,6 +75,9 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
   const categoryEmoji = getEmojiForCategory(jobInfo.category);
   const urgencyBadge = getUrgencyBadge(jobInfo.urgency);
   const urgencyTitle = getUrgencyTitle(jobInfo.urgency);
+  const formattedJobDate = jobInfo.jobDate
+    ? format(new Date(jobInfo.jobDate), 'dd/MM/yyyy')
+    : 'Bunu görmemelisin';
 
   const formatLocation = (
     country: string | undefined,
@@ -140,12 +145,10 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
               >
                 {jobInfo.orgName}
               </button>
-
               <div className='gap-1 inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10 hover:bg-red-100 transition-colors duration-300'>
                 <div>{urgencyBadge}</div>
                 <div>{urgencyTitle}</div>
               </div>
-
               <div className='ml-auto'>
                 {jobInfo.createdAt && (
                   <div className='text-gray-500 text-sm'>
@@ -173,6 +176,13 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
               <div className='flex items-center gap-1'>
                 <Flag className='size-4' />
                 <span>{formatLocation(jobInfo.countryTo, jobInfo.cityTo)}</span>
+              </div>
+            </div>
+            <div className='mt-2 sm:gap-x-4 text-sm text-gray-600'>
+              <div>
+                <span className='flex items-center gap-1'>
+                  <CalendarDays className='size-4' /> Tarih: {formattedJobDate}
+                </span>
               </div>
             </div>
           </div>

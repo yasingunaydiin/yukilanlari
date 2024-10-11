@@ -1,20 +1,29 @@
 'use client';
+
 import CitySelect from '@/app/components/EuropeanCities';
 import CountrySelect from '@/app/components/EuropeanCountries';
 import TransportCategories from '@/app/components/TransportCategories';
 import { Button } from '@/app/components/ui/button';
+import { Calendar } from '@/app/components/ui/calendar';
 import { Card, CardContent } from '@/app/components/ui/card';
 import { Input } from '@/app/components/ui/input';
 import { Label } from '@/app/components/ui/label';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/app/components/ui/popover';
 import { Textarea } from '@/app/components/ui/textarea';
+import { cn } from '@/lib/utils';
 import type { Job } from '@/models/Job';
+import { format } from 'date-fns';
+import { Calendar as CalendarIcon } from 'lucide-react';
 import { redirect } from 'next/navigation';
 import { useState } from 'react';
 import { saveJobAction } from '../actions/jobActions';
 import UrgencyComponent from './UrgencyComponent';
 
 export function JobForm({ orgId, jobInfo }: { orgId: string; jobInfo?: Job }) {
-  // State variables for tracking the form data and selected country/city information
   const [countryFrom, setCountryFrom] = useState<string | undefined>();
   const [countryTo, setCountryTo] = useState<string | undefined>();
   const [selectedCountryIdFrom, setSelectedCountryIdFrom] = useState<
@@ -25,21 +34,27 @@ export function JobForm({ orgId, jobInfo }: { orgId: string; jobInfo?: Job }) {
   >();
   const [cityFrom, setCityFrom] = useState<string | undefined>();
   const [cityTo, setCityTo] = useState<string | undefined>();
+  const [date, setDate] = useState<Date | undefined>(
+    jobInfo?.jobDate ? new Date(jobInfo.jobDate) : undefined
+  );
 
-  // Function to handle form submission and save the job data
   async function handleSaveJob(data: FormData) {
     data.set('countryFrom', countryFrom ?? '');
     data.set('cityFrom', cityFrom ?? '');
     data.set('countryTo', countryTo ?? '');
     data.set('cityTo', cityTo ?? '');
-    data.set('orgId', orgId); // Set the organization ID
-    const jobInfo = await saveJobAction(data); // Call the save action
-    redirect(`/jobs/${jobInfo.orgId}`); // Redirect to the job's organization page after saving
+    data.set('orgId', orgId);
+    if (date) {
+      data.set('jobDate', date.toISOString());
+    } else {
+      data.delete('jobDate');
+    }
+    const jobInfo = await saveJobAction(data);
+    redirect(`/jobs/${jobInfo.orgId}`);
   }
 
   return (
     <form action={handleSaveJob} className='container mt-6'>
-      {/* Hidden input for job ID (used only when updating an existing job) */}
       {jobInfo && <input type='hidden' name='id' value={jobInfo?._id} />}
 
       <Card>
@@ -93,7 +108,31 @@ export function JobForm({ orgId, jobInfo }: { orgId: string; jobInfo?: Job }) {
             defaultValue={jobInfo?.description || ''}
             required
           />
-
+          <div className='flex flex-col gap-2'>
+            <Label>Tarih Aralığı</Label>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant={'outline'}
+                  className={cn(
+                    'w-[240px] justify-start text-left font-normal',
+                    !date && 'text-muted-foreground'
+                  )}
+                >
+                  <CalendarIcon className='mr-2 h-4 w-4' />
+                  {date ? format(date, 'PPP') : <span>Tarih seçin</span>}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className='w-auto p-0' align='start'>
+                <Calendar
+                  mode='single'
+                  selected={date}
+                  onSelect={setDate}
+                  initialFocus
+                />
+              </PopoverContent>
+            </Popover>
+          </div>
           <div className='space-y-4'>
             <div className='flex flex-col sm:flex-row gap-4'>
               <div className='flex flex-col gap-2 flex-1'>
@@ -115,7 +154,6 @@ export function JobForm({ orgId, jobInfo }: { orgId: string; jobInfo?: Job }) {
                 />
               </div>
             </div>
-
             <div className='flex flex-col sm:flex-row gap-4'>
               <div className='flex flex-col gap-2 flex-1'>
                 <Label>Şehir (Nereden)</Label>
