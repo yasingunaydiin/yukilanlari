@@ -8,6 +8,7 @@ export interface Company extends Document {
   newCompanyWebsite?: string;
   newCompanySocialFacebook?: string;
   organizationId: string;
+  createdBy: Schema.Types.ObjectId; // Reference the User's ObjectId
 }
 
 const CompanySchema = new Schema<Company>({
@@ -18,8 +19,8 @@ const CompanySchema = new Schema<Company>({
   newCompanyWebsite: { type: String },
   newCompanySocialFacebook: { type: String },
   organizationId: { type: String, required: true },
+  createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true }, // Track user ID
 });
 
-// Check if the model already exists in the `models` collection
 export const CompanyModel =
   models.Company || model<Company>('Company', CompanySchema, 'companies');

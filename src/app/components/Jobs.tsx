@@ -15,8 +15,9 @@ export default function Jobs({ jobs }: { header: string; jobs: Job[] }) {
       </div>
       <div className='flex justify-center mt-3'>
         <Button className='bg-yellow-400 text-white rounded-md'>
-          Daha fazla
+          <a href={'/all-jobs'}>Daha fazla</a>
         </Button>
+        {/* Change the Button into 1 - 2 - 3 from shadcn */}
       </div>
     </Card>
   );

@@ -45,6 +45,17 @@ export default async function Header() {
             </form>
           )}
 
+          {/* {user && (
+            <Link href={'/profile'}>
+              <button
+                type='submit'
+                className=' text-yellow-400 rounded-lg px-4 py-2'
+              >
+                Profilin
+              </button>
+            </Link>
+          )} */}
+
           {/* Job post button */}
 
           <Link href={'/new-listing'}>

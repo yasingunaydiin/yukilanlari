@@ -17,10 +17,8 @@ export default function SpinningButton() {
 
   return (
     <div className='flex justify-center'>
-      <Button className='bg-yellow-400'>
-        <button type='button' onClick={navigate}>
-          Oluştur
-        </button>
+      <Button className='bg-yellow-400' onClick={navigate}>
+        Oluştur
         {isPending && <Loader2 className='ml-2 mr-2 h-4 w-4 animate-spin' />}
       </Button>
     </div>

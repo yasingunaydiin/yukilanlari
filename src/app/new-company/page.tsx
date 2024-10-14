@@ -51,7 +51,7 @@ export default async function NewCompanyPage() {
         newCompanyLocation,
         newCompanyWebsite || '',
         newCompanySocialFacebook || '',
-        authenticatedUser.id
+        authenticatedUser.id // Pass user ID
       );
       redirect('/new-listing');
     }

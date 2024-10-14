@@ -45,7 +45,7 @@ export default async function OrganizationDetailsPage({ params }: PageProps) {
 
   const orgDetails: OrgDetails = companyDetails || chauffeurDetails;
 
-  // Check if the user is an admin for this organization
+  // Check if the user is an admin for this organization, its used to delete the company
   const isAdmin = jobsWithData.some((job) => job.isAdmin);
 
   const getOrgProperty = (key: string): string | null => {
