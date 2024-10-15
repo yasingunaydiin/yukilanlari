@@ -3,7 +3,18 @@ import { ChauffeurModel } from '@/models/Chauffeur';
 import { CompanyModel } from '@/models/Company';
 import { getSignInUrl, withAuth } from '@workos-inc/authkit-nextjs';
 import { WorkOS } from '@workos-inc/node';
-import { Edit2, Trash2 } from 'lucide-react';
+import {
+  Building2,
+  Edit2,
+  Facebook,
+  Globe,
+  Mail,
+  Map,
+  Phone,
+  Trash2,
+  TruckIcon,
+  User,
+} from 'lucide-react';
 import Link from 'next/link';
 import { Alert, AlertDescription } from '../components/ui/alert';
 import { Button } from '../components/ui/button';
@@ -52,12 +63,24 @@ export default async function CompanyListPage() {
     companies = mongoCompanies.map((mongoCompany) => ({
       id: String(mongoCompany._id), // Convert the MongoDB ObjectId to a string
       name: mongoCompany.newCompanyContactName, // Display contact name
+      organizationId: mongoCompany.organizationId, // Include the organizationId
+      phone: mongoCompany.newCompanyPhone, // Include the organizationId
+      email: mongoCompany.newCompanyEmail, // Include the organizationId
+      location: mongoCompany.newCompanyLocation, // Include the organizationId
+      website: mongoCompany.newCompanyWebsite, // Include the organizationId
+      socialFacebook: mongoCompany.newCompanySocialFacebook, // Include the organizationId
     }));
 
     // Map the MongoDB chauffeur documents to a structure suitable for the frontend
     chauffeur = mongoChauffeurs.map((mongoChauffeur) => ({
       id: String(mongoChauffeur._id), // Convert the MongoDB ObjectId to a string
       name: mongoChauffeur.newChauffeurContactName, // Display contact name
+      chauffeurId: mongoChauffeur.chauffeurId, // Include the organizationId
+      phone: mongoChauffeur.newChauffeurPhone, // Include the organizationId
+      email: mongoChauffeur.newChauffeurEmail, // Include the organizationId
+      location: mongoChauffeur.newChauffeurLocation, // Include the organizationId
+      website: mongoChauffeur.newChauffeurWebsite, // Include the organizationId
+      socialFacebook: mongoChauffeur.newChauffeurSocialFacebook, // Include the organizationId
     }));
   } catch (error) {
     // If there's an error, log it and display an error message to the user
@@ -103,23 +126,23 @@ export default async function CompanyListPage() {
       <ul className='space-y-4 m-5'>
         <h1 className='text-3xl font-bold'>Sirketler</h1>
         {companies.length > 0 ? (
-          // If company exist, map over them and render each company with one organization
-          companies.map((companies, index) => {
+          // If companies exist, map over them and render each company with one organization
+          companies.map((company, index) => {
             // Get the first organization name (or any specific logic you want)
             const orgName = Object.values(organizationsNames)[index]; // Using index to get the organization
 
             return (
-              <Card key={companies.id} className='p-4'>
-                <Link href={''}>
-                  <div className='space-y-2'>
+              <Card key={company.id} className='p-4'>
+                <div className='flex items-center justify-between'>
+                  <div className='flex items-center gap-2'>
+                    {' '}
+                    {/* Added a container for the icon and name */}
+                    <Building2 />
                     {orgName && ( // Check if the organization name exists
-                      <h1 className='flex items-center text-xl font-bold'>
-                        {orgName}
-                      </h1>
+                      <h1 className='text-xl font-bold'>{orgName}</h1>
                     )}
-                    <p>{companies.name}</p>
                   </div>
-                  <div className='flex gap-2 justify-end'>
+                  <div className='flex gap-2'>
                     <button className='inline-flex items-center gap-1 rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10 hover:bg-blue-100 transition-colors duration-300'>
                       <Edit2 className='size-3' />
                       Düzenle
@@ -129,17 +152,61 @@ export default async function CompanyListPage() {
                       Sil
                     </button>
                   </div>
-                </Link>
+                </div>
+                <div className='flex items-center'>
+                  <User className='w-5 h-5 mr-2 text-muted-foreground' />
+                  {company.name}
+                </div>
+                <div className='flex items-center'>
+                  <Mail className='w-5 h-5 mr-2 text-muted-foreground' />
+                  {company.email}
+                </div>
+                <div className='flex items-center'>
+                  <Phone className='w-5 h-5 mr-2 text-muted-foreground' />
+                  {company.phone}
+                </div>
+                <div className='flex items-center'>
+                  <Map className='w-5 h-5 mr-2 text-muted-foreground' />
+                  {company.location}
+                </div>
+                <div className='flex items-center'>
+                  <Globe className='w-5 h-5 mr-2 text-muted-foreground' />
+                  {company.website ? (
+                    <a
+                      href={company.website}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                    >
+                      {company.website}
+                    </a>
+                  ) : (
+                    'Websitesi Yok' // You can also show a placeholder message if the website is not available
+                  )}
+                </div>
+                <div className='flex items-center'>
+                  <Facebook className='w-5 h-5 mr-2 text-muted-foreground' />
+                  {company.socialFacebook ? (
+                    <a
+                      href={company.socialFacebook}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                    >
+                      {company.socialFacebook}
+                    </a>
+                  ) : (
+                    'Facebook Sayfasi Yok' // Show placeholder if the website is empty
+                  )}
+                </div>
               </Card>
             );
           })
         ) : (
-          // If there are no chauffeurs, display a message
+          // Handle the case where there are no companies
           <Alert>
             <AlertDescription>
-              Sirket oluşturmadınız.
+              Şirketler oluşturmadınız.
               <Button className='m-1 text-orange-400 inline-flex items-center gap-1 h-5 rounded-md bg-orange-50 px-2 py-1 text-xs font-medium ring-1 ring-inset ring-orange-600/10 hover:bg-orange-100 transition-colors duration-300'>
-                <Link href={'new-company'}>Sirket Oluşturun</Link>
+                <Link href={'new-company'}>Şirket Oluşturun</Link>
               </Button>
             </AlertDescription>
           </Alert>
@@ -149,23 +216,21 @@ export default async function CompanyListPage() {
       <ul className='space-y-4 m-5'>
         <h1 className='text-3xl font-bold'>Sürücüleriniz</h1>
         {chauffeur.length > 0 ? (
-          // If chauffeurs exist, map over them and render each chauffeur with one organization
+          // If chauffeurs exist, map over them and render each chauffeur with their details
           chauffeur.map((chauffeur, index) => {
-            // Get the first organization name (or any specific logic you want)
-            const orgName = Object.values(organizationsNames)[index]; // Using index to get the organization
+            // Get the organization name for the corresponding chauffeur
+            const orgName = Object.values(chauffeurNames)[index];
 
             return (
               <Card key={chauffeur.id} className='p-4'>
-                <Link href={''}>
-                  <div className='space-y-2'>
+                <div className='flex items-center justify-between'>
+                  <div className='flex items-center gap-2'>
+                    <TruckIcon />
                     {orgName && ( // Check if the organization name exists
-                      <h1 className='flex items-center text-xl font-bold'>
-                        {orgName}
-                      </h1>
+                      <h1 className='text-xl font-bold'>{orgName}</h1>
                     )}
-                    <p>{chauffeur.name}</p>
                   </div>
-                  <div className='flex gap-2 justify-end'>
+                  <div className='flex gap-2'>
                     <button className='inline-flex items-center gap-1 rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10 hover:bg-blue-100 transition-colors duration-300'>
                       <Edit2 className='size-3' />
                       Düzenle
@@ -175,7 +240,52 @@ export default async function CompanyListPage() {
                       Sil
                     </button>
                   </div>
-                </Link>
+                </div>
+                <div className='flex items-center'>
+                  <User className='w-5 h-5 mr-2 text-muted-foreground' />
+                  {chauffeur.name}
+                </div>
+                <div className='flex items-center'>
+                  <Mail className='w-5 h-5 mr-2 text-muted-foreground' />
+                  {chauffeur.email}
+                </div>
+                <div className='flex items-center'>
+                  <Phone className='w-5 h-5 mr-2 text-muted-foreground' />
+                  {chauffeur.phone}
+                </div>
+                <div className='flex items-center'>
+                  <Map className='w-5 h-5 mr-2 text-muted-foreground' />
+                  {chauffeur.location}
+                </div>
+                <div className='flex items-center'>
+                  <Globe className='w-5 h-5 mr-2 text-muted-foreground' />
+                  {chauffeur.website ? (
+                    <a
+                      href={chauffeur.website}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                    >
+                      {chauffeur.website}
+                    </a>
+                  ) : (
+                    'Websitesi Yok' // Show placeholder if the website is empty
+                  )}
+                </div>
+
+                <div className='flex items-center'>
+                  <Facebook className='w-5 h-5 mr-2 text-muted-foreground' />
+                  {chauffeur.socialFacebook ? (
+                    <a
+                      href={chauffeur.socialFacebook}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                    >
+                      {chauffeur.socialFacebook}
+                    </a>
+                  ) : (
+                    'Facebook Sayfasi Yok' // Show placeholder if the website is empty
+                  )}
+                </div>
               </Card>
             );
           })
