@@ -1,4 +1,5 @@
 import { getSignInUrl, signOut, withAuth } from '@workos-inc/authkit-nextjs';
+import { ContactRound, LogIn, LogOut } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from './ui/button';
 
@@ -12,7 +13,7 @@ export default async function Header() {
         <div>
           <Link
             href={'/'}
-            className='bg-gradient-to-r from-gray-600 to-gray-900 text-transparent bg-clip-text font-bold text-2xl'
+            className='bg-gradient-to-r from-yellow-400 to-orange-500 text-transparent bg-clip-text font-bold text-2xl'
           >
             Yük Bul
           </Link>
@@ -20,11 +21,14 @@ export default async function Header() {
         <nav className='flex gap-4'>
           {/* Login button */}
           {!user && (
-            <Link
-              href={signInUrl}
-              className=' text-yellow-400 rounded-lg px-4 py-2'
-            >
-              Giriş
+            <Link href={signInUrl}>
+              <Button
+                variant='outline'
+                className='bg-white text-yellow-400 border-yellow-300 hover:bg-yellow-50 hover:text-yellow-300'
+              >
+                <LogIn className='w-4 h-4 mr-2' />
+                Giriş
+              </Button>
             </Link>
           )}
 
@@ -36,25 +40,29 @@ export default async function Header() {
                 await signOut();
               }}
             >
-              <button
+              <Button
                 type='submit'
-                className=' text-yellow-400 rounded-lg px-4 py-2'
+                variant='outline'
+                className='bg-white text-yellow-400 border-yellow-300 hover:bg-yellow-50 hover:text-yellow-300'
               >
+                <LogOut className='w-4 h-4 mr-2' />
                 Çıkış
-              </button>
+              </Button>
             </form>
           )}
 
-          {/* {user && (
+          {user && (
             <Link href={'/profile'}>
-              <button
+              <Button
                 type='submit'
-                className=' text-yellow-400 rounded-lg px-4 py-2'
+                variant='outline'
+                className=' bg-white text-yellow-400 border-yellow-300 hover:bg-yellow-50 hover:text-yellow-300'
               >
+                <ContactRound className='w-4 h-4 mr-2' />
                 Profilin
-              </button>
+              </Button>
             </Link>
-          )} */}
+          )}
 
           {/* Job post button */}
 

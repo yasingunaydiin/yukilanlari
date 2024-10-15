@@ -8,7 +8,7 @@ export interface Chauffeur extends Document {
   newChauffeurWebsite?: string;
   newChauffeurSocialFacebook?: string;
   chauffeurId: string;
-  createdBy: Schema.Types.ObjectId; // Reference the User's ObjectId
+  createdBy: string; // To track the user who created the organization
 }
 
 const ChauffeurSchema = new Schema<Chauffeur>({
@@ -19,7 +19,7 @@ const ChauffeurSchema = new Schema<Chauffeur>({
   newChauffeurWebsite: { type: String },
   newChauffeurSocialFacebook: { type: String },
   chauffeurId: { type: String, required: true },
-  createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true }, // Track user ID
+  createdBy: { type: String, required: true }, // Track by user ID
 });
 
 // Check if the model already exists in the `models` collection

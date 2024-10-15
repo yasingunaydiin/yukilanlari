@@ -41,7 +41,8 @@ export async function createCompany(
     newCompanyLocation: newCompanyLocation,
     newCompanyWebsite: newCompanyWebsite,
     newCompanySocialFacebook: newCompanySocialFacebook,
-    organizationId: org.id, // Add this line to save the WorkOS organization ID
+    organizationId: org.id, // Save the WorkOS organization ID
+    createdBy: userId, // Store the authenticated user ID
   });
 
   // Save the company details to MongoDB
@@ -51,6 +52,8 @@ export async function createCompany(
   revalidatePath('/new-listing');
   redirect('/new-listing');
 }
+
+//Create Chauffeur function
 
 export async function createChauffeur(
   chauffeurName: string,
@@ -86,6 +89,7 @@ export async function createChauffeur(
     newChauffeurWebsite: newChauffeurWebsite,
     newChauffeurSocialFacebook: newChauffeurSocialFacebook,
     chauffeurId: org.id, // Save the WorkOS organization ID as ChauffeurId
+    createdBy: userId, // Store the authenticated user ID
   });
 
   // Save the Chauffeur details to MongoDB
