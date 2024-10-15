@@ -61,7 +61,7 @@ export default async function NewCompanyPage() {
     <div className='container max-w-md mx-auto py-8'>
       <Card>
         <CardHeader>
-          <CardTitle>Yeni bir şirket oluştur</CardTitle>
+          <CardTitle>Yeni bir şirket oluşturun</CardTitle>
           <CardDescription>
             Bir ilan oluşturmak için şirketinizi oluşturun
           </CardDescription>

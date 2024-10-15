@@ -141,7 +141,7 @@ export default async function NewListingPage({
               <div className='mt-6'>
                 <Link href='/new-company'>
                   <Button className='w-full bg-yellow-400 text-white rounded-lg px-4 py-2 font-bold'>
-                    Şirket oluştur
+                    Şirket oluşturun
                     <ArrowRight className='ml-2 h-4 w-4' />
                   </Button>
                 </Link>
@@ -152,7 +152,7 @@ export default async function NewListingPage({
         <TabsContent value='chauffeur'>
           <Card>
             <CardHeader>
-              <CardTitle>Sürücü İlanı Oluştur</CardTitle>
+              <CardTitle>Sürücü İlanı Oluşturun</CardTitle>
               <CardDescription>
                 İlan yayınlamak için sürücü profilinizi oluşturun ve seçin
               </CardDescription>
@@ -194,7 +194,7 @@ export default async function NewListingPage({
               <div className='mt-6'>
                 <Link href='/new-chauffeur'>
                   <Button className='w-full bg-orange-400 text-white rounded-lg px-4 py-2 font-bold'>
-                    Sürücü oluştur
+                    Sürücü oluşturun
                     <ArrowRight className='ml-2 h-4 w-4' />
                   </Button>
                 </Link>

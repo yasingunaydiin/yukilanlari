@@ -68,7 +68,7 @@ export default async function Header() {
 
           <Link href={'/new-listing'}>
             <Button className='bg-yellow-400 text-white rounded-lg px-4 py-2 font-bold'>
-              İlan oluştur
+              İlan oluşturun
             </Button>
           </Link>
         </nav>

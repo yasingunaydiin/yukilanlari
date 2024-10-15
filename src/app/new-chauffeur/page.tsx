@@ -61,7 +61,7 @@ export default async function NewChauffeurPage() {
     <div className='container max-w-md mx-auto py-8'>
       <Card>
         <CardHeader>
-          <CardTitle>Yeni bir sürücü oluştur</CardTitle>
+          <CardTitle>Yeni bir sürücü oluşturun</CardTitle>
           <CardDescription>
             Bir ilan oluşturmak için sürücünüzü oluşturun
           </CardDescription>
