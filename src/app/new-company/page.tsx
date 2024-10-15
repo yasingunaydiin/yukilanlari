@@ -1,4 +1,4 @@
-import { createCompany } from '@/app/actions/workosActions';
+import { createCompany } from '@/app/actions/companyActions';
 import {
   Card,
   CardContent,

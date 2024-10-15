@@ -1,15 +1,31 @@
 import { connectToDB } from '@/lib/dbConnect';
 import { ChauffeurModel } from '@/models/Chauffeur';
 import { CompanyModel } from '@/models/Company';
-import { withAuth } from '@workos-inc/authkit-nextjs';
+import { getSignInUrl, withAuth } from '@workos-inc/authkit-nextjs';
+import Link from 'next/link';
+import { Alert, AlertDescription } from '../components/ui/alert';
+import { Button } from '../components/ui/button';
 
 export default async function CompanyListPage() {
   // Automatically fetch authenticated user info using WorkOS authentication
   const { user } = await withAuth();
+  const signInUrl = await getSignInUrl();
 
   // If the user is not authenticated, show a message to log in
   if (!user) {
-    return <p>Please log in to view your organizations.</p>;
+    return (
+      <div className='container mt-6'>
+        <Alert>
+          <AlertDescription>
+            İş veya sürücü ilanlarınızı görmek için
+            <Button className='m-1 text-yellow-400 inline-flex items-center gap-1 h-5 w-12 rounded-md bg-orange-50 px-2 py-1 text-xs font-medium ring-1 ring-inset ring-orange-600/10 hover:bg-orange-100 transition-colors duration-300'>
+              <Link href={signInUrl}>Giriş</Link>
+            </Button>
+            yapın
+          </AlertDescription>
+        </Alert>
+      </div>
+    );
   }
 
   // Initialize an empty array to store the companies
@@ -31,14 +47,14 @@ export default async function CompanyListPage() {
 
     // Map the MongoDB company documents to a structure suitable for the frontend
     companies = mongoCompanies.map((mongoCompany) => ({
-      id: mongoCompany._id.toString(), // Convert the MongoDB ObjectId to a string
-      name: mongoCompany.newCompanyContactName, // Use the contact name as the display name
+      id: String(mongoCompany._id), // Convert the MongoDB ObjectId to a string
+      name: mongoCompany.newCompanyContactName, // Display contact name
     }));
 
-    // Map the MongoDB company documents to a structure suitable for the frontend
+    // Map the MongoDB chauffeur documents to a structure suitable for the frontend
     chauffeur = mongoChauffeurs.map((mongoChauffeur) => ({
-      id: mongoChauffeur._id.toString(), // Convert the MongoDB ObjectId to a string
-      name: mongoChauffeur.newChauffeurContactName, // Use the contact name as the display name
+      id: String(mongoChauffeur._id), // Convert the MongoDB ObjectId to a string
+      name: mongoChauffeur.newChauffeurContactName, // Display contact name
     }));
   } catch (error) {
     // If there's an error, log it and display an error message to the user
@@ -53,8 +69,8 @@ export default async function CompanyListPage() {
   // Render the company list or a message if there are no companies
   return (
     <div className='container my-6 max-w-3xl mx-auto'>
-      <h1 className='text-3xl font-bold'>Şirketleriniz</h1>
-      <ul className='space-y-4'>
+      <ul className='space-y-4 m-5'>
+        <h1 className='text-3xl font-bold'>Şirketleriniz</h1>
         {companies.length > 0 ? (
           // If companies exist, map over them and render each company in a list
           companies.map((company) => (
@@ -64,12 +80,19 @@ export default async function CompanyListPage() {
           ))
         ) : (
           // If there are no companies, display a message
-          <p>Hiçbir kuruluş oluşturmadınız.</p>
-          // Add a button that says "kurun" which leads them to new-company
+          <Alert>
+            <AlertDescription>
+              Şirket oluşturmadınınız.
+              <Button className='m-1 text-yellow-400 inline-flex items-center gap-1 h-5 rounded-md bg-orange-50 px-2 py-1 text-xs font-medium ring-1 ring-inset ring-orange-600/10 hover:bg-orange-100 transition-colors duration-300'>
+                <Link href={'new-company'}>Şirket Oluşturun</Link>
+              </Button>
+            </AlertDescription>
+          </Alert>
         )}
       </ul>
-      <h1 className='text-3xl font-bold'>Sürücüleriniz</h1>
-      <ul className='space-y-4'>
+
+      <ul className='space-y-4 m-5'>
+        <h1 className='text-3xl font-bold'>Sürücüleriniz</h1>
         {chauffeur.length > 0 ? (
           // If chauffeur exist, map over them and render each chauffeur in a list
           chauffeur.map((chauffeur) => (
@@ -78,9 +101,15 @@ export default async function CompanyListPage() {
             </li>
           ))
         ) : (
-          // If there are no companies, display a message
-          <p>Hiçbir sürücü oluşturmadınız.</p>
-          // Add a button that says "kurun" which leads them to new-chauffeur
+          // If there are no chauffeurs, display a message
+          <Alert>
+            <AlertDescription>
+              Sürücü oluşturmadın.
+              <Button className='m-1 text-orange-400 inline-flex items-center gap-1 h-5 rounded-md bg-orange-50 px-2 py-1 text-xs font-medium ring-1 ring-inset ring-orange-600/10 hover:bg-orange-100 transition-colors duration-300'>
+                <Link href={'new-chauffeur'}>Sürücü Oluştur</Link>
+              </Button>
+            </AlertDescription>
+          </Alert>
         )}
       </ul>
     </div>

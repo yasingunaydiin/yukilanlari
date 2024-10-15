@@ -1,4 +1,4 @@
-import { createChauffeur } from '@/app/actions/workosActions';
+import { createChauffeur } from '@/app/actions/chauffeurActions';
 import {
   Card,
   CardContent,

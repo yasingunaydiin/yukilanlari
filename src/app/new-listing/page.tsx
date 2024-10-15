@@ -37,7 +37,7 @@ export default async function NewListingPage({
       <div className='container mt-6'>
         <Alert>
           <AlertDescription>
-            İş ilanı veya sürücü ilanı oluşturmak için
+            İş veya sürücü ilanı oluşturmak için
             <Button className='m-1 text-yellow-400 inline-flex items-center gap-1 h-5 w-12 rounded-md bg-orange-50 px-2 py-1 text-xs font-medium ring-1 ring-inset ring-orange-600/10 hover:bg-orange-100 transition-colors duration-300'>
               <Link href={signInUrl}>Giriş</Link>
             </Button>
@@ -101,8 +101,7 @@ export default async function NewListingPage({
             <CardHeader>
               <CardTitle>Şirketleriniz</CardTitle>
               <CardDescription>
-                İlan oluşturmak için bir şirket seç veya yeni bir şirket
-                oluştur.
+                İlan yayınlamak için şirket profilinizi oluşturun ve seçin
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -132,13 +131,16 @@ export default async function NewListingPage({
               ) : (
                 <Alert variant='default'>
                   <AlertDescription>
-                    Kullanıcınıza atanmış şirket bulunmuyor
+                    Kullanıcınıza atanmış şirket bulunmuyor{' '}
+                    <Button className='m-1 text-yellow-400 inline-flex items-center gap-1 h-5 rounded-md bg-orange-50 px-2 py-1 text-xs font-medium ring-1 ring-inset ring-orange-600/10 hover:bg-orange-100 transition-colors duration-300'>
+                      <Link href={'new-company'}>Şirket Oluşturun</Link>
+                    </Button>
                   </AlertDescription>
                 </Alert>
               )}
               <div className='mt-6'>
                 <Link href='/new-company'>
-                  <Button className='w-full'>
+                  <Button className='w-full bg-yellow-400 text-white rounded-lg px-4 py-2 font-bold'>
                     Şirket oluştur
                     <ArrowRight className='ml-2 h-4 w-4' />
                   </Button>
@@ -152,7 +154,7 @@ export default async function NewListingPage({
             <CardHeader>
               <CardTitle>Sürücü İlanı Oluştur</CardTitle>
               <CardDescription>
-                Kendinizi tanıtın ve iş fırsatlarını yakalayın.
+                İlan yayınlamak için sürücü profilinizi oluşturun ve seçin
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -182,13 +184,16 @@ export default async function NewListingPage({
               ) : (
                 <Alert variant='default'>
                   <AlertDescription>
-                    Kullanıcınıza atanmış sürücü bulunmuyor
+                    Kullanıcınıza atanmış sürücü bulunmuyor{' '}
+                    <Button className='m-1 text-orange-400 inline-flex items-center gap-1 h-5 rounded-md bg-orange-50 px-2 py-1 text-xs font-medium ring-1 ring-inset ring-orange-600/10 hover:bg-orange-100 transition-colors duration-300'>
+                      <Link href={'new-chauffeur'}>Sürücü Oluşturun</Link>
+                    </Button>
                   </AlertDescription>
                 </Alert>
               )}
               <div className='mt-6'>
-                <Link href='/new-trucker'>
-                  <Button className='w-full'>
+                <Link href='/new-chauffeur'>
+                  <Button className='w-full bg-orange-400 text-white rounded-lg px-4 py-2 font-bold'>
                     Sürücü oluştur
                     <ArrowRight className='ml-2 h-4 w-4' />
                   </Button>
