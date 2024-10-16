@@ -16,7 +16,7 @@ export default function DeleteOrganization({
   orgType,
 }: DeleteOrganizationProps) {
   const [isDeleting, setIsDeleting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | undefined>();
   const router = useRouter();
 
   const handleDelete = async () => {
@@ -26,14 +26,12 @@ export default function DeleteOrganization({
     }
 
     const confirmMessage =
-      orgType === 'company'
-        ? 'Şirket veya sürücünüzü silmek istediğinizden emin misiniz? Bu şirket veya sürücünün tüm ilanları silinecektir.'
-        : 'Şirket veya sürücünüzü silmek istediğinizden emin misiniz? Bu şirket veya sürücünün tüm ilanları silinecektir.';
+      'Şirket veya sürücünüzü silmek istediğinizden emin misiniz? Bu şirket veya sürücünün tüm ilanları silinecektir.';
 
     if (!confirm(confirmMessage)) return;
 
     setIsDeleting(true);
-    setError(null);
+    setError(undefined);
 
     try {
       const response = await fetch(`/api/organizations/${organizationId}`, {
@@ -45,11 +43,15 @@ export default function DeleteOrganization({
       });
 
       if (!response.ok) {
-        const { error } = await response.json();
-        throw new Error(error || 'Organizasyon silinemedi');
+        const errorMsg = response.headers
+          .get('content-type')
+          ?.includes('application/json')
+          ? (await response.json()).error
+          : 'Organizasyon silinemedi';
+        throw new Error(errorMsg);
       }
 
-      router.push('/new-listing');
+      router.refresh();
     } catch (err) {
       setError(`Organizasyon silinemedi. ${(err as Error).message}`);
     } finally {
@@ -69,9 +71,14 @@ export default function DeleteOrganization({
         variant='destructive'
         className='h-6 inline-flex items-center gap-1 rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10 hover:bg-red-100 transition-colors duration-300'
       >
-        <Trash2 className='size-3' />
-        Sil
-        {isDeleting && <Loader2 className='ml-2 mr-2 h-4 w-4 animate-spin' />}
+        {isDeleting ? (
+          <Loader2 className='ml-2 mr-2 h-4 w-4 animate-spin' />
+        ) : (
+          <>
+            <Trash2 className='size-3' />
+            Sil
+          </>
+        )}
       </Button>
       {error && <p className='text-red-500 mt-2'>{error}</p>}
     </div>

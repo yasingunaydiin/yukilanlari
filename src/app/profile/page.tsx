@@ -11,11 +11,11 @@ import {
   Mail,
   Map,
   Phone,
-  Trash2,
   TruckIcon,
   User,
 } from 'lucide-react';
 import Link from 'next/link';
+import DeleteOrganization from '../components/DeleteOrganization';
 import { Alert, AlertDescription } from '../components/ui/alert';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
@@ -53,34 +53,34 @@ export default async function CompanyListPage() {
     // Fetch companies from MongoDB that were created by the authenticated user
     const mongoCompanies = await CompanyModel.find({
       createdBy: user.id, // Filter by the logged-in user's ID
-    }).lean(); // Use `.lean()` to get plain JavaScript objects instead of Mongoose documents idk what this is
+    }).lean(); // Use `.lean()` to get plain JavaScript objects instead of Mongoose documents
 
     const mongoChauffeurs = await ChauffeurModel.find({
       createdBy: user.id, // Filter by the logged-in user's ID
-    }).lean(); // Use `.lean()` to get plain JavaScript objects instead of Mongoose documents idk what this is
+    }).lean(); // Use `.lean()` to get plain JavaScript objects instead of Mongoose documents
 
     // Map the MongoDB company documents to a structure suitable for the frontend
     companies = mongoCompanies.map((mongoCompany) => ({
-      id: String(mongoCompany._id), // Convert the MongoDB ObjectId to a string
-      name: mongoCompany.newCompanyContactName, // Display contact name
-      organizationId: mongoCompany.organizationId, // Include the organizationId
-      phone: mongoCompany.newCompanyPhone, // Include the organizationId
-      email: mongoCompany.newCompanyEmail, // Include the organizationId
-      location: mongoCompany.newCompanyLocation, // Include the organizationId
-      website: mongoCompany.newCompanyWebsite, // Include the organizationId
-      socialFacebook: mongoCompany.newCompanySocialFacebook, // Include the organizationId
+      id: String(mongoCompany._id),
+      name: mongoCompany.newCompanyContactName,
+      organizationId: mongoCompany.organizationId,
+      phone: mongoCompany.newCompanyPhone,
+      email: mongoCompany.newCompanyEmail,
+      location: mongoCompany.newCompanyLocation,
+      website: mongoCompany.newCompanyWebsite,
+      socialFacebook: mongoCompany.newCompanySocialFacebook,
     }));
 
     // Map the MongoDB chauffeur documents to a structure suitable for the frontend
     chauffeur = mongoChauffeurs.map((mongoChauffeur) => ({
-      id: String(mongoChauffeur._id), // Convert the MongoDB ObjectId to a string
-      name: mongoChauffeur.newChauffeurContactName, // Display contact name
-      chauffeurId: mongoChauffeur.chauffeurId, // Include the organizationId
-      phone: mongoChauffeur.newChauffeurPhone, // Include the organizationId
-      email: mongoChauffeur.newChauffeurEmail, // Include the organizationId
-      location: mongoChauffeur.newChauffeurLocation, // Include the organizationId
-      website: mongoChauffeur.newChauffeurWebsite, // Include the organizationId
-      socialFacebook: mongoChauffeur.newChauffeurSocialFacebook, // Include the organizationId
+      id: String(mongoChauffeur._id),
+      name: mongoChauffeur.newChauffeurContactName,
+      chauffeurId: mongoChauffeur.chauffeurId,
+      phone: mongoChauffeur.newChauffeurPhone,
+      email: mongoChauffeur.newChauffeurEmail,
+      location: mongoChauffeur.newChauffeurLocation,
+      website: mongoChauffeur.newChauffeurWebsite,
+      socialFacebook: mongoChauffeur.newChauffeurSocialFacebook,
     }));
   } catch (error) {
     // If there's an error, log it and display an error message to the user
@@ -135,8 +135,6 @@ export default async function CompanyListPage() {
               <Card key={company.id} className='p-4'>
                 <div className='flex items-center justify-between'>
                   <div className='flex items-center gap-2'>
-                    {' '}
-                    {/* Added a container for the icon and name */}
                     <Building2 />
                     {orgName && ( // Check if the organization name exists
                       <h1 className='text-xl font-bold'>{orgName}</h1>
@@ -147,10 +145,11 @@ export default async function CompanyListPage() {
                       <Edit2 className='size-3' />
                       Düzenle
                     </button>
-                    <button className='inline-flex items-center gap-1 rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10 hover:bg-red-100 transition-colors duration-300'>
-                      <Trash2 className='size-3' />
-                      Sil
-                    </button>
+                    <DeleteOrganization
+                      organizationId={company.organizationId} // Use the correct ID from your chauffeur object
+                      isAdmin={true} // Assuming the user is an admin, adjust this logic as needed
+                      orgType='company' // Define the organization type
+                    />
                   </div>
                 </div>
                 <div className='flex items-center'>
@@ -180,7 +179,7 @@ export default async function CompanyListPage() {
                       {company.website}
                     </a>
                   ) : (
-                    'Websitesi Yok' // You can also show a placeholder message if the website is not available
+                    'Websitesi Yok'
                   )}
                 </div>
                 <div className='flex items-center'>
@@ -194,7 +193,7 @@ export default async function CompanyListPage() {
                       {company.socialFacebook}
                     </a>
                   ) : (
-                    'Facebook Sayfasi Yok' // Show placeholder if the website is empty
+                    'Facebook Sayfasi Yok'
                   )}
                 </div>
               </Card>
@@ -216,10 +215,9 @@ export default async function CompanyListPage() {
       <ul className='space-y-4 m-5'>
         <h1 className='text-3xl font-bold'>Sürücüleriniz</h1>
         {chauffeur.length > 0 ? (
-          // If chauffeurs exist, map over them and render each chauffeur with their details
+          // If chauffeurs exist, map over them and render each chauffeur
           chauffeur.map((chauffeur, index) => {
-            // Get the organization name for the corresponding chauffeur
-            const orgName = Object.values(chauffeurNames)[index];
+            const orgName = Object.values(chauffeurNames)[index]; // Using index to get the organization
 
             return (
               <Card key={chauffeur.id} className='p-4'>
@@ -235,10 +233,11 @@ export default async function CompanyListPage() {
                       <Edit2 className='size-3' />
                       Düzenle
                     </button>
-                    <button className='inline-flex items-center gap-1 rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10 hover:bg-red-100 transition-colors duration-300'>
-                      <Trash2 className='size-3' />
-                      Sil
-                    </button>
+                    <DeleteOrganization
+                      organizationId={chauffeur.chauffeurId} // Use the correct ID from your chauffeur object
+                      isAdmin={true} // Assuming the user is an admin, adjust this logic as needed
+                      orgType='chauffeur' // Define the organization type
+                    />
                   </div>
                 </div>
                 <div className='flex items-center'>
@@ -268,10 +267,9 @@ export default async function CompanyListPage() {
                       {chauffeur.website}
                     </a>
                   ) : (
-                    'Websitesi Yok' // Show placeholder if the website is empty
+                    'Websitesi Yok' // You can also show a placeholder message if the website is not available
                   )}
                 </div>
-
                 <div className='flex items-center'>
                   <Facebook className='w-5 h-5 mr-2 text-muted-foreground' />
                   {chauffeur.socialFacebook ? (
@@ -291,14 +289,17 @@ export default async function CompanyListPage() {
           })
         ) : (
           // If there are no chauffeurs, display a message
-          <Alert>
-            <AlertDescription>
-              Sürücü oluşturmadınız.
-              <Button className='m-1 text-orange-400 inline-flex items-center gap-1 h-5 rounded-md bg-orange-50 px-2 py-1 text-xs font-medium ring-1 ring-inset ring-orange-600/10 hover:bg-orange-100 transition-colors duration-300'>
-                <Link href={'new-chauffeur'}>Sürücü Oluşturun</Link>
-              </Button>
-            </AlertDescription>
-          </Alert>
+          <>
+            <Alert>
+              <AlertDescription>
+                Sürücü oluşturmadınız.
+                <Button className='m-1 text-orange-400 inline-flex items-center gap-1 h-5 rounded-md bg-orange-50 px-2 py-1 text-xs font-medium ring-1 ring-inset ring-orange-600/10 hover:bg-orange-100 transition-colors duration-300'>
+                  <Link href={'new-chauffeur'}>Sürücü Oluşturun</Link>
+                </Button>
+              </AlertDescription>
+            </Alert>
+            {/* Added message */}
+          </>
         )}
       </ul>
     </div>
