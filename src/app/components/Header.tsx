@@ -6,7 +6,7 @@ import {
   DropdownMenuTrigger,
 } from '@/app/components/ui/dropdown-menu'; // Import shadcn dropdown components
 import { getSignInUrl, signOut, withAuth } from '@workos-inc/authkit-nextjs';
-import { ContactRound, LogIn, LogOut } from 'lucide-react';
+import { ContactRound, LogIn, LogOut, Package } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from './ui/button';
 
@@ -17,14 +17,19 @@ export default async function Header() {
   return (
     <header className='flex items-center justify-between mx-auto p-4'>
       {/* Logo */}
-      <div>
+      <Button
+        className='items-center gap-2 inline-flex rounded-md bg-white px-2 py-1 
+     ring-1 ring-inset ring-orange-600/10
+      hover:bg-orange-50 transition-colors duration-300'
+      >
+        <Package className='text-orange-400' />
         <Link
           href='/'
-          className='bg-gradient-to-r from-yellow-400 to-orange-500 text-transparent bg-clip-text font-bold text-2xl'
+          className='text-orange-400 bg-clip-text font-bold text-2xl'
         >
           Yük Bul
         </Link>
-      </div>
+      </Button>
 
       {/* Dropdown Menu */}
       <Link href='/new-listing' className='flex items-center'>
@@ -87,7 +92,6 @@ export default async function Header() {
           )}
         </DropdownMenuContent>
       </DropdownMenu>
-
       {/* Desktop Navigation */}
       <nav className='hidden md:flex gap-4'>
         {!user && (
