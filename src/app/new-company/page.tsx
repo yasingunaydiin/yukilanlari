@@ -83,30 +83,30 @@ export default async function NewCompanyPage() {
             <Input
               name='newCompanyPhone'
               type='text'
-              placeholder='Telefon numarası gir'
+              placeholder='Telefon numarası gir (Örnek: 0541 123 45 67)'
               required
             />
             <Input
               name='newCompanyEmail'
               type='email'
-              placeholder='E-posta adresi gir'
+              placeholder='E-posta adresi gir (Örnek: mehmet@gmail.com)'
               required
             />
             <Input
               name='newCompanyLocation'
               type='text'
-              placeholder='Konum gir'
+              placeholder='Konum gir (Örnek: İstanbul)'
               required
             />
             <Input
               name='newCompanyWebsite'
               type='text'
-              placeholder='Website adresini gir'
+              placeholder='Website adresini gir (Opsiyonel)'
             />
             <Input
               name='newCompanySocialFacebook'
               type='text'
-              placeholder='Facebook adresini gir'
+              placeholder='Facebook adresini gir (Opsiyonel)'
             />
             <SpinningButton />
           </form>

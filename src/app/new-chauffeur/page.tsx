@@ -71,42 +71,42 @@ export default async function NewChauffeurPage() {
             <Input
               name='newChauffeurName'
               type='text'
-              placeholder='Sürücü ismi gir'
+              placeholder='Sürücü ismi gir (Örnek: Mehmet)'
               required
             />
             <Input
               name='newChauffeurContactName'
               type='text'
-              placeholder='İsim gir'
+              placeholder='İsim gir (Örnek: Mehmet Yıldız)'
               required
             />
             <Input
               name='newChauffeurPhone'
               type='text'
-              placeholder='Telefon numarası gir'
+              placeholder='Telefon numarası gir (Örnek: 0541 123 45 67)'
               required
             />
             <Input
               name='newChauffeurEmail'
               type='email'
-              placeholder='E-posta adresi gir'
+              placeholder='E-posta adresi gir (Örnek: mehmet@gmail.com)'
               required
             />
             <Input
               name='newChauffeurLocation'
               type='text'
-              placeholder='Konum gir'
+              placeholder='Konum gir (Örnek: İstanbul)'
               required
             />
             <Input
               name='newChauffeurWebsite'
               type='text'
-              placeholder='Website adresini gir'
+              placeholder='Website adresini gir (Opsiyonel)'
             />
             <Input
               name='newChauffeurSocialFacebook'
               type='text'
-              placeholder='Facebook adresini gir'
+              placeholder='Facebook adresini gir (Opsiyonel)'
             />
             <SpinningButton />
           </form>

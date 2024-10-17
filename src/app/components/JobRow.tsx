@@ -1,5 +1,4 @@
 'use client';
-import TimeAgo from '@/app/components/TimeAgo';
 import {
   Dialog,
   DialogContent,
@@ -24,6 +23,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
+import TimeAgo from './TimeAgo';
 import { Button } from './ui/button';
 
 //If something doesnt work with the emojis, put it in teh translportcategories component.
@@ -149,13 +149,6 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
                 <div>{urgencyBadge}</div>
                 <div>{urgencyTitle}</div>
               </div>
-              <div className='ml-auto'>
-                {jobInfo.createdAt && (
-                  <div className='text-gray-500 text-sm'>
-                    <TimeAgo createdAt={jobInfo.createdAt} />
-                  </div>
-                )}
-              </div>
             </div>
             <h2 className='text-lg font-bold mb-2'>{jobInfo.title}</h2>
             <div className='flex flex-col sm:flex-row gap-y-2 sm:gap-x-4 text-sm text-gray-600'>
@@ -189,6 +182,13 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
         </div>
       </Link>
       <div className='mb-4 mr-4 flex items-center justify-end gap-2'>
+        <div className='ml-auto'>
+          {jobInfo.createdAt && (
+            <div className='text-gray-500 text-sm'>
+              <TimeAgo createdAt={jobInfo.createdAt} />
+            </div>
+          )}
+        </div>
         {jobInfo.isAdmin && (
           <div className='flex gap-2'>
             <button

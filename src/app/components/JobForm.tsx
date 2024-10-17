@@ -73,7 +73,7 @@ export function JobForm({ orgId, jobInfo }: { orgId: string; jobInfo?: Job }) {
               <Input
                 name='contactEmail'
                 type='email'
-                placeholder='E-mail'
+                placeholder='E-mail (Örnek: mehmet@gmail.com)'
                 className='flex-1'
                 defaultValue={jobInfo?.contactEmail || ''}
                 required
@@ -81,7 +81,7 @@ export function JobForm({ orgId, jobInfo }: { orgId: string; jobInfo?: Job }) {
               <Input
                 name='contactPhone'
                 type='tel'
-                placeholder='Telefon Numarası'
+                placeholder='Telefon Numarası (Örnek: 0541 123 45 67)'
                 className='flex-1'
                 defaultValue={jobInfo?.contactPhone || ''}
                 required
@@ -110,7 +110,7 @@ export function JobForm({ orgId, jobInfo }: { orgId: string; jobInfo?: Job }) {
             required
           />
           <div className='flex flex-col gap-2'>
-            <Label>Tarih Aralığı</Label>
+            <Label>Tarih</Label>
             <Popover>
               <PopoverTrigger asChild>
                 <Button
