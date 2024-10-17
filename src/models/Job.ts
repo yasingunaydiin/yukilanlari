@@ -26,7 +26,7 @@ export type Job = {
   updatedAt: string;
   isAdmin?: boolean;
   urgency: string;
-  jobDate: string;
+  jobDate: Date; // Ensure this is a Date type
 };
 
 const JobSchema = new Schema(
@@ -46,15 +46,19 @@ const JobSchema = new Schema(
     contactEmail: { type: String, required: true },
     isAdmin: { type: Boolean, default: false },
     urgency: { type: String, required: false },
-    jobDate: { type: String, required: false },
+    jobDate: { type: Date, required: true }, // Date type is required
   },
   {
     timestamps: true,
   }
 );
 
+// TTL index to automatically delete jobs after 7 days (7 * 24 * 60 * 60 = 604800 seconds)
+JobSchema.index({ jobDate: 1 }, { expireAfterSeconds: 7 * 24 * 60 * 60 }); // 7 days in seconds
+
 export const JobModel = models?.Job || model('Job', JobSchema);
 
+// Assuming you have other functions that use the Job model.
 export async function addOrgAndUserData(jobsInfo: Job[], user: User | null) {
   jobsInfo = JSON.parse(JSON.stringify(jobsInfo));
   await mongoose.connect(process.env.MONGO_URI as string);
