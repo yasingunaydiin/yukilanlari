@@ -182,13 +182,6 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
         </div>
       </Link>
       <div className='mb-4 mr-4 flex items-center justify-end gap-2'>
-        <div className='ml-auto'>
-          {jobInfo.createdAt && (
-            <div className='text-gray-500 text-sm'>
-              <TimeAgo createdAt={jobInfo.createdAt} />
-            </div>
-          )}
-        </div>
         {jobInfo.isAdmin && (
           <div className='flex gap-2'>
             <button
@@ -238,6 +231,13 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
             </div>
           </DialogContent>
         </Dialog>
+      </div>
+      <div className='-mt-5 p-3'>
+        {jobInfo.createdAt && (
+          <div className='text-gray-500 text-sm'>
+            <TimeAgo createdAt={jobInfo.createdAt} />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -18,9 +18,9 @@ import { cn } from '@/lib/utils';
 import type { Job } from '@/models/Job';
 import { format } from 'date-fns';
 import { tr } from 'date-fns/locale';
-import { Calendar as CalendarIcon } from 'lucide-react';
-import { redirect } from 'next/navigation';
-import { useState } from 'react';
+import { Calendar as CalendarIcon, Loader2 } from 'lucide-react';
+import { redirect, useRouter } from 'next/navigation';
+import { useState, useTransition } from 'react';
 import { saveJobAction } from '../actions/jobActions';
 import UrgencyComponent from './UrgencyComponent';
 
@@ -52,6 +52,15 @@ export function JobForm({ orgId, jobInfo }: { orgId: string; jobInfo?: Job }) {
     }
     const jobInfo = await saveJobAction(data);
     redirect(`/jobs/${jobInfo.orgId}`);
+  }
+
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+
+  function navigate() {
+    startTransition(() => {
+      router.push('/');
+    });
   }
 
   return (
@@ -176,7 +185,10 @@ export function JobForm({ orgId, jobInfo }: { orgId: string; jobInfo?: Job }) {
         </CardContent>
       </Card>
       <div className='flex justify-center p-4'>
-        <Button type='submit'>Kaydet</Button>
+        <Button className='bg-yellow-400' type='submit' onClick={navigate}>
+          Oluştur
+          {isPending && <Loader2 className='ml-2 mr-2 h-4 w-4 animate-spin' />}
+        </Button>
       </div>
     </form>
   );
