@@ -152,7 +152,6 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
                 </div>
               </div>
               <div className='hidden sm:block'>
-                {/* if screen is bigger than SM, hide */}
                 {jobInfo.createdAt && (
                   <div className='text-gray-500 text-sm'>
                     <TimeAgo createdAt={jobInfo.createdAt} />

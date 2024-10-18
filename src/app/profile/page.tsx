@@ -298,7 +298,6 @@ export default async function CompanyListPage() {
                 </Button>
               </AlertDescription>
             </Alert>
-            {/* Added message */}
           </>
         )}
       </ul>

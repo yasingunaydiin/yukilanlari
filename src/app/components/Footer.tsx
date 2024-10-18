@@ -7,7 +7,6 @@ export default function Footer() {
     <footer className='bg-white rounded-lg shadow dark:bg-gray-900 m-4 mt-8'>
       <div className='w-full max-w-screen-xl mx-auto p-4 md:py-8'>
         <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between'>
-          {/* Title and Icon */}
           <div className='flex items-center justify-between mb-4'>
             <Link href='/' className='flex items-center'>
               <Package className='text-orange-400' />
@@ -20,7 +19,6 @@ export default function Footer() {
             </Link>
           </div>
 
-          {/* Navigation Links */}
           <ul className='flex flex-wrap items-center text-center justify-center sm:justify-end mt-4 sm:mt-0 space-x-2 sm:space-x-4 text-sm font-medium text-gray-500 dark:text-gray-400 '>
             <li>
               <Link href='/about' className='hover:underline'>

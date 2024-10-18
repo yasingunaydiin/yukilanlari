@@ -28,7 +28,6 @@ export default function WhoWeAreSection() {
 
   return (
     <div className='container mx-auto px-4 py-16 max-w-7xl'>
-      {/* Header Section */}
       <div className='space-y-4 mb-12'>
         <h1 className='text-indigo-600 font-medium'>Biz Kimiz?</h1>
         <h1 className='text-4xl font-bold'>Geliştirme ve Çözümler</h1>
@@ -39,7 +38,6 @@ export default function WhoWeAreSection() {
         </p>
       </div>
 
-      {/* Mission and Vision Cards */}
       <div className='grid md:grid-cols-2 gap-8'>
         <Card className='p-6'>
           <CardContent className='space-y-4 pt-6'>
@@ -71,7 +69,7 @@ export default function WhoWeAreSection() {
           </CardContent>
         </Card>
       </div>
-      {/* Stats Grid */}
+
       <div className='grid md:grid-cols-3 gap-6 mt-12 '>
         {stats.map((stat, index) => (
           <div

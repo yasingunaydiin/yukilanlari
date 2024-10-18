@@ -16,7 +16,6 @@ export default async function Header() {
 
   return (
     <header className='flex items-center justify-between mx-auto p-4'>
-      {/* Logo */}
       <Button
         className='sm:text-2xl text-sm items-center gap-2 inline-flex rounded-md bg-white px-2 
      ring-1 ring-inset ring-orange-600/10
@@ -28,7 +27,6 @@ export default async function Header() {
         </Link>
       </Button>
 
-      {/* Dropdown Menu */}
       <Link href='/new-listing' className='flex items-center'>
         <Button className='bg-yellow-400 text-white text-sm md:hidden'>
           İlan oluşturun
@@ -39,9 +37,8 @@ export default async function Header() {
         <DropdownMenuTrigger asChild>
           <Button
             variant='ghost'
-            className='md:hidden block focus:outline-none' // Hamburger button on small screens
+            className='md:hidden block focus:outline-none'
           >
-            {/* Hamburger Icon */}
             <div className='space-y-1'>
               <span className='block w-6 h-0.5 bg-yellow-400'></span>
               <span className='block w-6 h-0.5 bg-yellow-400'></span>
@@ -50,7 +47,6 @@ export default async function Header() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align='end' className='w-32'>
-          {/* Conditionally render login/logout options */}
           {!user && (
             <DropdownMenuItem asChild>
               <Link href={signInUrl} className='flex items-center'>
@@ -90,7 +86,6 @@ export default async function Header() {
           )}
         </DropdownMenuContent>
       </DropdownMenu>
-      {/* Desktop Navigation */}
       <nav className='hidden md:flex gap-4'>
         {!user && (
           <Link href={signInUrl}>

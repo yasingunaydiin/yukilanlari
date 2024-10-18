@@ -10,27 +10,35 @@ import {
 } from 'lucide-react';
 
 interface SocialIconProps {
-  icon: LucideIcon; // Use the imported type here
+  icon: LucideIcon;
   bgColor: string;
   iconColor: string;
+  socialLink: string;
 }
 
-const SocialIcon = ({ icon: Icon, bgColor, iconColor }: SocialIconProps) => (
-  <div
+const SocialIcon = ({
+  icon: Icon,
+  bgColor,
+  iconColor,
+  socialLink,
+}: SocialIconProps) => (
+  <a
+    href={socialLink}
+    target='_blank'
+    rel='noopener noreferrer'
     className={`p-4 ${bgColor} rounded-full cursor-pointer transition-transform hover:scale-105`}
   >
     <Icon className={`${iconColor}`} size={24} />
-  </div>
+  </a>
 );
 
 export default function ContactPage() {
   const handleWhatsAppClick = () => {
-    window.open('https://wa.me/905417688751', '_blank'); // Example link
+    window.open('https://wa.me/905417688751', '_blank');
   };
 
   return (
-    <div className=' max-w-6xl mx-auto py-12'>
-      {/* Header */}
+    <div className='max-w-6xl mx-auto py-12'>
       <div className='text-center mb-12'>
         <h1 className='text-4xl font-bold mb-4'>Bize Ulaşın</h1>
         <p className='text-gray-600 mb-8'>
@@ -38,30 +46,30 @@ export default function ContactPage() {
           sizi dinleyelim
         </p>
 
-        {/* Social Media Icons */}
         <div className='flex justify-center gap-6 mb-12'>
           <SocialIcon
             icon={Facebook}
             bgColor='bg-blue-50'
             iconColor='text-blue-500'
+            socialLink=''
           />
           <SocialIcon
             icon={Instagram}
             bgColor='bg-purple-50'
             iconColor='text-purple-500'
+            socialLink=''
           />
           <SocialIcon
             icon={Linkedin}
             bgColor='bg-blue-50'
             iconColor='text-blue-500'
+            socialLink='https://www.linkedin.com/in/yasin-gunaydin-b45466204/'
           />
         </div>
       </div>
 
       <div className='flex justify-center gap-12'>
-        {/* Left Column - Contact Info */}
         <div className='space-y-6'>
-          {/* Phone Card */}
           <div className='bg-indigo-600 text-white p-6 rounded-lg sm:w-[700px] w-[500px]'>
             <div className='flex gap-2 items-center mb-2'>
               <Phone size={24} />
@@ -75,7 +83,6 @@ export default function ContactPage() {
             </a>
           </div>
 
-          {/* WhatsApp Card */}
           <div className='bg-green-600 p-6 rounded-lg text-white'>
             <div className='flex gap-2 items-center mb-2'>
               <MessageCircle size={24} />
@@ -91,7 +98,6 @@ export default function ContactPage() {
             </button>
           </div>
 
-          {/* Email Card */}
           <div className='bg-gray-100 p-6 rounded-lg'>
             <div className='flex gap-2 items-center mb-2'>
               <Mail size={24} />
