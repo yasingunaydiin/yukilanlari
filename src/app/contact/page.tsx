@@ -3,12 +3,19 @@ import {
   Facebook,
   Instagram,
   Linkedin,
+  LucideIcon,
   Mail,
   MessageCircle,
   Phone,
 } from 'lucide-react';
 
-const SocialIcon = ({ icon: Icon, bgColor, iconColor }) => (
+interface SocialIconProps {
+  icon: LucideIcon; // Use the imported type here
+  bgColor: string;
+  iconColor: string;
+}
+
+const SocialIcon = ({ icon: Icon, bgColor, iconColor }: SocialIconProps) => (
   <div
     className={`p-4 ${bgColor} rounded-full cursor-pointer transition-transform hover:scale-105`}
   >
@@ -17,9 +24,13 @@ const SocialIcon = ({ icon: Icon, bgColor, iconColor }) => (
 );
 
 export default function ContactPage() {
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Handle form submission logic here
+  };
+
+  const handleWhatsAppClick = () => {
+    window.open('https://wa.me/905417688751', '_blank'); // Example link
   };
 
   return (
@@ -61,30 +72,31 @@ export default function ContactPage() {
               <Phone size={24} />
               <h3 className='text-xl font-semibold'>Bizi doğrudan arayın</h3>
             </div>
-
             <p className='text-2xl font-bold'>+90 541 768 87 51</p>
             <a href='tel:0541-768-87-51'>
-              {' '}
               <button className='mt-4 w-full bg-indigo-500 hover:bg-indigo-700 py-2 rounded-md'>
                 Ara
               </button>
             </a>
           </div>
 
-          {/* Whatsapp Card */}
+          {/* WhatsApp Card */}
           <div className='bg-green-600 p-6 rounded-lg text-white'>
             <div className='flex gap-2 items-center mb-2'>
               <MessageCircle size={24} />
               <h3 className='text-xl font-semibold'>
-                Whatsapp Mesajı Gönderin
+                WhatsApp Mesajı Gönderin
               </h3>
             </div>
-
-            <button className='mt-4 w-full bg-green-500 hover:bg-green-700 py-2 rounded-md'>
+            <button
+              className='mt-4 w-full bg-green-500 hover:bg-green-700 py-2 rounded-md'
+              onClick={handleWhatsAppClick}
+            >
               Mesaj Gönder
             </button>
           </div>
 
+          {/* Email Card */}
           <div className='bg-gray-100 p-6 rounded-lg'>
             <div className='flex gap-2 items-center mb-2'>
               <Mail size={24} />
@@ -99,16 +111,12 @@ export default function ContactPage() {
 
         {/* Right Column - Contact Form */}
         <div className='bg-white rounded-lg'>
-          {/* Maıl Card */}
-
-          <form onSubmit={handleSubmit} className='space-y-6'>
-            <div>
-              <input
-                type='text'
-                placeholder='İsim'
-                className='w-full p-3 border rounded-lg'
-              />
-            </div>
+          <form onSubmit={handleSubmit} className='space-y-6 p-6'>
+            <input
+              type='text'
+              placeholder='İsim'
+              className='w-full p-3 border rounded-lg'
+            />
             <div className='grid md:grid-cols-2 gap-4'>
               <input
                 type='email'
@@ -121,13 +129,11 @@ export default function ContactPage() {
                 className='w-full p-3 border rounded-lg'
               />
             </div>
-            <div>
-              <textarea
-                placeholder='Buraya Mesajını Yaz...'
-                rows={6}
-                className='w-full p-3 border rounded-lg resize-none'
-              />
-            </div>
+            <textarea
+              placeholder='Buraya Mesajınızı Yazın...'
+              rows={6}
+              className='w-full p-3 border rounded-lg resize-none'
+            />
             <button
               type='submit'
               className='w-full bg-gray-900 text-white py-3 rounded-lg hover:bg-gray-800'
