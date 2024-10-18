@@ -24,17 +24,12 @@ const SocialIcon = ({ icon: Icon, bgColor, iconColor }: SocialIconProps) => (
 );
 
 export default function ContactPage() {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // Handle form submission logic here
-  };
-
   const handleWhatsAppClick = () => {
     window.open('https://wa.me/905417688751', '_blank'); // Example link
   };
 
   return (
-    <div className='max-w-6xl mx-auto px-4 py-12'>
+    <div className=' max-w-6xl mx-auto py-12'>
       {/* Header */}
       <div className='text-center mb-12'>
         <h1 className='text-4xl font-bold mb-4'>Bize Ulaşın</h1>
@@ -63,11 +58,11 @@ export default function ContactPage() {
         </div>
       </div>
 
-      <div className='grid md:grid-cols-2 gap-12'>
+      <div className='flex justify-center gap-12'>
         {/* Left Column - Contact Info */}
         <div className='space-y-6'>
           {/* Phone Card */}
-          <div className='bg-indigo-600 text-white p-6 rounded-lg'>
+          <div className='bg-indigo-600 text-white p-6 rounded-lg sm:w-[700px] w-[500px]'>
             <div className='flex gap-2 items-center mb-2'>
               <Phone size={24} />
               <h3 className='text-xl font-semibold'>Bizi doğrudan arayın</h3>
@@ -85,7 +80,7 @@ export default function ContactPage() {
             <div className='flex gap-2 items-center mb-2'>
               <MessageCircle size={24} />
               <h3 className='text-xl font-semibold'>
-                WhatsApp Mesajı Gönderin
+                WhatsApp mesajı gönderin
               </h3>
             </div>
             <button
@@ -103,44 +98,15 @@ export default function ContactPage() {
               <h3 className='text-xl font-semibold'>Email ile bize ulaşın</h3>
             </div>
             <p className='text-2xl font-bold'>y.gunaydinmail@gmail.com</p>
-            <button className='mt-4 w-full bg-gray-100 hover:bg-gray-300 py-2 rounded-md'>
+            <button
+              className='mt-4 w-full bg-gray-100 hover:bg-gray-300 py-2 rounded-md'
+              onClick={() =>
+                (window.location.href = 'mailto:y.gunaydinmail@gmail.com')
+              }
+            >
               Mail Gönder
             </button>
           </div>
-        </div>
-
-        {/* Right Column - Contact Form */}
-        <div className='bg-white rounded-lg'>
-          <form onSubmit={handleSubmit} className='space-y-6 p-6'>
-            <input
-              type='text'
-              placeholder='İsim'
-              className='w-full p-3 border rounded-lg'
-            />
-            <div className='grid md:grid-cols-2 gap-4'>
-              <input
-                type='email'
-                placeholder='Email Adres'
-                className='w-full p-3 border rounded-lg'
-              />
-              <input
-                type='tel'
-                placeholder='Telefon Numaran'
-                className='w-full p-3 border rounded-lg'
-              />
-            </div>
-            <textarea
-              placeholder='Buraya Mesajınızı Yazın...'
-              rows={6}
-              className='w-full p-3 border rounded-lg resize-none'
-            />
-            <button
-              type='submit'
-              className='w-full bg-gray-900 text-white py-3 rounded-lg hover:bg-gray-800'
-            >
-              Mesaj Gönder
-            </button>
-          </form>
         </div>
       </div>
     </div>

@@ -36,6 +36,7 @@
     "country-list": "^2.3.0",
     "date-fn": "^0.0.2",
     "date-fns": "^3.6.0",
+    "emailjs-com": "^3.2.0",
     "framer-motion": "^11.11.9",
     "input": "^1.0.1",
     "lucide-react": "^0.446.0",
