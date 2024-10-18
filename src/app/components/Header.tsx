@@ -18,25 +18,23 @@ export default async function Header() {
     <header className='flex items-center justify-between mx-auto p-4'>
       {/* Logo */}
       <Button
-        className='items-center gap-2 inline-flex rounded-md bg-white px-2 py-1 
+        className='sm:text-2xl text-sm items-center gap-2 inline-flex rounded-md bg-white px-2 
      ring-1 ring-inset ring-orange-600/10
       hover:bg-orange-50 transition-colors duration-300'
       >
         <Package className='text-orange-400' />
-        <Link
-          href='/'
-          className='text-orange-400 bg-clip-text font-bold text-2xl'
-        >
+        <Link href='/' className='text-orange-400 bg-clip-text font-bold '>
           Yük Bul
         </Link>
       </Button>
 
       {/* Dropdown Menu */}
       <Link href='/new-listing' className='flex items-center'>
-        <Button className='bg-yellow-400 text-white w-full md:hidden'>
+        <Button className='bg-yellow-400 text-white text-sm md:hidden'>
           İlan oluşturun
         </Button>
       </Link>
+
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
@@ -127,7 +125,7 @@ export default async function Header() {
         )}
 
         <Link href='/new-listing'>
-          <Button className='bg-yellow-400 text-white rounded-lg px-4 py-2 font-bold'>
+          <Button className='bg-yellow-400 text-white rounded-lg font-bold'>
             İlan oluşturun
           </Button>
         </Link>

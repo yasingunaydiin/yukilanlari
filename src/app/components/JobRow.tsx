@@ -138,18 +138,29 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
         <div className='flex gap-4'>
           <div className='content-center text-4xl'>{categoryEmoji}</div>
           <div className='grow'>
-            <div className='flex gap-5 items-center'>
-              <button
-                onClick={handleOrgClick}
-                className='text-primary text-sm font-medium hover:underline'
-              >
-                {jobInfo.orgName}
-              </button>
-              <div className='gap-1 inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10 hover:bg-red-100 transition-colors duration-300'>
-                <div>{urgencyBadge}</div>
-                <div>{urgencyTitle}</div>
+            <div className='flex justify-between gap-5 items-center'>
+              <div className='flex gap-2'>
+                <button
+                  onClick={handleOrgClick}
+                  className='text-primary text-sm font-medium hover:underline'
+                >
+                  {jobInfo.orgName}
+                </button>
+                <div className='gap-1 inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10 hover:bg-red-100 transition-colors duration-300'>
+                  <div>{urgencyBadge}</div>
+                  <div>{urgencyTitle}</div>
+                </div>
+              </div>
+              <div className='hidden sm:block'>
+                {/* if screen is bigger than SM, hide */}
+                {jobInfo.createdAt && (
+                  <div className='text-gray-500 text-sm'>
+                    <TimeAgo createdAt={jobInfo.createdAt} />
+                  </div>
+                )}
               </div>
             </div>
+
             <h2 className='text-lg font-bold mb-2'>{jobInfo.title}</h2>
             <div className='flex flex-col sm:flex-row gap-y-2 sm:gap-x-4 text-sm text-gray-600'>
               <div className='flex items-center gap-1'>
@@ -232,7 +243,7 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
           </DialogContent>
         </Dialog>
       </div>
-      <div className='-mt-5 p-3'>
+      <div className='md:hidden -mt-5 p-3'>
         {jobInfo.createdAt && (
           <div className='text-gray-500 text-sm'>
             <TimeAgo createdAt={jobInfo.createdAt} />
