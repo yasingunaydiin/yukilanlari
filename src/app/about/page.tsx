@@ -1,20 +1,24 @@
 import { Card, CardContent } from '@/app/components/ui/card';
+import { getCounts } from '@/lib/actions';
 import { CheckCircle, Eye, Target, User, Users } from 'lucide-react';
 
-export default function WhoWeAreSection() {
+export const revalidate = 10; // Revalidate every hour
+
+export default async function About() {
+  const { companyCount, chauffeurCount, jobCount } = await getCounts();
   const stats = [
     {
-      number: '100',
+      number: companyCount.toString(),
       label: 'Aktif Şirket Hesabı',
       icon: <User className='w-6 h-6 text-indigo-600' />,
     },
     {
-      number: '100',
+      number: chauffeurCount.toString(),
       label: 'Aktif Sürücü Hesabı',
       icon: <Users className='w-6 h-6 text-emerald-600' />,
     },
     {
-      number: '120',
+      number: jobCount.toString(),
       label: 'İlan Paylaşımı',
       icon: <CheckCircle className='w-6 h-6 text-orange-600' />,
     },
