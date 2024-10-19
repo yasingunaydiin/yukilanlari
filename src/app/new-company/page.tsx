@@ -108,7 +108,7 @@ export default async function NewCompanyPage() {
               type='text'
               placeholder='Facebook adresini gir (Opsiyonel)'
             />
-            <SpinningButton />
+            <SpinningButton isFormValid={true} />
           </form>
         </CardContent>
       </Card>

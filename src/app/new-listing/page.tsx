@@ -101,7 +101,11 @@ export default async function NewListingPage({
             <CardHeader>
               <CardTitle>Şirketleriniz</CardTitle>
               <CardDescription>
-                İlan yayınlamak için şirket profilinizi oluşturun ve seçin
+                İlan yayınlamak için şirket profilinizi oluşturun ve{' '}
+                <span className='pointer-events-none inline-flex items-center gap-1 rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-700 ring-1 ring-inset ring-yellow-700/10 hover:bg-yellow-100 transition-colors duration-300'>
+                  Şirketinizi
+                </span>{' '}
+                seçin
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -132,7 +136,7 @@ export default async function NewListingPage({
                 <Alert variant='default'>
                   <AlertDescription>
                     Kullanıcınıza atanmış şirket bulunmuyor{' '}
-                    <Button className='m-1 text-yellow-400 inline-flex items-center gap-1 h-5 rounded-md bg-orange-50 px-2 py-1 text-xs font-medium ring-1 ring-inset ring-orange-600/10 hover:bg-orange-100 transition-colors duration-300'>
+                    <Button className='m-1 text-yellow-400 inline-flex items-center gap-1 h-5 rounded-md bg-orange-50 px-2 py-1 text-xs font-medium ring-1 ring-inset ring-orange-600/10 '>
                       <Link href={'new-company'}>Şirket Oluşturun</Link>
                     </Button>
                   </AlertDescription>
@@ -152,9 +156,13 @@ export default async function NewListingPage({
         <TabsContent value='chauffeur'>
           <Card>
             <CardHeader>
-              <CardTitle>Sürücü İlanı Oluşturun</CardTitle>
+              <CardTitle>Sürücüleriniz</CardTitle>
               <CardDescription>
-                İlan yayınlamak için sürücü profilinizi oluşturun ve seçin
+                İlan yayınlamak için sürücü profilinizi oluşturun ve{' '}
+                <span className='pointer-events-none inline-flex items-center gap-1 rounded-md bg-orange-50 px-2 py-1 text-xs font-medium text-orange-700 ring-1 ring-inset ring-orange-700/10 '>
+                  Sürücünüzü
+                </span>{' '}
+                seçin
               </CardDescription>
             </CardHeader>
             <CardContent>
