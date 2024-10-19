@@ -128,8 +128,8 @@ export default async function NewListingPage({
                 <div className='space-y-2'>
                   {fetchCompaniesData.map((company) => (
                     <Link
-                      key={company._id as string}
-                      href={`/new-listing/${company._id}`}
+                      key={company._id as string} // Ensure you're using the correct property for the key
+                      href={`/new-listing/${company.organizationId}`} // Use the correct organizationId for the URL
                       className='block'
                     >
                       <Button
@@ -138,7 +138,8 @@ export default async function NewListingPage({
                       >
                         <span className='flex items-center'>
                           <OrganizationIcon orgType='company' />
-                          {company.newCompanyName}
+                          {company.newCompanyName}{' '}
+                          {/* Ensure you're displaying the correct name */}
                         </span>
                         <ArrowRight className='h-4 w-4' />
                       </Button>
@@ -183,8 +184,8 @@ export default async function NewListingPage({
                 <div className='space-y-2'>
                   {fetchChauffeursData.map((chauffeur) => (
                     <Link
-                      key={chauffeur._id as string}
-                      href={`/new-listing/${chauffeur._id}`}
+                      key={chauffeur._id as string} // Ensure you're using the correct property for the key
+                      href={`/new-listing/${chauffeur.chauffeurId}`} // Use the correct organizationId for the URL
                       className='block'
                     >
                       <Button
@@ -193,7 +194,8 @@ export default async function NewListingPage({
                       >
                         <span className='flex items-center'>
                           <OrganizationIcon orgType='chauffeur' />
-                          {chauffeur.newChauffeurName}
+                          {chauffeur.newChauffeurName}{' '}
+                          {/* Ensure you're displaying the correct name */}
                         </span>
                         <ArrowRight className='h-4 w-4' />
                       </Button>
@@ -203,17 +205,17 @@ export default async function NewListingPage({
               ) : (
                 <Alert variant='default'>
                   <AlertDescription>
-                    Kullanıcınıza atanmış sürücü bulunmuyor{' '}
-                    <Button className='m-1 text-orange-400 inline-flex items-center gap-1 h-5 rounded-md bg-orange-50 px-2 py-1 text-xs font-medium ring-1 ring-inset ring-orange-600/10 hover:bg-orange-100 transition-colors duration-300'>
-                      <Link href={'new-chauffeur'}>Sürücü Oluşturun</Link>
+                    Kullanıcınıza atanmış şoför bulunmuyor{' '}
+                    <Button className='m-1 text-yellow-400 inline-flex items-center gap-1 h-5 rounded-md bg-orange-50 px-2 py-1 text-xs font-medium ring-1 ring-inset ring-orange-600/10 '>
+                      <Link href={'new-chauffeur'}>Şoför Oluşturun</Link>
                     </Button>
                   </AlertDescription>
                 </Alert>
               )}
               <div className='mt-6'>
                 <Link href='/new-chauffeur'>
-                  <Button className='w-full bg-orange-400 text-white rounded-lg px-4 py-2 font-bold'>
-                    Sürücü oluşturun
+                  <Button className='w-full bg-yellow-400 text-white rounded-lg px-4 py-2 font-bold'>
+                    Şoför oluşturun
                     <ArrowRight className='ml-2 h-4 w-4' />
                   </Button>
                 </Link>
