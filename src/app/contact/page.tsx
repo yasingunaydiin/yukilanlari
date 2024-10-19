@@ -69,8 +69,8 @@ export default function ContactPage() {
       </div>
 
       <div className='flex justify-center gap-12'>
-        <div className='space-y-6'>
-          <div className='bg-indigo-600 text-white p-6 rounded-lg sm:w-[700px] w-[500px]'>
+        <div className='space-y-6 sm:w-[700px] w-[360px]'>
+          <div className='bg-indigo-600 text-white p-6 rounded-lg'>
             <div className='flex gap-2 items-center mb-2'>
               <Phone size={24} />
               <h3 className='text-xl font-semibold'>Bizi doğrudan arayın</h3>
