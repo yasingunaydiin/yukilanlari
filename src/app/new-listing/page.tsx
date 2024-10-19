@@ -13,6 +13,8 @@ import {
   TabsList,
   TabsTrigger,
 } from '@/app/components/ui/tabs';
+import { Chauffeur, ChauffeurModel } from '@/models/Chauffeur'; // Adjust the path based on your structure
+import { Company, CompanyModel } from '@/models/Company'; // Adjust the path based on your structure
 import { getSignInUrl, withAuth } from '@workos-inc/authkit-nextjs';
 import { WorkOS } from '@workos-inc/node';
 import { ArrowRight } from 'lucide-react';
@@ -23,6 +25,14 @@ interface NewListingPageProps {
   searchParams: {
     tab?: string; // The tab parameter in the query string
   };
+}
+
+async function fetchCompanies(userId: string): Promise<Company[]> {
+  return await CompanyModel.find({ createdBy: userId }).exec();
+}
+
+async function fetchChauffeurs(userId: string): Promise<Chauffeur[]> {
+  return await ChauffeurModel.find({ createdBy: userId }).exec();
 }
 
 export default async function NewListingPage({
@@ -47,6 +57,11 @@ export default async function NewListingPage({
       </div>
     );
   }
+  // Fetch companies for the authenticated user
+  const fetchCompaniesData: Company[] = await fetchCompanies(user.id);
+
+  // Fetch chauffeurs created by the user
+  const fetchChauffeursData: Chauffeur[] = await fetchChauffeurs(user.id);
 
   // Determine the active tab from the search parameters
   const activeTab = searchParams.tab === 'chauffeur' ? 'chauffeur' : 'company';
@@ -109,28 +124,26 @@ export default async function NewListingPage({
               </CardDescription>
             </CardHeader>
             <CardContent>
-              {Object.keys(organizationsNames).length > 0 ? (
+              {fetchCompaniesData.length > 0 ? (
                 <div className='space-y-2'>
-                  {Object.entries(organizationsNames).map(
-                    ([orgId, orgName]) => (
-                      <Link
-                        key={orgId}
-                        href={`/new-listing/${orgId}`}
-                        className='block'
+                  {fetchCompaniesData.map((company) => (
+                    <Link
+                      key={company._id as string}
+                      href={`/new-listing/${company._id}`}
+                      className='block'
+                    >
+                      <Button
+                        variant='outline'
+                        className='w-full justify-between'
                       >
-                        <Button
-                          variant='outline'
-                          className='w-full justify-between'
-                        >
-                          <span className='flex items-center'>
-                            <OrganizationIcon orgType='company' />
-                            {orgName}
-                          </span>
-                          <ArrowRight className='h-4 w-4' />
-                        </Button>
-                      </Link>
-                    )
-                  )}
+                        <span className='flex items-center'>
+                          <OrganizationIcon orgType='company' />
+                          {company.newCompanyName}
+                        </span>
+                        <ArrowRight className='h-4 w-4' />
+                      </Button>
+                    </Link>
+                  ))}
                 </div>
               ) : (
                 <Alert variant='default'>
@@ -166,28 +179,26 @@ export default async function NewListingPage({
               </CardDescription>
             </CardHeader>
             <CardContent>
-              {Object.keys(chauffeurNames).length > 0 ? (
+              {fetchChauffeursData.length > 0 ? (
                 <div className='space-y-2'>
-                  {Object.entries(chauffeurNames).map(
-                    ([chauffeurId, chauffeurName]) => (
-                      <Link
-                        key={chauffeurId}
-                        href={`/new-listing/${chauffeurId}`}
-                        className='block'
+                  {fetchChauffeursData.map((chauffeur) => (
+                    <Link
+                      key={chauffeur._id as string}
+                      href={`/new-listing/${chauffeur._id}`}
+                      className='block'
+                    >
+                      <Button
+                        variant='outline'
+                        className='w-full justify-between'
                       >
-                        <Button
-                          variant='outline'
-                          className='w-full justify-between'
-                        >
-                          <span className='flex items-center'>
-                            <OrganizationIcon orgType='chauffeur' />
-                            {chauffeurName}
-                          </span>
-                          <ArrowRight className='h-4 w-4' />
-                        </Button>
-                      </Link>
-                    )
-                  )}
+                        <span className='flex items-center'>
+                          <OrganizationIcon orgType='chauffeur' />
+                          {chauffeur.newChauffeurName}
+                        </span>
+                        <ArrowRight className='h-4 w-4' />
+                      </Button>
+                    </Link>
+                  ))}
                 </div>
               ) : (
                 <Alert variant='default'>

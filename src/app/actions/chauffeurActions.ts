@@ -8,7 +8,7 @@ import { redirect } from 'next/navigation';
 const workos = new WorkOS(process.env.WORKOS_API_KEY);
 
 export async function createChauffeur(
-  chauffeurName: string,
+  newChauffeurName: string,
   newChauffeurContactName: string,
   newChauffeurPhone: string,
   newChauffeurEmail: string,
@@ -22,7 +22,7 @@ export async function createChauffeur(
 
   // Create the organization in WorkOS (use the ChauffeurName as organization name)
   const org = await workos.organizations.createOrganization({
-    name: chauffeurName,
+    name: newChauffeurName,
   });
 
   // Create a membership for the user in the organization
@@ -34,6 +34,7 @@ export async function createChauffeur(
 
   // Create a new Chauffeur document in MongoDB
   const newChauffeur = new ChauffeurModel({
+    newChauffeurName: newChauffeurName,
     newChauffeurContactName: newChauffeurContactName,
     newChauffeurPhone: newChauffeurPhone,
     newChauffeurEmail: newChauffeurEmail,

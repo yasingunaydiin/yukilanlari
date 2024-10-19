@@ -1,6 +1,7 @@
 import { Document, Schema, model, models } from 'mongoose';
 
 export interface Company extends Document {
+  newCompanyName: string;
   newCompanyContactName: string;
   newCompanyPhone: string;
   newCompanyEmail: string;
@@ -12,6 +13,7 @@ export interface Company extends Document {
 }
 
 const CompanySchema = new Schema<Company>({
+  newCompanyName: { type: String, required: true },
   newCompanyContactName: { type: String, required: true },
   newCompanyPhone: { type: String, required: true },
   newCompanyEmail: { type: String, required: true },

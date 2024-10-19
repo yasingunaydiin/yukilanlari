@@ -8,7 +8,7 @@ import { redirect } from 'next/navigation';
 const workos = new WorkOS(process.env.WORKOS_API_KEY);
 
 export async function createCompany(
-  companyName: string,
+  newCompanyName: string,
   newCompanyContactName: string,
   newCompanyPhone: string,
   newCompanyEmail: string,
@@ -22,7 +22,7 @@ export async function createCompany(
 
   // Create the organization in WorkOS
   const org = await workos.organizations.createOrganization({
-    name: companyName,
+    name: newCompanyName,
   });
 
   // Create a membership for the user in the organization
@@ -34,6 +34,7 @@ export async function createCompany(
 
   // Create a new company document in MongoDB
   const newCompany = new CompanyModel({
+    newCompanyName: newCompanyName,
     newCompanyContactName: newCompanyContactName,
     newCompanyPhone: newCompanyPhone,
     newCompanyEmail: newCompanyEmail,
