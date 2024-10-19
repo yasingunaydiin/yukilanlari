@@ -108,7 +108,7 @@ export default async function NewChauffeurPage() {
               type='text'
               placeholder='Facebook adresini gir (Opsiyonel)'
             />
-            <SpinningButton />
+            <SpinningButton isFormValid={true} />
           </form>
         </CardContent>
       </Card>

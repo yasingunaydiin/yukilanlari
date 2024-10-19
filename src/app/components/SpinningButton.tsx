@@ -11,10 +11,12 @@ export default function SpinningButton({
 }) {
   const [isPending, startTransition] = useTransition();
 
-  function navigate() {
+  function handleClick() {
     if (isFormValid) {
       startTransition(() => {
-        // Redirect will be handled in the form submission
+        // Perform form submission or other logic here
+        console.log('Form is valid, proceeding...');
+        // If necessary, you can add a redirect or any async logic here
       });
     }
   }
@@ -23,8 +25,8 @@ export default function SpinningButton({
     <div className='flex justify-center'>
       <Button
         className='bg-yellow-400'
-        onClick={navigate}
-        disabled={!isFormValid}
+        onClick={handleClick}
+        disabled={!isFormValid || isPending} // Disable if form is invalid or pending
       >
         Oluştur
         {isPending && <Loader2 className='ml-2 mr-2 h-4 w-4 animate-spin' />}
