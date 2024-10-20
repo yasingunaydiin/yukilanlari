@@ -1,3 +1,4 @@
+import OrgButton from '@/app/components/OrgButton';
 import TimeAgo from '@/app/components/TimeAgo';
 import {
   Card,
@@ -33,7 +34,9 @@ export default async function SingleJobPage(props: PageProps) {
     <div className='container my-6 max-w-3xl mx-auto'>
       <Card>
         <CardHeader>
-          <CardTitle className='text-3xl font-bold'>{jobInfo.title}</CardTitle>
+          <CardTitle>
+            <OrgButton orgId={jobInfo.orgId} title={jobInfo.title} />
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <div className='space-y-4'>

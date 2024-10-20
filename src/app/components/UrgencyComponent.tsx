@@ -6,6 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/app/components/ui/select';
+import { Siren } from 'lucide-react';
 
 const UrgencyComponentArray = [
   { value: 'Diğer', label: 'Diğer', emoji: '🏷️' },
@@ -18,8 +19,9 @@ const UrgencyComponentArray = [
 const UrgencyComponent = () => {
   return (
     <Select name='urgency' required>
-      <SelectTrigger className='w-full'>
-        <SelectValue placeholder='Aciliyet' />
+      <SelectTrigger className='flex justify-start gap-1 w-full text-gray-500'>
+        <Siren className='mr-2 h-4 w-4' />
+        <SelectValue placeholder='Aciliyet seçin' />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>

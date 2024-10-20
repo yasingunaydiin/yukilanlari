@@ -18,7 +18,7 @@ export default async function Header() {
     <header className='flex items-center justify-between mx-auto p-4'>
       <Button
         className='sm:text-2xl text-sm items-center gap-2 inline-flex rounded-md bg-white px-2 
-     ring-1 ring-inset ring-orange-600/10
+     
       hover:bg-orange-50 transition-colors duration-300'
       >
         <Package className='text-orange-400' />

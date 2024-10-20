@@ -6,6 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/app/components/ui/select';
+import { LibraryBig } from 'lucide-react';
 
 const transportCategoriesArray = [
   { value: 'Diğer', label: 'Diğer', emoji: '🏷️' },
@@ -28,8 +29,9 @@ const transportCategoriesArray = [
 const TransportCategories = () => {
   return (
     <Select name='category' required>
-      <SelectTrigger className='w-full'>
-        <SelectValue placeholder='Kategori' />
+      <SelectTrigger className='flex justify-start gap-1 w-full text-gray-500'>
+        <LibraryBig className='mr-2 h-4 w-4' />
+        <SelectValue placeholder='Kategori seçin'></SelectValue>
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>

@@ -18,7 +18,7 @@ import { cn } from '@/lib/utils';
 import type { Job } from '@/models/Job';
 import { format } from 'date-fns';
 import { tr } from 'date-fns/locale';
-import { Calendar as CalendarIcon, Loader2 } from 'lucide-react';
+import { Calendar as CalendarIcon, ChevronDown, Loader2 } from 'lucide-react';
 import { redirect, useRouter } from 'next/navigation';
 import { useState, useTransition } from 'react';
 import { saveJobAction } from '../actions/jobActions';
@@ -64,7 +64,7 @@ export function JobForm({ orgId, jobInfo }: { orgId: string; jobInfo?: Job }) {
   }
 
   return (
-    <form action={handleSaveJob} className='container mt-6'>
+    <form action={handleSaveJob} className='container max-w-6xl mx-auto mt-6'>
       {jobInfo && <input type='hidden' name='id' value={jobInfo?._id} />}
 
       <Card>
@@ -100,37 +100,31 @@ export function JobForm({ orgId, jobInfo }: { orgId: string; jobInfo?: Job }) {
 
           <Input
             name='title'
-            placeholder='Başlık'
+            placeholder='Başlık girin'
             defaultValue={jobInfo?.title || ''}
             required
           />
           <Input
             name='tonaj'
-            placeholder='Tonaj'
+            placeholder='Tonaj girin'
             defaultValue={jobInfo?.tonaj || ''}
             required
           />
           <TransportCategories />
           <UrgencyComponent />
-          <Textarea
-            name='description'
-            placeholder='Açıklama'
-            defaultValue={jobInfo?.description || ''}
-            required
-          />
           <div className='flex flex-col gap-2'>
-            <Label>Tarih</Label>
             <Popover>
               <PopoverTrigger asChild>
                 <Button
                   variant={'outline'}
                   className={cn(
-                    'w-[240px] justify-start text-left font-normal',
+                    'w-auto justify-start text-left font-normal',
                     !date && 'text-muted-foreground'
                   )}
                 >
                   <CalendarIcon className='mr-2 h-4 w-4' />
                   {date ? format(date, 'PPP') : <span>Tarih seçin</span>}
+                  <ChevronDown className='text-gray-400 ml-2 h-4 w-4' />
                 </Button>
               </PopoverTrigger>
               <PopoverContent className='w-auto p-0' align='start'>
@@ -144,6 +138,13 @@ export function JobForm({ orgId, jobInfo }: { orgId: string; jobInfo?: Job }) {
               </PopoverContent>
             </Popover>
           </div>
+          <Textarea
+            name='description'
+            placeholder='Açıklama girin'
+            defaultValue={jobInfo?.description || ''}
+            required
+          />
+
           <div className='space-y-4'>
             <div className='flex flex-col sm:flex-row gap-4'>
               <div className='flex flex-col gap-2 flex-1'>
