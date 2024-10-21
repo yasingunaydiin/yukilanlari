@@ -10,7 +10,7 @@ export type Job = {
   orgName?: string;
   _id: string;
   title: string;
-  tonaj: string;
+  weight: string;
   countryFrom: string;
   countryTo: string;
   cityFrom: string;
@@ -26,13 +26,15 @@ export type Job = {
   updatedAt: string;
   isAdmin?: boolean;
   urgency: string;
+  vehicleType: string;
+  vehicleSize: string;
   jobDate: Date; // Ensure this is a Date type
 };
 
 const JobSchema = new Schema(
   {
     title: { type: String, required: true },
-    tonaj: { type: String, required: true },
+    weight: { type: String, required: true },
     countryFrom: { type: String, required: true },
     countryTo: { type: String, required: true },
     cityFrom: { type: String, required: true },
@@ -45,7 +47,9 @@ const JobSchema = new Schema(
     contactPhone: { type: String, required: true },
     contactEmail: { type: String, required: true },
     isAdmin: { type: Boolean, default: false },
-    urgency: { type: String, required: false },
+    urgency: { type: String, required: true },
+    vehicleType: { type: String, required: true },
+    vehicleSize: { type: String, required: true },
     jobDate: { type: Date, required: true }, // Date type is required
   },
   {

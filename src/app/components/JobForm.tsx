@@ -1,8 +1,8 @@
 'use client';
 
-import CitySelect from '@/app/components/EuropeanCities';
-import CountrySelect from '@/app/components/EuropeanCountries';
-import TransportCategories from '@/app/components/TransportCategories';
+import TransportCategories from '@/app/components/CategoriesComponent';
+import CitySelect from '@/app/components/CitiesArray';
+import CountrySelect from '@/app/components/CountriesArray';
 import { Button } from '@/app/components/ui/button';
 import { Calendar } from '@/app/components/ui/calendar';
 import { Card, CardContent } from '@/app/components/ui/card';
@@ -23,6 +23,7 @@ import { redirect, useRouter } from 'next/navigation';
 import { useState, useTransition } from 'react';
 import { saveJobAction } from '../actions/jobActions';
 import UrgencyComponent from './UrgencyComponent';
+import VehicleTypeComponent from './VehicleTypeComponent';
 
 export function JobForm({ orgId, jobInfo }: { orgId: string; jobInfo?: Job }) {
   const [countryFrom, setCountryFrom] = useState<string | undefined>();
@@ -105,13 +106,20 @@ export function JobForm({ orgId, jobInfo }: { orgId: string; jobInfo?: Job }) {
             required
           />
           <Input
-            name='tonaj'
+            name='weight'
             placeholder='Tonaj girin'
-            defaultValue={jobInfo?.tonaj || ''}
+            defaultValue={jobInfo?.weight || ''}
+            required
+          />
+          <Input
+            name='vehicleSize'
+            placeholder='Boyut girin'
+            defaultValue={jobInfo?.vehicleSize || ''}
             required
           />
           <TransportCategories />
           <UrgencyComponent />
+          <VehicleTypeComponent />
           <div className='flex flex-col gap-2'>
             <Popover>
               <PopoverTrigger asChild>

@@ -151,6 +151,7 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
                   <div>{urgencyTitle}</div>
                 </div>
               </div>
+
               <div className='hidden sm:block'>
                 {jobInfo.createdAt && (
                   <div className='text-gray-500 text-sm'>
@@ -168,7 +169,7 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
               </div>
               <div className='flex items-center gap-1'>
                 <Weight className='size-4' />
-                <span className='font-medium'>Tonaj:</span> {jobInfo.tonaj}
+                <span className='font-medium'>Tonaj:</span> {jobInfo.weight}
               </div>
               <div className='flex items-center gap-1'>
                 <MapPinHouse className='size-4' />

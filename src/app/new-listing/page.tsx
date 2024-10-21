@@ -17,7 +17,7 @@ import { Chauffeur, ChauffeurModel } from '@/models/Chauffeur'; // Adjust the pa
 import { Company, CompanyModel } from '@/models/Company'; // Adjust the path based on your structure
 import { getSignInUrl, withAuth } from '@workos-inc/authkit-nextjs';
 import { WorkOS } from '@workos-inc/node';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import OrganizationIcon from '../components/CompanyChauffeurIcon';
 
@@ -138,10 +138,12 @@ export default async function NewListingPage({
                       >
                         <span className='flex items-center'>
                           <OrganizationIcon orgType='company' />
-                          {company.newCompanyName}{' '}
-                          {/* Ensure you're displaying the correct name */}
+                          {company.newCompanyName}
                         </span>
-                        <ArrowRight className='h-4 w-4' />
+                        <span className='flex items-center text-sm text-gray-500 group-hover:text-gray-700'>
+                          İlan oluştur
+                          <ChevronRight className='ml-1 h-4 w-4' />
+                        </span>
                       </Button>
                     </Link>
                   ))}
@@ -197,7 +199,10 @@ export default async function NewListingPage({
                           {chauffeur.newChauffeurName}{' '}
                           {/* Ensure you're displaying the correct name */}
                         </span>
-                        <ArrowRight className='h-4 w-4' />
+                        <span className='flex items-center text-sm text-gray-500 group-hover:text-gray-700'>
+                          İlan oluştur
+                          <ChevronRight className='ml-1 h-4 w-4' />
+                        </span>
                       </Button>
                     </Link>
                   ))}
