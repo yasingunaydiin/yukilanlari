@@ -16,11 +16,7 @@ export default async function Header() {
 
   return (
     <header className='flex items-center justify-between mx-auto p-4'>
-      <Button
-        className='sm:text-2xl text-sm items-center gap-2 inline-flex rounded-md bg-white px-2 
-     
-      hover:bg-orange-50 transition-colors duration-300'
-      >
+      <Button className='sm:text-2xl text-sm items-center gap-2 inline-flex rounded-md bg-white px-2 hover:bg-orange-50 transition-colors duration-300'>
         <Package className='text-orange-400' />
         <Link href='/' className='text-orange-400 bg-clip-text font-bold '>
           Yük Bul

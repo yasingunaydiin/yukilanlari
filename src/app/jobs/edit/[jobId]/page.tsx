@@ -1,7 +1,10 @@
 import { JobForm } from '@/app/components/JobForm';
+import { Alert, AlertDescription } from '@/app/components/ui/alert';
+import { Button } from '@/app/components/ui/button';
 import { JobModel } from '@/models/Job';
-import { withAuth } from '@workos-inc/authkit-nextjs';
+import { getSignInUrl, withAuth } from '@workos-inc/authkit-nextjs';
 import { WorkOS } from '@workos-inc/node';
+import { Link } from 'lucide-react';
 import mongoose from 'mongoose';
 
 type PageProps = {
@@ -19,10 +22,24 @@ export default async function EditJobPage(pageProps: PageProps) {
     return 'Bulunamadı';
   }
   const { user } = await withAuth();
+  const signInUrl = await getSignInUrl();
   const workos = new WorkOS(process.env.WORKOS_API_KEY);
   if (!user) {
     // If user hasnt logged in
-    return 'Giriş yapmanız gerekiyor';
+    return (
+      <div className='container mt-6'>
+        <Alert>
+          <Link href={signInUrl}>
+            <AlertDescription>
+              <Button className='m-1 text-yellow-400 inline-flex items-center gap-1 h-5 w-12 rounded-md bg-orange-50 px-2 py-1 text-xs font-medium ring-1 ring-inset ring-orange-600/10 hover:bg-orange-100 transition-colors duration-300'>
+                Giriş
+              </Button>
+              yapmanız gerekiyor
+            </AlertDescription>
+          </Link>
+        </Alert>
+      </div>
+    );
   }
   const oms = await workos.userManagement.listOrganizationMemberships({
     userId: user.id,

@@ -7,16 +7,16 @@ export default function Footer() {
     <footer className='bg-white rounded-lg shadow dark:bg-gray-900 m-4 mt-8'>
       <div className='w-full max-w-screen-xl mx-auto p-4 md:py-8'>
         <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between'>
-          <div className='flex items-center justify-between mb-4'>
-            <Link href='/' className='flex items-center'>
+          <div className='flex items-center justify-between'>
+            <Button
+              variant='ghost'
+              className='self-center text-xl font-semibold text-orange-400 bg-white px-2 gap-2 hover:text-orange-400 hover:bg-orange-50 transition-colors duration-300'
+            >
               <Package className='text-orange-400' />
-              <Button
-                variant='ghost'
-                className='self-center text-xl font-semibold whitespace-nowrap dark:text-white text-orange-400 bg-clip-text '
-              >
+              <Link href='/' className='flex items-center'>
                 Yük Bul
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
 
           <ul className='flex flex-wrap items-center text-center justify-center sm:justify-end mt-4 sm:mt-0 space-x-2 sm:space-x-4 text-sm font-medium text-gray-500 dark:text-gray-400 '>

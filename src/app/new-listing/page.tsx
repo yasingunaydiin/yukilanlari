@@ -46,13 +46,15 @@ export default async function NewListingPage({
     return (
       <div className='container mt-6'>
         <Alert>
-          <AlertDescription>
-            İş veya sürücü ilanı oluşturmak için
-            <Button className='m-1 text-yellow-400 inline-flex items-center gap-1 h-5 w-12 rounded-md bg-orange-50 px-2 py-1 text-xs font-medium ring-1 ring-inset ring-orange-600/10 hover:bg-orange-100 transition-colors duration-300'>
-              <Link href={signInUrl}>Giriş</Link>
-            </Button>
-            yapın
-          </AlertDescription>
+          <Link href={signInUrl}>
+            <AlertDescription>
+              İş veya sürücü ilanı oluşturmak için
+              <Button className='m-1 text-yellow-400 inline-flex items-center gap-1 h-5 w-12 rounded-md bg-orange-50 px-2 py-1 text-xs font-medium ring-1 ring-inset ring-orange-600/10 hover:bg-orange-100 transition-colors duration-300'>
+                Giriş
+              </Button>
+              yapın
+            </AlertDescription>
+          </Link>
         </Alert>
       </div>
     );
