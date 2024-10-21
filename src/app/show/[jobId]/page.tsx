@@ -1,3 +1,5 @@
+import CallButton from '@/app/components/CallButton';
+import MailButton from '@/app/components/EmailButton';
 import OrgButton from '@/app/components/OrgButton';
 import TimeAgo from '@/app/components/TimeAgo';
 import {
@@ -6,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/app/components/ui/card';
+import WhatsAppButton from '@/app/components/WhatsappButton';
 import { JobModel } from '@/models/Job';
 import {
   BusFront,
@@ -98,6 +101,11 @@ export default async function SingleJobPage(props: PageProps) {
               </div>
             </div>
           </div>
+
+          <WhatsAppButton phoneNumber={jobInfo.contactPhone} />
+          <CallButton phoneNumber={jobInfo.contactPhone} />
+          <MailButton contactEmail={jobInfo.contactEmail} />
+
           <div className='mt-6 text-sm text-muted-foreground'>
             <TimeAgo createdAt={jobInfo.createdAt} /> paylaşıldı
           </div>
