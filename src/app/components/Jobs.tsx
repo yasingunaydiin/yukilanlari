@@ -18,7 +18,6 @@ export default function Jobs({ jobs }: { header: string; jobs: Job[] }) {
         {!jobs?.length && <div>İlan bulunamadı</div>}
 
         {jobs && jobs.map((job, index) => <JobRow key={index} jobInfo={job} />)}
-        {/*If issues happen with this job code, use this older code: {jobs && jobs.map((job) => <JobRow jobInfo={job} />)}*/}
       </div>
       <div className='flex justify-center mt-3'>
         <Pagination className='container'>

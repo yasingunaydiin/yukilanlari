@@ -22,12 +22,6 @@ export default async function About() {
       label: 'İlan Paylaşımı',
       icon: <CheckCircle className='w-6 h-6 text-orange-600' />,
     },
-    // ,
-    // {
-    //   number: '89+',
-    //   label: 'Orders in Queue',
-    //   icon: <Inbox className='w-6 h-6 text-blue-600' />,
-    // },
   ];
 
   return (
@@ -36,9 +30,11 @@ export default async function About() {
         <h1 className='text-indigo-600 font-medium'>Biz Kimiz?</h1>
         <h1 className='text-4xl font-bold'>Geliştirme ve Çözümler</h1>
         <p className='text-gray-600 max-w-3xl'>
-          Web site ve modern çözümler geliştirmeyi seven bir junior
-          yazılımcıyım. Amacım, teknolojiyi kullanarak işleri kolaylaştıran ve
-          herkesin rahatlıkla kullanabileceği projeler yapmaktır.
+          Lojistik sektöründe yenilikçi bir yaklaşım benimseyen ekibimiz, boş
+          tır sahipleri ile nakliye ihtiyacı olan şirketleri bir araya getirerek
+          verimliliği artırmayı hedefliyoruz. Teknoloji odaklı platformumuz,
+          kullanıcı dostu arayüzü ile tır sahiplerine ve şirketlere hızlı ve
+          etkili çözümler sunuyor.
         </p>
       </div>
 

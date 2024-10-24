@@ -103,11 +103,11 @@ export default function ContactPage() {
               <Mail size={24} />
               <h3 className='text-xl font-semibold'>Email ile bize ulaşın</h3>
             </div>
-            <p className='text-2xl font-bold'>y.gunaydinmail@gmail.com</p>
+            <p className='text-2xl font-bold'>yukilanlarinet@gmail.com</p>
             <button
               className='mt-4 w-full bg-gray-100 hover:bg-gray-300 py-2 rounded-md'
               onClick={() =>
-                (window.location.href = 'mailto:y.gunaydinmail@gmail.com')
+                (window.location.href = 'mailto:yukilanlarinet@gmail.com')
               }
             >
               Mail Gönder
