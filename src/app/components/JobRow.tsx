@@ -113,7 +113,7 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
   const [open, setOpen] = useState(false);
 
   const handleShare = (platform: string) => {
-    const jobLink = `https://yuk-bul.vercel.app/show/${jobInfo._id}`;
+    const jobLink = `https://yukilanlari.vercel.app/show/${jobInfo._id}`;
     let shareUrl = '';
 
     if (platform === 'Twitter') {

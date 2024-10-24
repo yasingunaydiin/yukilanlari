@@ -14,7 +14,7 @@ export default function Footer() {
             >
               <Package className='text-orange-400' />
               <Link href='/' className='flex items-center'>
-                Yük Bul
+                Yük İlanları.net
               </Link>
             </Button>
           </div>
@@ -48,7 +48,7 @@ export default function Footer() {
         <span className='block text-sm text-gray-500 sm:text-center dark:text-gray-400'>
           © {new Date().getFullYear()}{' '}
           <Link href='/' className='hover:underline'>
-            Yük Bul™
+            Yük İlanları™
           </Link>
           . Tüm Hakları Saklıdır.
         </span>
