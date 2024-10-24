@@ -1,5 +1,6 @@
 import CallButton from '@/app/components/CallButton';
 import MailButton from '@/app/components/EmailButton';
+import GuestSignIn from '@/app/components/GuestSignIn';
 import OrgButton from '@/app/components/OrgButton';
 import TimeAgo from '@/app/components/TimeAgo';
 import {
@@ -97,23 +98,23 @@ export default async function SingleJobPage(props: PageProps) {
                 <div className='space-y-2 text-muted-foreground'>
                   <div className='flex items-center'>
                     <User className='w-5 h-5 mr-2' />
-                    <span>Giriş yapın</span>
+                    <GuestSignIn signInUrl={signInUrl} />
                   </div>
                   <div className='flex items-center'>
                     <Mail className='w-5 h-5 mr-2' />
-                    <span>Giriş yapın</span>
+                    <GuestSignIn signInUrl={signInUrl} />
                   </div>
                   <div className='flex items-center'>
                     <Phone className='w-5 h-5 mr-2' />
-                    <span>Giriş yapın</span>
+                    <GuestSignIn signInUrl={signInUrl} />
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className='bg-green-600 mt-5 p-5 rounded-lg text-white w-[400px] mx-auto'>
+            <div className='bg-green-600 mt-5 p-5 rounded-lg text-white sm:w-[400px] mx-auto w-[250px] '>
               <div className='flex gap-2 items-center'>
-                <MessageCircle size={24} />
+                <MessageCircle className='sm:size-6 size-10' />
                 <h3 className='text-xl font-semibold'>
                   WhatsApp mesajı göndermek için
                 </h3>
@@ -127,9 +128,9 @@ export default async function SingleJobPage(props: PageProps) {
                 </Link>
               </button>
             </div>
-            <div className='bg-indigo-600 mt-5 p-5 rounded-lg text-white w-[400px] mx-auto'>
+            <div className='bg-indigo-600 mt-5 p-5 rounded-lg text-white sm:w-[400px] mx-auto w-[250px]'>
               <div className='flex gap-2 items-center'>
-                <Phone size={24} />
+                <Phone className='sm:size-6 size-7' />
                 <h3 className='text-xl font-semibold'>
                   İlan sahibini aramak için
                 </h3>
@@ -143,9 +144,9 @@ export default async function SingleJobPage(props: PageProps) {
                 </Link>
               </button>
             </div>
-            <div className='bg-gray-100 mt-5 p-5 rounded-lg w-[400px] mx-auto'>
+            <div className='bg-gray-100 mt-5 p-5 rounded-lg sm:w-[400px] mx-auto w-[250px]'>
               <div className='flex gap-2 items-center'>
-                <Mail size={24} />
+                <Mail className='sm:size-6 size-6' />
                 <h3 className='text-xl font-semibold'>
                   Email ile ulaşmak için
                 </h3>
