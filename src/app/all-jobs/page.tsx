@@ -1,3 +1,5 @@
+// Might delete this page.
+
 import Jobs from '@/app/components/Jobs';
 import { Button } from '@/app/components/ui/button';
 import { Input } from '@/app/components/ui/input';
@@ -26,7 +28,7 @@ export default async function Home() {
         </Button>
       </form>
       <div className='mt-5'>
-        <Jobs header={''} jobs={latestJobs} />
+        <Jobs jobs={latestJobs} />
         {/* Add a seperation between Company ads and chauffeur ads */}
       </div>
     </>

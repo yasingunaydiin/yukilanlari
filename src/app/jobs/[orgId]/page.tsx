@@ -141,10 +141,7 @@ export default async function OrganizationDetailsPage({ params }: PageProps) {
           <h2 className='text-2xl font-bold mb-4'>
             {org.name} tarafından paylaşılan ilanlar
           </h2>
-          <Jobs
-            jobs={jobsWithData}
-            header={`${org.name} tarafından paylaşılan ilanlar`}
-          />
+          <Jobs jobs={jobsWithData} />
         </div>
       </div>
     );
@@ -226,10 +223,7 @@ export default async function OrganizationDetailsPage({ params }: PageProps) {
         <h2 className='text-2xl font-bold mb-4'>
           {org.name} tarafından paylaşılan ilanlar
         </h2>
-        <Jobs
-          jobs={jobsWithData}
-          header={`${org.name} tarafından paylaşılan ilanlar`}
-        />
+        <Jobs jobs={jobsWithData} />
       </div>
     </div>
   );

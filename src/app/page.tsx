@@ -15,7 +15,7 @@ export default async function Home() {
   return (
     <>
       <Hero />
-      <Jobs header={''} jobs={latestJobs} />
+      <Jobs jobs={latestJobs} />
       {/* Add a seperation between Company ads and chauffeur ads */}
     </>
   );
