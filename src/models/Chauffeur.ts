@@ -1,6 +1,8 @@
+import { ProfileType } from '@/app/types/shared';
 import { Document, Schema, model, models } from 'mongoose';
 
 export interface Chauffeur extends Document {
+  profileType: ProfileType;
   newChauffeurName: string;
   newChauffeurContactName: string;
   newChauffeurPhone: string;
@@ -13,6 +15,12 @@ export interface Chauffeur extends Document {
 }
 
 const ChauffeurSchema = new Schema<Chauffeur>({
+  profileType: {
+    type: String,
+    enum: ['company', 'chauffeur'],
+    default: 'chauffeur',
+    required: true,
+  },
   newChauffeurName: { type: String, required: true },
   newChauffeurContactName: { type: String, required: true },
   newChauffeurPhone: { type: String, required: true },

@@ -1,4 +1,4 @@
-import { JobForm } from '@/app/components/JobForm';
+import { CompanyJobForm } from '@/app/components/CompanyJobForm';
 import { Alert, AlertDescription } from '@/app/components/ui/alert';
 import { Button } from '@/app/components/ui/button';
 import { getSignInUrl, withAuth } from '@workos-inc/authkit-nextjs';
@@ -53,5 +53,5 @@ export default async function NewListingForOrgPage(props: PageProps) {
     );
   }
 
-  return <JobForm orgId={orgId} />;
+  return <CompanyJobForm orgId={orgId} />;
 }

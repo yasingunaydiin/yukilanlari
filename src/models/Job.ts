@@ -1,3 +1,4 @@
+import { ProfileType } from '@/app/types/shared';
 import {
   AutoPaginatable,
   OrganizationMembership,
@@ -7,6 +8,7 @@ import {
 import mongoose, { model, models, Schema } from 'mongoose';
 
 export type Job = {
+  profileType: ProfileType;
   orgName?: string;
   _id: string;
   title: string;
@@ -33,6 +35,11 @@ export type Job = {
 
 const JobSchema = new Schema(
   {
+    profileType: {
+      type: String,
+      enum: ['company', 'chauffeur'],
+      required: true,
+    },
     title: { type: String, required: true },
     weight: { type: String, required: true },
     countryFrom: { type: String, required: true },

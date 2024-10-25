@@ -131,7 +131,7 @@ export default async function NewListingPage({
                   {fetchCompaniesData.map((company) => (
                     <Link
                       key={company._id as string} // Ensure you're using the correct property for the key
-                      href={`/new-listing/${company.organizationId}`} // Use the correct organizationId for the URL
+                      href={`/new-listing/company/${company.organizationId}`} // Use the correct organizationId for the URL
                       className='block'
                     >
                       <Button
@@ -151,14 +151,16 @@ export default async function NewListingPage({
                   ))}
                 </div>
               ) : (
-                <Alert variant='default'>
-                  <AlertDescription>
-                    Kullanıcınıza atanmış şirket bulunmuyor{' '}
-                    <Button className='m-1 text-yellow-400 inline-flex items-center gap-1 h-5 rounded-md bg-orange-50 px-2 py-1 text-xs font-medium ring-1 ring-inset ring-orange-600/10 '>
-                      <Link href={'new-company'}>Şirket Oluşturun</Link>
-                    </Button>
-                  </AlertDescription>
-                </Alert>
+                <Link href={'new-company'}>
+                  <Alert variant='default'>
+                    <AlertDescription>
+                      Kullanıcınıza atanmış şirket bulunmuyor{' '}
+                      <Button className='m-1 text-yellow-400 inline-flex items-center gap-1 h-5 rounded-md bg-orange-50 px-2 py-1 text-xs font-medium ring-1 ring-inset ring-orange-600/10 '>
+                        Şirket Oluşturun
+                      </Button>
+                    </AlertDescription>
+                  </Alert>
+                </Link>
               )}
               <div className='mt-6'>
                 <Link href='/new-company'>
@@ -189,7 +191,7 @@ export default async function NewListingPage({
                   {fetchChauffeursData.map((chauffeur) => (
                     <Link
                       key={chauffeur._id as string} // Ensure you're using the correct property for the key
-                      href={`/new-listing/${chauffeur.chauffeurId}`} // Use the correct organizationId for the URL
+                      href={`/new-listing/chauffeur/${chauffeur.chauffeurId}`} // Use the correct organizationId for the URL
                       className='block'
                     >
                       <Button
@@ -199,7 +201,6 @@ export default async function NewListingPage({
                         <span className='flex items-center'>
                           <OrganizationIcon orgType='chauffeur' />
                           {chauffeur.newChauffeurName}{' '}
-                          {/* Ensure you're displaying the correct name */}
                         </span>
                         <span className='flex items-center text-sm text-gray-500 group-hover:text-gray-700'>
                           İlan oluştur
@@ -210,14 +211,16 @@ export default async function NewListingPage({
                   ))}
                 </div>
               ) : (
-                <Alert variant='default'>
-                  <AlertDescription>
-                    Kullanıcınıza atanmış şoför bulunmuyor{' '}
-                    <Button className='m-1 text-yellow-400 inline-flex items-center gap-1 h-5 rounded-md bg-orange-50 px-2 py-1 text-xs font-medium ring-1 ring-inset ring-orange-600/10 '>
-                      <Link href={'new-chauffeur'}>Şoför Oluşturun</Link>
-                    </Button>
-                  </AlertDescription>
-                </Alert>
+                <Link href={'new-chauffeur'}>
+                  <Alert variant='default'>
+                    <AlertDescription>
+                      Kullanıcınıza atanmış şoför bulunmuyor{' '}
+                      <Button className='m-1 text-yellow-400 inline-flex items-center gap-1 h-5 rounded-md bg-orange-50 px-2 py-1 text-xs font-medium ring-1 ring-inset ring-orange-600/10 '>
+                        Şoför Oluşturun
+                      </Button>
+                    </AlertDescription>
+                  </Alert>
+                </Link>
               )}
               <div className='mt-6'>
                 <Link href='/new-chauffeur'>

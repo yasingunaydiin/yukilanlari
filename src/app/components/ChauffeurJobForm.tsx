@@ -25,7 +25,13 @@ import { saveJobAction } from '../actions/jobActions';
 import UrgencyComponent from './UrgencyComponent';
 import VehicleTypeComponent from './VehicleTypeComponent';
 
-export function JobForm({ orgId, jobInfo }: { orgId: string; jobInfo?: Job }) {
+export function ChauffeurJobForm({
+  orgId,
+  jobInfo,
+}: {
+  orgId: string;
+  jobInfo?: Job;
+}) {
   const [countryFrom, setCountryFrom] = useState<string | undefined>();
   const [countryTo, setCountryTo] = useState<string | undefined>();
   const [selectedCountryIdFrom, setSelectedCountryIdFrom] = useState<
@@ -67,6 +73,7 @@ export function JobForm({ orgId, jobInfo }: { orgId: string; jobInfo?: Job }) {
   return (
     <form action={handleSaveJob} className='container max-w-6xl mx-auto mt-6'>
       {jobInfo && <input type='hidden' name='id' value={jobInfo?._id} />}
+      <input type='hidden' name='profileType' value='chauffeur' />
 
       <Card>
         <CardContent className='flex flex-col gap-4 p-5'>

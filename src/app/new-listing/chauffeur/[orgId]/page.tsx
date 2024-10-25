@@ -1,31 +1,21 @@
-import { CompanyJobForm } from '@/app/components/CompanyJobForm';
+import { ChauffeurJobForm } from '@/app/components/ChauffeurJobForm';
 import { Alert, AlertDescription } from '@/app/components/ui/alert';
 import { Button } from '@/app/components/ui/button';
-import { JobModel } from '@/models/Job';
 import { getSignInUrl, withAuth } from '@workos-inc/authkit-nextjs';
 import { WorkOS } from '@workos-inc/node';
-import { Link } from 'lucide-react';
-import mongoose from 'mongoose';
+import Link from 'next/link';
 
 type PageProps = {
   params: {
-    jobId: string;
+    orgId: string;
   };
 };
 
-export default async function EditJobPage(pageProps: PageProps) {
-  const jobId = pageProps.params.jobId;
-  await mongoose.connect(process.env.MONGO_URI as string);
-  const jobInfo = JSON.parse(JSON.stringify(await JobModel.findById(jobId)));
-  if (!jobInfo) {
-    // If no job
-    return 'Bulunamadı';
-  }
+export default async function NewListingForOrgPage(props: PageProps) {
   const { user } = await withAuth();
   const signInUrl = await getSignInUrl();
   const workos = new WorkOS(process.env.WORKOS_API_KEY);
-  if (!user) {
-    // If user hasnt logged in
+  if (!user)
     return (
       <div className='container mt-6'>
         <Alert>
@@ -34,23 +24,34 @@ export default async function EditJobPage(pageProps: PageProps) {
               <Button className='m-1 text-yellow-400 inline-flex items-center gap-1 h-5 w-12 rounded-md bg-orange-50 px-2 py-1 text-xs font-medium ring-1 ring-inset ring-orange-600/10 hover:bg-orange-100 transition-colors duration-300'>
                 Giriş
               </Button>
-              yapmanız gerekiyor
+              yapın
             </AlertDescription>
           </Link>
         </Alert>
       </div>
-    );
-  }
+    ); // Please log in
+
+  const orgId = props.params.orgId;
   const oms = await workos.userManagement.listOrganizationMemberships({
     userId: user.id,
-    organizationId: jobInfo.orgId,
   });
-  if (oms.data.length === 0) {
-    return 'Erişim reddedildi';
-  }
-  return (
-    <div>
-      <CompanyJobForm orgId={jobInfo.orgId} jobInfo={jobInfo} />
-    </div>
+
+  // Check if user is a member of the specified organization
+  const hasAccess = oms.data.some(
+    (membership) => membership.organizationId === orgId
   );
+
+  if (!hasAccess) {
+    return (
+      <div className='container mt-6'>
+        <Alert>
+          <AlertDescription>
+            Bu organizasyona erişim izniniz yok.
+          </AlertDescription>
+        </Alert>
+      </div>
+    );
+  }
+
+  return <ChauffeurJobForm orgId={orgId} />;
 }
