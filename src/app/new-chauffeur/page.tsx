@@ -19,7 +19,6 @@ export default async function NewChauffeurPage() {
     redirect('/login');
   }
 
-  // Type assertion to assure TypeScript that user exists
   const authenticatedUser = user as User;
 
   async function handleNewChauffeurFormSubmit(formData: FormData) {

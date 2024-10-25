@@ -8,7 +8,7 @@ type CallButtonProps = {
 const CallButton: React.FC<CallButtonProps> = ({ phoneNumber }) => {
   const handleCallClick = () => {
     const formattedPhone = phoneNumber.replace(/\s+/g, ''); // Remove spaces
-    window.open(`tel:${formattedPhone}`, '_blank'); // Use 'tel:' for calls
+    window.open(`tel:${formattedPhone}`, '_blank');
   };
 
   return (

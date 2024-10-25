@@ -2,7 +2,7 @@ import { Card, CardContent } from '@/app/components/ui/card';
 import { getCounts } from '@/lib/actions';
 import { CheckCircle, Eye, Target, User, Users } from 'lucide-react';
 
-export const revalidate = 10; // Revalidate every hour
+export const revalidate = 10;
 
 export default async function About() {
   const { companyCount, chauffeurCount, jobCount } = await getCounts();

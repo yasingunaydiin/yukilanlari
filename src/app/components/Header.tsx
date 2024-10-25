@@ -4,7 +4,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/app/components/ui/dropdown-menu'; // Import shadcn dropdown components
+} from '@/app/components/ui/dropdown-menu';
 import { getSignInUrl, signOut, withAuth } from '@workos-inc/authkit-nextjs';
 import { ContactRound, LogIn, LogOut, Package } from 'lucide-react';
 import Link from 'next/link';

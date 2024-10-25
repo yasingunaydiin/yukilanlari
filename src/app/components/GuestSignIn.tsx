@@ -1,8 +1,6 @@
-// ButtonLink.tsx
 import Link from 'next/link';
 import { Button } from './ui/button';
 
-// Define the props type for the ButtonLink component
 interface ButtonLinkProps {
   signInUrl: string;
 }

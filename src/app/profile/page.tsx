@@ -46,7 +46,6 @@ export default async function CompanyListPage() {
   try {
     await connectToDB();
 
-    // Fetch companies and chauffeurs from MongoDB
     const mongoCompanies = await CompanyModel.find({
       createdBy: user.id,
     }).lean();

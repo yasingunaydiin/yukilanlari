@@ -18,14 +18,12 @@ export default async function EditJobPage(pageProps: PageProps) {
   await mongoose.connect(process.env.MONGO_URI as string);
   const jobInfo = JSON.parse(JSON.stringify(await JobModel.findById(jobId)));
   if (!jobInfo) {
-    // If no job
     return 'Bulunamadı';
   }
   const { user } = await withAuth();
   const signInUrl = await getSignInUrl();
   const workos = new WorkOS(process.env.WORKOS_API_KEY);
   if (!user) {
-    // If user hasnt logged in
     return (
       <div className='container mt-6'>
         <Alert>

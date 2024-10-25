@@ -30,7 +30,7 @@ export type Job = {
   urgency: string;
   vehicleType: string;
   vehicleSize: string;
-  jobDate: Date; // Ensure this is a Date type
+  jobDate: Date;
 };
 
 const JobSchema = new Schema(
@@ -57,7 +57,7 @@ const JobSchema = new Schema(
     urgency: { type: String, required: true },
     vehicleType: { type: String, required: true },
     vehicleSize: { type: String, required: true },
-    jobDate: { type: Date, required: true }, // Date type is required
+    jobDate: { type: Date, required: true },
   },
   {
     timestamps: true,
@@ -69,7 +69,6 @@ const JobSchema = new Schema(
 
 export const JobModel = models?.Job || model('Job', JobSchema);
 
-// Assuming you have other functions that use the Job model.
 export async function addOrgAndUserData(jobsInfo: Job[], user: User | null) {
   jobsInfo = JSON.parse(JSON.stringify(jobsInfo));
   await mongoose.connect(process.env.MONGO_URI as string);

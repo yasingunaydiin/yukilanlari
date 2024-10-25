@@ -26,8 +26,6 @@ import { useState } from 'react';
 import TimeAgo from './TimeAgo';
 import { Button } from './ui/button';
 
-//If something doesnt work with the emojis, put it in teh translportcategories component.
-
 const transportCategoriesArray = [
   { value: 'Diğer', label: 'Diğer', emoji: '🏷️' },
   { value: 'Araç Kurtarma', label: 'Araç Kurtarma', emoji: '🚗' },
@@ -83,7 +81,7 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
     country: string | undefined,
     city: string
   ): string => {
-    if (!country) return ''; // Return an empty string or handle the undefined case
+    if (!country) return '';
     return country.toLowerCase() === 'türkiye' ? city : country;
   };
 

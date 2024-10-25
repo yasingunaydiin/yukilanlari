@@ -1,4 +1,3 @@
-// lib/actions.ts
 'use server';
 
 import { connectToDB } from '@/lib/dbConnect';

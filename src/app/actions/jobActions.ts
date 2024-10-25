@@ -9,7 +9,6 @@ export async function saveJobAction(formData: FormData) {
 
   const { id, ...jobData } = Object.fromEntries(formData);
 
-  // Add profile type based on the form's origin
   const enrichedJobData = {
     ...jobData,
     profileType: formData.get('profileType') || 'company', // defaults to 'company' if not specified

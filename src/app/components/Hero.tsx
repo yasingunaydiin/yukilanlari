@@ -15,7 +15,7 @@ const textArray = [
 export default function Hero() {
   const [currentText, setCurrentText] = useState(0);
   const [visible, setVisible] = useState(true);
-  const { scrollY } = useScroll(); // Icon hide on scroll
+  const { scrollY } = useScroll();
 
   useEffect(() => {
     const interval = setInterval(
@@ -44,7 +44,7 @@ export default function Hero() {
             exit={{ opacity: 0, y: -50 }}
             transition={{ duration: 0.5 }}
             variants={textVariant(1.1)}
-            style={{ color: textArray[currentText].color }} // Sets the color dynamically
+            style={{ color: textArray[currentText].color }}
           >
             {textArray[currentText].title}
           </motion.h1>

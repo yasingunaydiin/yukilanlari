@@ -29,14 +29,13 @@ export default async function NewListingForOrgPage(props: PageProps) {
           </Link>
         </Alert>
       </div>
-    ); // Please log in
+    );
 
   const orgId = props.params.orgId;
   const oms = await workos.userManagement.listOrganizationMemberships({
     userId: user.id,
   });
 
-  // Check if user is a member of the specified organization
   const hasAccess = oms.data.some(
     (membership) => membership.organizationId === orgId
   );

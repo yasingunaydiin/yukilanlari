@@ -11,7 +11,7 @@ export interface Chauffeur extends Document {
   newChauffeurWebsite?: string;
   newChauffeurSocialFacebook?: string;
   chauffeurId: string;
-  createdBy: string; // To track the user who created the organization
+  createdBy: string;
 }
 
 const ChauffeurSchema = new Schema<Chauffeur>({
@@ -29,10 +29,9 @@ const ChauffeurSchema = new Schema<Chauffeur>({
   newChauffeurWebsite: { type: String },
   newChauffeurSocialFacebook: { type: String },
   chauffeurId: { type: String, required: true },
-  createdBy: { type: String, required: true }, // Track by user ID
+  createdBy: { type: String, required: true },
 });
 
-// Check if the model already exists in the `models` collection
 export const ChauffeurModel =
   models.Chauffeur ||
   model<Chauffeur>('Chauffeur', ChauffeurSchema, 'chauffeur');

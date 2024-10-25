@@ -1510,7 +1510,7 @@ export default function CitySelect({
           {cities.map((city) => (
             <SelectItem
               key={city.id}
-              value={city.name} // Set value to the city name
+              value={city.name}
               className='flex items-center'
             >
               {city.name}

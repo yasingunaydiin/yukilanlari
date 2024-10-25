@@ -1,5 +1,5 @@
 'use server';
-import { connectToDB } from '@/lib/dbConnect'; // Import the database connection
+import { connectToDB } from '@/lib/dbConnect';
 import { ChauffeurModel } from '@/models/Chauffeur';
 import { WorkOS } from '@workos-inc/node';
 import { revalidatePath } from 'next/cache';
@@ -17,10 +17,9 @@ export async function createChauffeur(
   newChauffeurSocialFacebook: string,
   userId: string
 ) {
-  // Connect to MongoDB
   await connectToDB();
 
-  // Create the organization in WorkOS (use the ChauffeurName as organization name)
+  // Create the organization in WorkOS
   const org = await workos.organizations.createOrganization({
     name: newChauffeurName,
   });
@@ -41,8 +40,8 @@ export async function createChauffeur(
     newChauffeurLocation: newChauffeurLocation,
     newChauffeurWebsite: newChauffeurWebsite,
     newChauffeurSocialFacebook: newChauffeurSocialFacebook,
-    chauffeurId: org.id, // Save the WorkOS organization ID as ChauffeurId
-    createdBy: userId, // Store the authenticated user ID
+    chauffeurId: org.id,
+    createdBy: userId,
   });
 
   // Save the Chauffeur details to MongoDB

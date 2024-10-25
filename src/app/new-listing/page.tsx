@@ -13,8 +13,8 @@ import {
   TabsList,
   TabsTrigger,
 } from '@/app/components/ui/tabs';
-import { Chauffeur, ChauffeurModel } from '@/models/Chauffeur'; // Adjust the path based on your structure
-import { Company, CompanyModel } from '@/models/Company'; // Adjust the path based on your structure
+import { Chauffeur, ChauffeurModel } from '@/models/Chauffeur';
+import { Company, CompanyModel } from '@/models/Company';
 import { getSignInUrl, withAuth } from '@workos-inc/authkit-nextjs';
 import { WorkOS } from '@workos-inc/node';
 import { ArrowRight, ChevronRight } from 'lucide-react';
@@ -23,7 +23,7 @@ import OrganizationIcon from '../components/CompanyChauffeurIcon';
 
 interface NewListingPageProps {
   searchParams: {
-    tab?: string; // The tab parameter in the query string
+    tab?: string;
   };
 }
 
@@ -59,13 +59,11 @@ export default async function NewListingPage({
       </div>
     );
   }
-  // Fetch companies for the authenticated user
+
   const fetchCompaniesData: Company[] = await fetchCompanies(user.id);
 
-  // Fetch chauffeurs created by the user
   const fetchChauffeursData: Chauffeur[] = await fetchChauffeurs(user.id);
 
-  // Determine the active tab from the search parameters
   const activeTab = searchParams.tab === 'chauffeur' ? 'chauffeur' : 'company';
 
   const organizationMemberships =
@@ -130,8 +128,8 @@ export default async function NewListingPage({
                 <div className='space-y-2'>
                   {fetchCompaniesData.map((company) => (
                     <Link
-                      key={company._id as string} // Ensure you're using the correct property for the key
-                      href={`/new-listing/company/${company.organizationId}`} // Use the correct organizationId for the URL
+                      key={company._id as string}
+                      href={`/new-listing/company/${company.organizationId}`}
                       className='block'
                     >
                       <Button
@@ -190,8 +188,8 @@ export default async function NewListingPage({
                 <div className='space-y-2'>
                   {fetchChauffeursData.map((chauffeur) => (
                     <Link
-                      key={chauffeur._id as string} // Ensure you're using the correct property for the key
-                      href={`/new-listing/chauffeur/${chauffeur.chauffeurId}`} // Use the correct organizationId for the URL
+                      key={chauffeur._id as string}
+                      href={`/new-listing/chauffeur/${chauffeur.chauffeurId}`}
                       className='block'
                     >
                       <Button

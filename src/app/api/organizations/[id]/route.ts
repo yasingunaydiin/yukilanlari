@@ -5,7 +5,6 @@ import { JobModel } from '@/models/Job';
 import { WorkOS } from '@workos-inc/node';
 import { NextResponse } from 'next/server';
 
-// Initialize WorkOS
 const workos = new WorkOS(process.env.WORKOS_API_KEY);
 
 export async function DELETE(
@@ -21,7 +20,6 @@ export async function DELETE(
   }
 
   try {
-    // Connect to MongoDB
     await connectToDB();
 
     // 1. Delete the organization from WorkOS

@@ -1,5 +1,5 @@
 'use server';
-import { connectToDB } from '@/lib/dbConnect'; // Import the database connection
+import { connectToDB } from '@/lib/dbConnect';
 import { CompanyModel } from '@/models/Company';
 import { WorkOS } from '@workos-inc/node';
 import { revalidatePath } from 'next/cache';
@@ -17,7 +17,6 @@ export async function createCompany(
   newCompanySocialFacebook: string,
   userId: string
 ) {
-  // Connect to MongoDB
   await connectToDB();
 
   // Create the organization in WorkOS
@@ -52,5 +51,3 @@ export async function createCompany(
   revalidatePath('/new-listing');
   redirect('/new-listing');
 }
-
-//deleted chauffeur here
