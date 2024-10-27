@@ -4,8 +4,6 @@ import { motion, useMotionValueEvent, useScroll } from 'framer-motion';
 import { CircleArrowDown } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { textVariant } from '../../../motion.js';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
 
 const textArray = [
   { title: 'yükünü', color: 'rgb(250 204 21)' },
@@ -52,16 +50,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <form className='flex gap-2 mt-14 max-w-xl mx-auto'>
-        <Input
-          type='search'
-          className='border border-gray-300 w-full py-2 px-3 rounded-md '
-          placeholder='Ara...'
-        />
-        <Button className='bg-yellow-400 text-white py-2 px-4 rounded-md'>
-          Ara
-        </Button>
-      </form>
+      {/* Need filter here */}
       <motion.div
         initial={{ opacity: 1 }}
         animate={{ opacity: visible ? 1 : 0 }}

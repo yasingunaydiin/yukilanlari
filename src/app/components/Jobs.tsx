@@ -34,17 +34,17 @@ export default function Jobs({ jobs }: { jobs: Job[] }) {
           </TabsTrigger>
         </TabsList>
         <TabsContent value='company'>
-          <JobList jobs={companyJobs} />
+          <ShowJobsList jobs={companyJobs} />
         </TabsContent>
         <TabsContent value='chauffeur'>
-          <JobList jobs={chauffeurJobs} />
+          <ShowJobsList jobs={chauffeurJobs} />
         </TabsContent>
       </Tabs>
     </Card>
   );
 }
 
-function JobList({ jobs }: { jobs: Job[] }) {
+function ShowJobsList({ jobs }: { jobs: Job[] }) {
   return (
     <div className='flex flex-col gap-4 mt-4'>
       {!jobs?.length && (
