@@ -4,6 +4,7 @@ import ShowMoreJobs from '@/app/components/ShowMoreJobs'; // Import the JobsList
 import { connectToDB } from '@/lib/dbConnect';
 import { addOrgAndUserData, JobModel } from '@/models/Job';
 import { withAuth } from '@workos-inc/authkit-nextjs';
+import FAQ from './components/FAQ';
 
 export default async function Home() {
   await connectToDB();
@@ -17,6 +18,7 @@ export default async function Home() {
     <>
       <Hero />
       <ShowMoreJobs initialJobs={latestJobs} />
+      <FAQ />
     </>
   );
 }

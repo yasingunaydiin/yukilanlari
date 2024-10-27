@@ -31,6 +31,12 @@ export default function Hero() {
 
   return (
     <section className='container my-16'>
+      <div className='flex items-center justify-center -mt-10 mb-3'>
+        <span className='inline-flex items-center rounded-md bg-orange-50 px-2 py-1 text-xs font-medium text-orange-600 ring-1 ring-inset ring-orange-500/10'>
+          🎉 Hoş geldiniz!
+        </span>
+      </div>
+
       <div className='absolute z-[-1] bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_80%)]'></div>
       <div className='bg-gradient-to-r from-gray-600 to-gray-900 text-transparent bg-clip-text flex flex-col text-4xl lg:text-6xl md:text-5xl font-bold text-center items-center'>
         <h1>Bir sonraki</h1>
