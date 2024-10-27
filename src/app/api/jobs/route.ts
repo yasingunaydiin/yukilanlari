@@ -1,7 +1,7 @@
 import { addOrgAndUserData, JobModel } from '@/models/Job';
 import { withAuth } from '@workos-inc/authkit-nextjs';
 import mongoose from 'mongoose';
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 // GET handler for loading more jobs
 export async function GET(req: NextRequest) {
@@ -26,10 +26,10 @@ export async function GET(req: NextRequest) {
       user
     );
 
-    return Response.json(jobs);
+    return NextResponse.json(jobs);
   } catch (error) {
     console.error('Error loading jobs:', error);
-    return Response.json({ error: 'Failed to load jobs' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to load jobs' }, { status: 500 });
   }
 }
 
@@ -43,5 +43,5 @@ export async function DELETE(req: NextRequest) {
     _id: id,
   });
 
-  return Response.json(true);
+  return NextResponse.json(true); //Changed from Response to NextResponse
 }
