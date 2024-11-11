@@ -1,4 +1,8 @@
-![Empty MacOS icon](https://github.com/user-attachments/assets/a216df8c-4dfc-41df-a670-a687c20fddbe)
+<img width="128px" src="public/Empty_MacOS_icon.png" alt="Logo" align="left" />
+
+# Regexorcist Landing Page
+
+Landing page for my regexcleaner
 
 
 # Yukilanlari.net
