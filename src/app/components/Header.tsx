@@ -5,8 +5,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/app/components/ui/dropdown-menu';
+import logoIcon from '@/public/logoIcon.png';
 import { getSignInUrl, signOut, withAuth } from '@workos-inc/authkit-nextjs';
-import { ContactRound, LogIn, LogOut, Package } from 'lucide-react';
+import { ContactRound, LogIn, LogOut } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from './ui/button';
 
@@ -17,7 +19,7 @@ export default async function Header() {
   return (
     <header className='flex items-center justify-between mx-auto p-4'>
       <Button className='sm:text-2xl text-sm items-center gap-2 inline-flex rounded-md bg-white px-2 hover:bg-orange-50 transition-colors duration-300'>
-        <Package className='text-orange-400' />
+        <Image src={logoIcon} width={45} height={45} alt='Platform Logo' />
         <Link href='/' className='text-orange-400 bg-clip-text font-bold '>
           Yük İlanları.net
         </Link>
