@@ -10,6 +10,7 @@ Features
 - Categories dropdown.
 - Country from and to dropdown, city from and to dropdown both connected.
 - Hamburger menu for phone.
+- Skeleton loader
   // More to add when I'm done.
 
   ## Screenshots
