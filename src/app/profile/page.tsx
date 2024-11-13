@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import DeleteOrganization from '../components/DeleteOrganization';
+import SkeletonLoader from '../components/SkeletonLoader';
 import { Alert, AlertDescription } from '../components/ui/alert';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
@@ -99,7 +100,9 @@ export default async function CompanyListPage() {
                   <Link href={`/jobs/${company.organizationId}`}>
                     <div className='flex gap-2'>
                       <h1 className='text-xl font-bold cursor-pointer'>
-                        {company.organizationName}
+                        <SkeletonLoader>
+                          {company.organizationName}
+                        </SkeletonLoader>
                       </h1>
                       <span className='flex items-center text-sm text-gray-500 group-hover:text-gray-700'>
                         Tüm ilanları göster
@@ -120,23 +123,23 @@ export default async function CompanyListPage() {
                   />
                 </div>
               </div>
-              <div className='flex items-center'>
+              <div className='flex items-center m-2'>
                 <User className='w-5 h-5 mr-2 text-muted-foreground' />
-                {company.contactName}
+                <SkeletonLoader>{company.contactName}</SkeletonLoader>
               </div>
-              <div className='flex items-center'>
+              <div className='flex items-center m-2'>
                 <Mail className='w-5 h-5 mr-2 text-muted-foreground' />
-                {company.email}
+                <SkeletonLoader>{company.email}</SkeletonLoader>
               </div>
-              <div className='flex items-center'>
+              <div className='flex items-center m-2'>
                 <Phone className='w-5 h-5 mr-2 text-muted-foreground' />
-                {company.phone}
+                <SkeletonLoader>{company.phone}</SkeletonLoader>
               </div>
-              <div className='flex items-center'>
+              <div className='flex items-center m-2'>
                 <Map className='w-5 h-5 mr-2 text-muted-foreground' />
-                {company.location}
+                <SkeletonLoader>{company.location}</SkeletonLoader>
               </div>
-              <div className='flex items-center'>
+              <div className='flex items-center m-2'>
                 <Globe className='w-5 h-5 mr-2 text-muted-foreground' />
                 {company.website ? (
                   <a
@@ -144,13 +147,13 @@ export default async function CompanyListPage() {
                     target='_blank'
                     rel='noopener noreferrer'
                   >
-                    {company.website}
+                    <SkeletonLoader>{company.website}</SkeletonLoader>
                   </a>
                 ) : (
                   'Websitesi Yok'
                 )}
               </div>
-              <div className='flex items-center'>
+              <div className='flex items-center  m-2'>
                 <Facebook className='w-5 h-5 mr-2 text-muted-foreground' />
                 {company.socialFacebook ? (
                   <a
@@ -158,7 +161,7 @@ export default async function CompanyListPage() {
                     target='_blank'
                     rel='noopener noreferrer'
                   >
-                    {company.socialFacebook}
+                    <SkeletonLoader>{company.socialFacebook}</SkeletonLoader>
                   </a>
                 ) : (
                   'Facebook Sayfasi Yok'
@@ -197,7 +200,9 @@ export default async function CompanyListPage() {
                   <Link href={`/jobs/${chauffeur.chauffeurId}`}>
                     <div className='flex gap-2'>
                       <h1 className='text-xl font-bold cursor-pointer'>
-                        {chauffeur.chauffeurName}
+                        <SkeletonLoader>
+                          {chauffeur.chauffeurName}
+                        </SkeletonLoader>
                       </h1>
                       <span className='flex items-center text-sm text-gray-500 group-hover:text-gray-700'>
                         Tüm ilanları göster
@@ -218,23 +223,23 @@ export default async function CompanyListPage() {
                   />
                 </div>
               </div>
-              <div className='flex items-center'>
+              <div className='flex items-center m-2'>
                 <User className='w-5 h-5 mr-2 text-muted-foreground' />
-                {chauffeur.contactName}
+                <SkeletonLoader>{chauffeur.contactName}</SkeletonLoader>
               </div>
-              <div className='flex items-center'>
+              <div className='flex items-center m-2'>
                 <Mail className='w-5 h-5 mr-2 text-muted-foreground' />
-                {chauffeur.email}
+                <SkeletonLoader>{chauffeur.email}</SkeletonLoader>
               </div>
-              <div className='flex items-center'>
+              <div className='flex items-center m-2'>
                 <Phone className='w-5 h-5 mr-2 text-muted-foreground' />
-                {chauffeur.phone}
+                <SkeletonLoader>{chauffeur.phone}</SkeletonLoader>
               </div>
-              <div className='flex items-center'>
+              <div className='flex items-center m-2'>
                 <Map className='w-5 h-5 mr-2 text-muted-foreground' />
-                {chauffeur.location}
+                <SkeletonLoader>{chauffeur.location}</SkeletonLoader>
               </div>
-              <div className='flex items-center'>
+              <div className='flex items-center m-2'>
                 <Globe className='w-5 h-5 mr-2 text-muted-foreground' />
                 {chauffeur.website ? (
                   <a
@@ -242,13 +247,13 @@ export default async function CompanyListPage() {
                     target='_blank'
                     rel='noopener noreferrer'
                   >
-                    {chauffeur.website}
+                    <SkeletonLoader>{chauffeur.website}</SkeletonLoader>
                   </a>
                 ) : (
                   'Websitesi Yok'
                 )}
               </div>
-              <div className='flex items-center'>
+              <div className='flex items-center m-2'>
                 <Facebook className='w-5 h-5 mr-2 text-muted-foreground' />
                 {chauffeur.socialFacebook ? (
                   <a
@@ -256,7 +261,7 @@ export default async function CompanyListPage() {
                     target='_blank'
                     rel='noopener noreferrer'
                   >
-                    {chauffeur.socialFacebook}
+                    <SkeletonLoader>{chauffeur.socialFacebook}</SkeletonLoader>
                   </a>
                 ) : (
                   'Facebook Sayfasi Yok'
