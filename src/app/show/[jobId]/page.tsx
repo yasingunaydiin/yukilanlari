@@ -2,6 +2,7 @@ import CallButton from '@/app/components/CallButton';
 import MailButton from '@/app/components/EmailButton';
 import GuestSignIn from '@/app/components/GuestSignIn';
 import OrgButton from '@/app/components/OrgButton';
+import SkeletonLoader from '@/app/components/SkeletonLoader';
 import TimeAgo from '@/app/components/TimeAgo';
 import {
   Card,
@@ -15,6 +16,7 @@ import { getSignInUrl, withAuth } from '@workos-inc/authkit-nextjs';
 import {
   BusFront,
   Flag,
+  Info,
   Mail,
   MapPinHouse,
   MessageCircle,
@@ -47,46 +49,72 @@ export default async function SingleJobPage(props: PageProps) {
         <Card>
           <CardHeader>
             <CardTitle>
-              <OrgButton orgId={jobInfo.orgId} title={jobInfo.title} />
+              <SkeletonLoader>
+                <OrgButton orgId={jobInfo.orgId} title={jobInfo.title} />
+              </SkeletonLoader>
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className='space-y-4'>
               <div>
                 <h2 className='text-xl font-semibold mb-2'>Açıklama</h2>
-                <p className='text-muted-foreground'>{jobInfo.description}</p>
+                <div className='flex items-center'>
+                  <Info className='w-5 h-5 mr-2' />
+                  <SkeletonLoader>
+                    <p className='text-muted-foreground'>
+                      {jobInfo.description}
+                    </p>
+                  </SkeletonLoader>
+                </div>
               </div>
+
               <div>
                 <h2 className='text-xl font-semibold mb-2'>İş Detayları</h2>
                 <div className='grid grid-cols-2 gap-4'>
                   <div className='flex items-start gap-2 flex-col text-muted-foreground'>
                     <div className='flex items-center'>
                       <Package className='w-5 h-5 mr-2' />
-                      <span className='capitalize'>{jobInfo.category}</span>
+                      <SkeletonLoader>
+                        <span className='capitalize'>{jobInfo.category}</span>
+                      </SkeletonLoader>
                     </div>
                     <div className='flex items-center'>
                       <Weight className='w-5 h-5 mr-2' />
-                      <span className='capitalize'>{jobInfo.weight}</span>
+                      <SkeletonLoader>
+                        <span className='capitalize'>{jobInfo.weight}</span>
+                      </SkeletonLoader>
                     </div>
                     <div className='flex items-center'>
                       <BusFront className='w-5 h-5 mr-2' />
-                      <span className='capitalize'>{jobInfo.vehicleType}</span>
+                      <SkeletonLoader>
+                        <span className='capitalize'>
+                          {jobInfo.vehicleType}
+                        </span>
+                      </SkeletonLoader>
                     </div>
                     <div className='flex items-center'>
                       <Ruler className='w-5 h-5 mr-2' />
-                      <span className='capitalize'>{jobInfo.vehicleSize}</span>
+                      <SkeletonLoader>
+                        <span className='capitalize'>
+                          {jobInfo.vehicleSize}
+                        </span>
+                      </SkeletonLoader>
                     </div>
                     <div className='flex items-center'>
                       <MapPinHouse className='w-5 h-5 mr-2' />
-                      <span>
-                        {jobInfo.countryFrom}, {jobInfo.cityFrom}
-                      </span>
+                      <SkeletonLoader>
+                        <span>
+                          {jobInfo.countryFrom}, {jobInfo.cityFrom}
+                        </span>
+                      </SkeletonLoader>
                     </div>
                     <div className='flex items-center'>
                       <Flag className='w-5 h-5 mr-2' />
-                      <span>
-                        {jobInfo.countryTo}, {jobInfo.cityTo}
-                      </span>
+                      <SkeletonLoader>
+                        <span>
+                          {jobInfo.countryTo}, {jobInfo.cityTo}
+                        </span>
+                      </SkeletonLoader>
                     </div>
                   </div>
                 </div>
@@ -175,14 +203,21 @@ export default async function SingleJobPage(props: PageProps) {
       <Card>
         <CardHeader>
           <CardTitle>
-            <OrgButton orgId={jobInfo.orgId} title={jobInfo.title} />
+            <SkeletonLoader>
+              <OrgButton orgId={jobInfo.orgId} title={jobInfo.title} />
+            </SkeletonLoader>
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className='space-y-4'>
             <div>
               <h2 className='text-xl font-semibold mb-2'>Açıklama</h2>
-              <p className='text-muted-foreground'>{jobInfo.description}</p>
+              <div className='flex items-center'>
+                <Info className='w-5 h-5 mr-2' />
+                <SkeletonLoader>
+                  <p className='text-muted-foreground'>{jobInfo.description}</p>
+                </SkeletonLoader>
+              </div>
             </div>
             <div>
               <h2 className='text-xl font-semibold mb-2'>İş Detayları</h2>
@@ -190,31 +225,43 @@ export default async function SingleJobPage(props: PageProps) {
                 <div className='flex items-start gap-2 flex-col text-muted-foreground'>
                   <div className='flex items-center'>
                     <Package className='w-5 h-5 mr-2' />
-                    <span className='capitalize'>{jobInfo.category}</span>
+                    <SkeletonLoader>
+                      <span className='capitalize'>{jobInfo.category}</span>
+                    </SkeletonLoader>
                   </div>
                   <div className='flex items-center'>
                     <Weight className='w-5 h-5 mr-2' />
-                    <span className='capitalize'>{jobInfo.weight}</span>
+                    <SkeletonLoader>
+                      <span className='capitalize'>{jobInfo.weight}</span>
+                    </SkeletonLoader>
                   </div>
                   <div className='flex items-center'>
                     <BusFront className='w-5 h-5 mr-2' />
-                    <span className='capitalize'>{jobInfo.vehicleType}</span>
+                    <SkeletonLoader>
+                      <span className='capitalize'>{jobInfo.vehicleType}</span>
+                    </SkeletonLoader>
                   </div>
                   <div className='flex items-center'>
                     <Ruler className='w-5 h-5 mr-2' />
-                    <span className='capitalize'>{jobInfo.vehicleSize}</span>
+                    <SkeletonLoader>
+                      <span className='capitalize'>{jobInfo.vehicleSize}</span>
+                    </SkeletonLoader>
                   </div>
                   <div className='flex items-center'>
                     <MapPinHouse className='w-5 h-5 mr-2' />
-                    <span>
-                      {jobInfo.countryFrom}, {jobInfo.cityFrom}
-                    </span>
+                    <SkeletonLoader>
+                      <span>
+                        {jobInfo.countryFrom}, {jobInfo.cityFrom}
+                      </span>
+                    </SkeletonLoader>
                   </div>
                   <div className='flex items-center'>
                     <Flag className='w-5 h-5 mr-2' />
-                    <span>
-                      {jobInfo.countryTo}, {jobInfo.cityTo}
-                    </span>
+                    <SkeletonLoader>
+                      <span>
+                        {jobInfo.countryTo}, {jobInfo.cityTo}
+                      </span>
+                    </SkeletonLoader>
                   </div>
                 </div>
               </div>
@@ -224,15 +271,21 @@ export default async function SingleJobPage(props: PageProps) {
               <div className='space-y-2 text-muted-foreground'>
                 <div className='flex items-center'>
                   <User className='w-5 h-5 mr-2' />
-                  <span className='capitalize'>{jobInfo.contactName}</span>
+                  <SkeletonLoader>
+                    <span className='capitalize'>{jobInfo.contactName}</span>
+                  </SkeletonLoader>
                 </div>
                 <div className='flex items-center'>
                   <Mail className='w-5 h-5 mr-2' />
-                  <span>{jobInfo.contactEmail}</span>
+                  <SkeletonLoader>
+                    <span>{jobInfo.contactEmail}</span>
+                  </SkeletonLoader>
                 </div>
                 <div className='flex items-center'>
                   <Phone className='w-5 h-5 mr-2' />
-                  <span>{jobInfo.contactPhone}</span>
+                  <SkeletonLoader>
+                    <span>{jobInfo.contactPhone}</span>
+                  </SkeletonLoader>
                 </div>
               </div>
             </div>

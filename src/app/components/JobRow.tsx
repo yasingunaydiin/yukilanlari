@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
+import SkeletonLoader from './SkeletonLoader';
 import TimeAgo from './TimeAgo';
 import { Button } from './ui/button';
 
@@ -163,27 +164,42 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
             <div className='flex flex-col sm:flex-row gap-y-2 sm:gap-x-4 text-sm text-gray-600'>
               <div className='flex items-center gap-1'>
                 <Package className='size-4' />
-                <span className='capitalize'>Kategori:</span> {jobInfo.category}
+                <span className='capitalize'>Kategori:</span>
+                <SkeletonLoader className='w-14'>
+                  {jobInfo.category}
+                </SkeletonLoader>
               </div>
               <div className='flex items-center gap-1'>
                 <Weight className='size-4' />
-                <span className='font-medium'>Tonaj:</span> {jobInfo.weight}
+                <span className='font-medium'>Tonaj:</span>{' '}
+                <SkeletonLoader className='w-14'>
+                  {jobInfo.weight}
+                </SkeletonLoader>
               </div>
               <div className='flex items-center gap-1'>
                 <MapPinHouse className='size-4' />
-                <span>
-                  {formatLocation(jobInfo.countryFrom, jobInfo.cityFrom)}
-                </span>
+                <SkeletonLoader className='w-14'>
+                  <span>
+                    {formatLocation(jobInfo.countryFrom, jobInfo.cityFrom)}
+                  </span>
+                </SkeletonLoader>
               </div>
               <div className='flex items-center gap-1'>
                 <Flag className='size-4' />
-                <span>{formatLocation(jobInfo.countryTo, jobInfo.cityTo)}</span>
+                <SkeletonLoader className='w-14'>
+                  <span>
+                    {formatLocation(jobInfo.countryTo, jobInfo.cityTo)}
+                  </span>
+                </SkeletonLoader>
               </div>
             </div>
             <div className='mt-2 sm:gap-x-4 text-sm text-gray-600'>
               <div>
                 <span className='flex items-center gap-1'>
-                  <CalendarDays className='size-4' /> Tarih: {formattedJobDate}
+                  <CalendarDays className='size-4' /> Tarih:{' '}
+                  <SkeletonLoader className='w-14'>
+                    {formattedJobDate}
+                  </SkeletonLoader>
                 </span>
               </div>
             </div>
