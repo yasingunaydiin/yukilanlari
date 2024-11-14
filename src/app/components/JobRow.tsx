@@ -165,20 +165,16 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
               <div className='flex items-center gap-1'>
                 <Package className='size-4' />
                 <span className='capitalize'>Kategori:</span>
-                <SkeletonLoader className='w-14'>
-                  {jobInfo.category}
-                </SkeletonLoader>
+                <SkeletonLoader>{jobInfo.category}</SkeletonLoader>
               </div>
               <div className='flex items-center gap-1'>
                 <Weight className='size-4' />
                 <span className='font-medium'>Tonaj:</span>{' '}
-                <SkeletonLoader className='w-14'>
-                  {jobInfo.weight}
-                </SkeletonLoader>
+                <SkeletonLoader>{jobInfo.weight}</SkeletonLoader>
               </div>
               <div className='flex items-center gap-1'>
                 <MapPinHouse className='size-4' />
-                <SkeletonLoader className='w-14'>
+                <SkeletonLoader>
                   <span>
                     {formatLocation(jobInfo.countryFrom, jobInfo.cityFrom)}
                   </span>
@@ -186,7 +182,7 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
               </div>
               <div className='flex items-center gap-1'>
                 <Flag className='size-4' />
-                <SkeletonLoader className='w-14'>
+                <SkeletonLoader>
                   <span>
                     {formatLocation(jobInfo.countryTo, jobInfo.cityTo)}
                   </span>
@@ -197,9 +193,7 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
               <div>
                 <span className='flex items-center gap-1'>
                   <CalendarDays className='size-4' /> Tarih:{' '}
-                  <SkeletonLoader className='w-14'>
-                    {formattedJobDate}
-                  </SkeletonLoader>
+                  <SkeletonLoader>{formattedJobDate}</SkeletonLoader>
                 </span>
               </div>
             </div>

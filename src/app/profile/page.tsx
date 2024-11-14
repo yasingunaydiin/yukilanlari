@@ -90,7 +90,7 @@ export default async function CompanyListPage() {
   return (
     <div className='container my-6 max-w-3xl mx-auto'>
       <ul className='space-y-4 m-5'>
-        <h1 className='text-3xl font-bold'>Sirketler</h1>
+        <h1 className='text-3xl font-bold'>Şirketleriniz</h1>
         {companies.length > 0 ? (
           companies.map((company) => (
             <Card key={company.id} className='p-4'>
