@@ -4,6 +4,7 @@ import ShowMoreJobs from '@/app/components/ShowMoreJobs'; // Import the JobsList
 import { connectToDB } from '@/lib/dbConnect';
 import { addOrgAndUserData, JobModel } from '@/models/Job';
 import { withAuth } from '@workos-inc/authkit-nextjs';
+import Head from 'next/head';
 import FAQ from './components/FAQ';
 
 export default async function Home() {
@@ -16,6 +17,9 @@ export default async function Home() {
 
   return (
     <>
+      <Head>
+        <link rel='icon' href='/favicon.ico' />{' '}
+      </Head>
       <Hero />
       <ShowMoreJobs initialJobs={latestJobs} />
       <FAQ />
