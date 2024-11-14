@@ -29,13 +29,15 @@ export default async function CompanyListPage() {
     return (
       <div className='container mt-6'>
         <Alert>
-          <AlertDescription>
-            İş veya sürücü ilanlarınızı görmek için
-            <Button className='m-1 text-yellow-400 inline-flex items-center gap-1 h-5 w-12 rounded-md bg-orange-50 px-2 py-1 text-xs font-medium ring-1 ring-inset ring-orange-600/10 hover:bg-orange-100 transition-colors duration-300'>
-              <Link href={signInUrl}>Giriş</Link>
-            </Button>
-            yapın
-          </AlertDescription>
+          <Link href={signInUrl}>
+            <AlertDescription>
+              İş veya sürücü ilanlarınızı görmek için
+              <Button className='m-1 text-yellow-400 inline-flex items-center gap-1 h-5 w-12 rounded-md bg-orange-50 px-2 py-1 text-xs font-medium ring-1 ring-inset ring-orange-600/10 hover:bg-orange-100 transition-colors duration-300'>
+                Giriş
+              </Button>
+              yapın
+            </AlertDescription>
+          </Link>
         </Alert>
       </div>
     );
@@ -89,6 +91,20 @@ export default async function CompanyListPage() {
 
   return (
     <div className='container my-6 max-w-3xl mx-auto'>
+      <Card className='p-4'>
+        <a href='mailto:yukilanlarinet@gmail.com?subject=Veri%20Silme%20Talebi'>
+          <p>
+            Verilerinizin tamamen silinmesini istiyorsanız,
+            <span className='p-1'>
+              <button className='inline-flex items-center gap-1 rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10 hover:bg-blue-100 transition-colors duration-300'>
+                buraya tıklayarak
+              </button>
+            </span>
+            bize e-posta gönderin.
+          </p>
+        </a>
+      </Card>
+
       <ul className='space-y-4 m-5'>
         <h1 className='text-3xl font-bold'>Şirketleriniz</h1>
         {companies.length > 0 ? (

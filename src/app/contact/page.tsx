@@ -42,8 +42,8 @@ export default function ContactPage() {
       <div className='text-center mb-12'>
         <h1 className='text-4xl font-bold mb-4'>Bize Ulaşın</h1>
         <p className='text-gray-600 mb-8'>
-          Bizimle iletişime geçmekten çekinmeyin, sorularınızı buraya gönderin,
-          sizi dinleyelim
+          Bizimle iletişime geçmekten çekinmeyin, sorularınızı sorun, sizi
+          dinleyelim
         </p>
 
         <div className='flex justify-center gap-6 mb-12'>
@@ -75,10 +75,13 @@ export default function ContactPage() {
               <Phone size={24} />
               <h3 className='text-xl font-semibold'>Bizi doğrudan arayın</h3>
             </div>
-            <p className='text-2xl font-bold'>+90 541 768 87 51</p>
+            {/* <p className='text-2xl font-bold'>+90 541 768 87 51</p> */}
             <a href='tel:0541-768-87-51'>
-              <button className='mt-4 w-full bg-indigo-500 hover:bg-indigo-700 py-2 rounded-md'>
-                Ara
+              <button
+                className='mt-4 w-full bg-indigo-500 hover:bg-indigo-700 py-2 rounded-md'
+                disabled
+              >
+                {/* Ara */} Yakında
               </button>
             </a>
           </div>
@@ -93,19 +96,20 @@ export default function ContactPage() {
             <button
               className='mt-4 w-full bg-green-500 hover:bg-green-700 py-2 rounded-md'
               onClick={handleWhatsAppClick}
+              disabled // Remove this when you get a new number
             >
-              Mesaj Gönder
+              {/* Mesaj Gönder */}Yakında
             </button>
           </div>
 
           <div className='bg-gray-100 p-6 rounded-lg'>
             <div className='flex gap-2 items-center mb-2'>
               <Mail size={24} />
-              <h3 className='text-xl font-semibold'>Email ile bize ulaşın</h3>
+              <h3 className='text-xl font-semibold'>E-posta ile bize ulaşın</h3>
             </div>
             <p className='text-2xl font-bold'>yukilanlarinet@gmail.com</p>
             <button
-              className='mt-4 w-full bg-gray-100 hover:bg-gray-300 py-2 rounded-md'
+              className='mt-4 w-full bg-gray-100 hover:bg-gray-300 py-2 rounded-md border border-gray-400'
               onClick={() =>
                 (window.location.href = 'mailto:yukilanlarinet@gmail.com')
               }
