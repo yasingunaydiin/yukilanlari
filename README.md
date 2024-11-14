@@ -1,4 +1,4 @@
-<img width="128px" src="public/Empty_MacOS_icon.png" alt="Logo" align="left" />
+<img width="128px" src="public/logoIcon.png" alt="Logo" align="left" />
 
 # Yukilanlari.net
 
