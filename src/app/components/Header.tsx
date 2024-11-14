@@ -114,14 +114,22 @@ export default async function Header() {
                 Çıkış
               </Button>
             </form>
+
+            <Link href='/new-listing'>
+              <Button className='bg-yellow-400 text-white rounded-lg font-bold'>
+                İlan oluşturun
+              </Button>
+            </Link>
           </>
         )}
 
-        <Link href='/new-listing'>
-          <Button className='bg-yellow-400 text-white rounded-lg font-bold'>
-            İlan oluşturun
-          </Button>
-        </Link>
+        {!user && (
+          <Link href={signInUrl}>
+            <Button className='bg-yellow-400 text-white rounded-lg font-bold'>
+              İlan oluşturun
+            </Button>
+          </Link>
+        )}
       </nav>
     </header>
   );
