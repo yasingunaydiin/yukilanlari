@@ -1,4 +1,4 @@
-<img width="128px" src="public/Empty_MacOS_icon.png" alt="Logo" align="left" />
+<img width="128px" src="[public/logoIcon.png](https://github.com/yasingunaydiin/yasingunaydiin/blob/434680657d8a5c9dffda337e6d841897f378ea87/Yukilanlari_logo.png)" alt="Logo" align="left" />
 
 # Yukilanlari.net
 
@@ -14,4 +14,5 @@ Features
   // More to add when I'm done.
 
   ## Screenshots
-<img width="1822" alt="Scherm­afbeelding 2024-11-11 om 21 27 45" src="https://github.com/user-attachments/assets/a741d445-4e77-4103-b336-60469219354a">
+<img width="791" alt="Scherm­afbeelding 2024-11-14 om 19 29 41" src="https://github.com/user-attachments/assets/7a797c11-286b-4f92-9534-36c43c1b02d1">
+
