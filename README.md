@@ -1,4 +1,4 @@
-<img width="128px" src="public/logoIcon.png" alt="Logo" align="left" />
+<img width="128px" src="[public/logoIcon.png](https://github.com/yasingunaydiin/yasingunaydiin/blob/434680657d8a5c9dffda337e6d841897f378ea87/Yukilanlari_logo.png)" alt="Logo" align="left" />
 
 # Yukilanlari.net
 
