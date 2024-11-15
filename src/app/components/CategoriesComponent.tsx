@@ -8,7 +8,7 @@ import {
 } from '@/app/components/ui/select';
 import { Box } from 'lucide-react';
 
-const transportCategoriesArray = [
+export const transportCategoriesArray = [
   { value: 'Diğer', label: 'Diğer', emoji: '🏷️' },
   { value: 'Araç Kurtarma', label: 'Araç Kurtarma', emoji: '🚗' },
   { value: 'Gıda', label: 'Gıda', emoji: '🍽️' },

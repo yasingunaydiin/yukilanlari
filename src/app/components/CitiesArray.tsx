@@ -11,7 +11,7 @@ import {
 } from '@/app/components/ui/select';
 import { useState } from 'react';
 
-const CitiesArray = [
+export const CitiesArray = [
   {
     id: 225,
     cities: [

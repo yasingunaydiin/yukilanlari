@@ -22,8 +22,8 @@ import { Calendar as CalendarIcon, ChevronDown, Loader2 } from 'lucide-react';
 import { redirect, useRouter } from 'next/navigation';
 import { useState, useTransition } from 'react';
 import { saveJobAction } from '../actions/jobActions';
-import UrgencyComponent from './UrgencyComponent';
-import VehicleTypeComponent from './VehicleTypeComponent';
+import UrgencyComponent from './UrgencyArray';
+import VehicleTypeComponent from './VehicleTypeArray';
 
 export function ChauffeurJobForm({
   orgId,

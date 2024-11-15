@@ -11,7 +11,7 @@ import {
 } from '@/app/components/ui/select';
 import { useState } from 'react';
 
-const EuropeanCountriesArray = [
+export const CountriesArray = [
   {
     id: 225,
     name: 'Türkiye',
@@ -1183,7 +1183,7 @@ export default function CountrySelect({
   >();
 
   const handleSelectCountry = (value: string) => {
-    const selectedCountry = EuropeanCountriesArray.find(
+    const selectedCountry = CountriesArray.find(
       (c) => c.id.toString() === value
     );
     if (selectedCountry) {
@@ -1204,18 +1204,18 @@ export default function CountrySelect({
       <SelectContent>
         <SelectGroup>
           <SelectLabel>Tüm Ülkeler</SelectLabel>
-          {EuropeanCountriesArray.sort((a, b) =>
-            a.name.localeCompare(b.name)
-          ).map((country) => (
-            <SelectItem
-              key={country.id}
-              value={country.id.toString()}
-              className='flex items-center'
-            >
-              <span className='mr-2'>{country.emoji}</span>
-              {country.name}
-            </SelectItem>
-          ))}
+          {CountriesArray.sort((a, b) => a.name.localeCompare(b.name)).map(
+            (country) => (
+              <SelectItem
+                key={country.id}
+                value={country.id.toString()}
+                className='flex items-center'
+              >
+                <span className='mr-2'>{country.emoji}</span>
+                {country.name}
+              </SelectItem>
+            )
+          )}
         </SelectGroup>
       </SelectContent>
     </Select>

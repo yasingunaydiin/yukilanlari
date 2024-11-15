@@ -8,7 +8,7 @@ import {
 } from '@/app/components/ui/select';
 import { Siren } from 'lucide-react';
 
-const UrgencyComponentArray = [
+export const UrgencyArray = [
   { value: 'Diğer', label: 'Diğer', emoji: '🏷️' },
   { value: 'Acil', label: 'Acil', emoji: '🚨' },
   { value: 'Bu Hafta', label: 'Bu Hafta', emoji: '📅' },
@@ -25,13 +25,17 @@ const UrgencyComponent = () => {
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          {UrgencyComponentArray.sort((a, b) =>
-            a.label.localeCompare(b.label)
-          ).map(({ value, label, emoji }) => (
-            <SelectItem key={value} value={value} className='flex items-center'>
-              <span className='mr-2'>{emoji}</span> {label}
-            </SelectItem>
-          ))}
+          {UrgencyArray.sort((a, b) => a.label.localeCompare(b.label)).map(
+            ({ value, label, emoji }) => (
+              <SelectItem
+                key={value}
+                value={value}
+                className='flex items-center'
+              >
+                <span className='mr-2'>{emoji}</span> {label}
+              </SelectItem>
+            )
+          )}
         </SelectGroup>
       </SelectContent>
     </Select>

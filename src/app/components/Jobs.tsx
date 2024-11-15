@@ -5,41 +5,128 @@ import type { Job } from '@/models/Job';
 import { Building2, Truck } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
+import JobFilter from './JobFilter';
 import { Button } from './ui/button';
-import { Card } from './ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 
 export default function Jobs({ jobs }: { jobs: Job[] }) {
   const [activeTab, setActiveTab] = useState<ProfileType>('company');
 
-  // Filter jobs based on the profile type
-  const companyJobs = jobs.filter((job) => job.profileType === 'company');
-  const chauffeurJobs = jobs.filter((job) => job.profileType === 'chauffeur');
+  const [selectedUrgency, setSelectedUrgency] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedVehicleType, setSelectedVehicleType] = useState<string | null>(
+    null
+  );
+  const [selectedCountryFrom, setSelectedCountryFrom] = useState<string | null>(
+    null
+  );
+  const [selectedCityFrom, setSelectedCityFrom] = useState<string | null>(null);
+  const [selectedCountryTo, setSelectedCountryTo] = useState<string | null>(
+    null
+  );
+  const [selectedCityTo, setSelectedCityTo] = useState<string | null>(null);
+
+  // Filter jobs based on the profile type, selected category, and urgency
+  const companyJobs = jobs
+    .filter((job) => job.profileType === 'company')
+
+    .filter((job) =>
+      selectedCategory ? job.category === selectedCategory : true
+    )
+
+    .filter((job) => (selectedUrgency ? job.urgency === selectedUrgency : true))
+
+    .filter((job) =>
+      selectedVehicleType ? job.vehicleType === selectedVehicleType : true
+    )
+
+    .filter((job) =>
+      selectedCountryFrom ? job.countryFrom === selectedCountryFrom : true
+    )
+
+    .filter((job) =>
+      selectedCityFrom ? job.cityFrom === selectedCityFrom : true
+    )
+
+    .filter((job) =>
+      selectedCountryTo ? job.countryTo === selectedCountryTo : true
+    )
+
+    .filter((job) => (selectedCityTo ? job.cityTo === selectedCityTo : true));
+
+  const chauffeurJobs = jobs
+    .filter((job) => job.profileType === 'chauffeur')
+    .filter((job) =>
+      selectedCategory ? job.category === selectedCategory : true
+    )
+    .filter((job) => (selectedUrgency ? job.urgency === selectedUrgency : true))
+
+    .filter((job) =>
+      selectedVehicleType ? job.vehicleType === selectedVehicleType : true
+    )
+
+    .filter((job) =>
+      selectedCountryFrom ? job.countryFrom === selectedCountryFrom : true
+    )
+
+    .filter((job) =>
+      selectedCityFrom ? job.cityFrom === selectedCityFrom : true
+    )
+
+    .filter((job) =>
+      selectedCountryTo ? job.countryTo === selectedCountryTo : true
+    )
+
+    .filter((job) => (selectedCityTo ? job.cityTo === selectedCityTo : true));
 
   return (
     <Card className='bg-slate-50 p-6 rounded-2xl shadow-md'>
-      <h1 className='font-bold mb-4'>Güncel İlanlar</h1>
-      <Tabs
-        value={activeTab}
-        onValueChange={(value) => setActiveTab(value as ProfileType)}
-      >
-        <TabsList className='grid w-full grid-cols-2'>
-          <TabsTrigger value='company'>
-            <Building2 className='mr-2 h-5 w-5' />
-            Şirketler
-          </TabsTrigger>
-          <TabsTrigger value='chauffeur'>
-            <Truck className='mr-2 h-5 w-5' />
-            Şoförler
-          </TabsTrigger>
-        </TabsList>
-        <TabsContent value='company'>
-          <ShowJobsList jobs={companyJobs} />
-        </TabsContent>
-        <TabsContent value='chauffeur'>
-          <ShowJobsList jobs={chauffeurJobs} />
-        </TabsContent>
-      </Tabs>
+      <CardHeader>
+        <CardTitle>Güncel İlanlar</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <JobFilter
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          selectedUrgency={selectedUrgency}
+          setSelectedUrgency={setSelectedUrgency}
+          selectedVehicleType={selectedVehicleType}
+          setSelectedVehicleType={setSelectedVehicleType}
+          selectedCountryFrom={selectedCountryFrom}
+          setSelectedCountryFrom={setSelectedCountryFrom}
+          selectedCityFrom={selectedCityFrom}
+          setSelectedCityFrom={setSelectedCityFrom}
+          selectedCountryTo={selectedCountryTo}
+          setSelectedCountryTo={setSelectedCountryTo}
+          selectedCityTo={selectedCityTo}
+          setSelectedCityTo={setSelectedCityTo}
+        />
+      </CardContent>
+      <CardContent>
+        {/* Tabs for switching between company and chauffeur jobs */}
+        <Tabs
+          value={activeTab}
+          onValueChange={(value) => setActiveTab(value as ProfileType)}
+        >
+          <TabsList className='grid w-full grid-cols-2'>
+            <TabsTrigger value='company'>
+              <Building2 className='mr-2 h-5 w-5' />
+              Şirketler
+            </TabsTrigger>
+            <TabsTrigger value='chauffeur'>
+              <Truck className='mr-2 h-5 w-5' />
+              Şoförler
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value='company'>
+            <ShowJobsList jobs={companyJobs} />
+          </TabsContent>
+          <TabsContent value='chauffeur'>
+            <ShowJobsList jobs={chauffeurJobs} />
+          </TabsContent>
+        </Tabs>
+      </CardContent>
     </Card>
   );
 }

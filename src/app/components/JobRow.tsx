@@ -45,7 +45,7 @@ const transportCategoriesArray = [
   { value: 'Çiçek', label: 'Çiçek', emoji: '🌸' },
 ];
 
-const UrgencyComponentArray = [
+const UrgencyArray = [
   { value: 'Diğer', label: 'Diğer', emoji: '🏷️' },
   { value: 'Acil', label: 'Acil', emoji: '🚨' },
   { value: 'Bu Hafta', label: 'Bu Hafta', emoji: '📅' },
@@ -61,12 +61,12 @@ const getEmojiForCategory = (category: string): string => {
 };
 
 const getUrgencyBadge = (urgency: string): string => {
-  const urgencyObj = UrgencyComponentArray.find((urg) => urg.value === urgency);
+  const urgencyObj = UrgencyArray.find((urg) => urg.value === urgency);
   return urgencyObj ? urgencyObj.emoji : '🏷️';
 };
 
 const getUrgencyTitle = (urgency: string): string => {
-  const urgencyObj = UrgencyComponentArray.find((urg) => urg.value === urgency);
+  const urgencyObj = UrgencyArray.find((urg) => urg.value === urgency);
   return urgencyObj ? urgencyObj.label : 'Diğer';
 };
 

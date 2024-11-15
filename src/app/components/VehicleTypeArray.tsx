@@ -8,7 +8,7 @@ import {
 } from '@/app/components/ui/select';
 import { BusFront } from 'lucide-react';
 
-const vehicleTypeArray = [
+export const vehicleTypeArray = [
   { value: 'Diğer', label: 'Diğer', emoji: '🏷️' },
   { value: 'Kırkayak', label: 'Kırkayak', emoji: '🚛' },
   { value: 'Kamyon', label: 'Kamyon', emoji: '🚚' },
