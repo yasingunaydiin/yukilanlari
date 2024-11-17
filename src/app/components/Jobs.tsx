@@ -2,7 +2,7 @@
 import JobRow from '@/app/components/JobRow';
 import { ProfileType } from '@/app/types/shared';
 import type { Job } from '@/models/Job';
-import { Building2, ChevronDown, Truck } from 'lucide-react';
+import { Building2, ChevronDown, Filter, Truck } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import JobFilter from './JobFilter';
@@ -91,8 +91,9 @@ export default function Jobs({ jobs }: { jobs: Job[] }) {
     <div className='flex flex-col gap-2'>
       <div>
         <CardHeader onClick={toggleFilters} className='cursor-pointer'>
-          <div className='flex flex-row gap-2'>
-            <CardTitle>Filtreler</CardTitle>
+          <div className='flex flex-row gap-2 items-center'>
+            <Filter size='18' />
+            <CardTitle className='text-xl'>Filtreler</CardTitle>
             <div
               className={`transform transition-transform ${
                 filtersVisible ? 'rotate-180' : ''
