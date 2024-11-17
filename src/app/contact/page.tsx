@@ -2,7 +2,6 @@
 import {
   Facebook,
   Instagram,
-  Linkedin,
   LucideIcon,
   Mail,
   MessageCircle,
@@ -51,20 +50,20 @@ export default function ContactPage() {
             icon={Facebook}
             bgColor='bg-blue-50'
             iconColor='text-blue-500'
-            socialLink=''
+            socialLink='https://www.facebook.com/yukilanlarinet/'
           />
           <SocialIcon
             icon={Instagram}
             bgColor='bg-purple-50'
             iconColor='text-purple-500'
-            socialLink=''
+            socialLink='https://www.instagram.com/yukilanlarinet/'
           />
-          <SocialIcon
+          {/* <SocialIcon
             icon={Linkedin}
             bgColor='bg-blue-50'
             iconColor='text-blue-500'
             socialLink='https://www.linkedin.com/in/yasin-gunaydin-b45466204/'
-          />
+          /> */}
         </div>
       </div>
 
