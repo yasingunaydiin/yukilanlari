@@ -1,31 +1,20 @@
 'use client';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/app/components/ui/dialog';
 import type { Job } from '@/models/Job';
 import axios from 'axios';
 import { format } from 'date-fns';
 import {
+  BusFront,
   CalendarDays,
   Edit2,
-  Facebook,
   Flag,
   MapPinHouse,
   Package,
-  Share2,
   Trash2,
-  Twitter,
   Weight,
 } from 'lucide-react';
 import Link from 'next/link';
-import { useState } from 'react';
 import SkeletonLoader from './SkeletonLoader';
 import TimeAgo from './TimeAgo';
-import { Button } from './ui/button';
 
 const transportCategoriesArray = [
   { value: 'Diğer', label: 'Diğer', emoji: '🏷️' },
@@ -109,28 +98,6 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
     }
   };
 
-  const [open, setOpen] = useState(false);
-
-  const handleShare = (platform: string) => {
-    const jobLink = `https://yukilanlari.vercel.app/show/${jobInfo._id}`;
-    let shareUrl = '';
-
-    if (platform === 'Twitter') {
-      shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
-        jobLink
-      )}`;
-    } else if (platform === 'Facebook') {
-      shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-        jobLink
-      )}`;
-    }
-
-    if (shareUrl) {
-      window.open(shareUrl, '_blank', 'noopener,noreferrer');
-      setOpen(false);
-    }
-  };
-
   return (
     <div className='bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300'>
       <Link href={`/show/${jobInfo._id}`} className='block p-4'>
@@ -169,8 +136,13 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
               </div>
               <div className='flex items-center gap-1'>
                 <Weight className='size-4' />
-                <span className='font-medium'>Tonaj:</span>{' '}
+                <span className='capitalize'>Tonaj:</span>{' '}
                 <SkeletonLoader>{jobInfo.weight}</SkeletonLoader>
+              </div>
+              <div className='flex items-center gap-1'>
+                <BusFront className='size-4' />
+                <span className='capitalize'>Araç Tipi:</span>{' '}
+                <SkeletonLoader>{jobInfo.vehicleType}</SkeletonLoader>
               </div>
               <div className='flex items-center gap-1'>
                 <MapPinHouse className='size-4' />
@@ -217,37 +189,6 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
             </button>
           </div>
         )}
-        <Dialog open={open} onOpenChange={setOpen}>
-          <DialogTrigger asChild>
-            <button className='inline-flex items-center gap-1 rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/10 hover:bg-green-100 transition-colors duration-300'>
-              <Share2 className='size-3' />
-              Paylaş
-            </button>
-          </DialogTrigger>
-          <DialogContent className='sm:max-w-[425px] rounded-xl'>
-            <DialogHeader>
-              <DialogTitle>Sosyal Medya`da Paylaş</DialogTitle>
-            </DialogHeader>
-            <div className='grid gap-4 py-4'>
-              <Button
-                variant='outline'
-                className='flex items-center justify-start gap-2'
-                onClick={() => handleShare('Twitter')}
-              >
-                <Twitter className='h-4 w-4' />
-                Twitter`da Paylaş
-              </Button>
-              <Button
-                variant='outline'
-                className='flex items-center justify-start gap-2'
-                onClick={() => handleShare('Facebook')}
-              >
-                <Facebook className='h-4 w-4' />
-                Facebook`ta Paylaş
-              </Button>
-            </div>
-          </DialogContent>
-        </Dialog>
       </div>
       <div className='md:hidden -mt-5 p-3'>
         {jobInfo.createdAt && (

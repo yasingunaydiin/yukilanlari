@@ -2,6 +2,7 @@ import CallButton from '@/app/components/CallButton';
 import MailButton from '@/app/components/EmailButton';
 import GuestSignIn from '@/app/components/GuestSignIn';
 import OrgButton from '@/app/components/OrgButton';
+import ShareDialog from '@/app/components/ShareDialog';
 import SkeletonLoader from '@/app/components/SkeletonLoader';
 import TimeAgo from '@/app/components/TimeAgo';
 import {
@@ -57,7 +58,11 @@ export default async function SingleJobPage(props: PageProps) {
           <CardContent>
             <div className='space-y-4'>
               <div>
-                <h2 className='text-xl font-semibold mb-2'>Açıklama</h2>
+                <div className='flex justify-between'>
+                  <h2 className='text-xl font-semibold mb-2'>Açıklama</h2>
+                  <ShareDialog jobId={jobInfo._id} />
+                </div>
+
                 <div className='flex items-center'>
                   <Info className='w-5 h-5 mr-2' />
                   <SkeletonLoader>
@@ -70,25 +75,29 @@ export default async function SingleJobPage(props: PageProps) {
 
               <div>
                 <h2 className='text-xl font-semibold mb-2'>İş Detayları</h2>
-                <div className='grid grid-cols-2 gap-4'>
+                <div className='grid grid-cols-1 gap-4'>
                   <div className='flex items-start gap-2 flex-col text-muted-foreground'>
                     <div className='flex items-center'>
                       <Package className='w-5 h-5 mr-2' />
                       <SkeletonLoader>
-                        <span className='capitalize'>{jobInfo.category}</span>
+                        <span className='capitalize'>
+                          Kategori: {jobInfo.category}
+                        </span>
                       </SkeletonLoader>
                     </div>
                     <div className='flex items-center'>
                       <Weight className='w-5 h-5 mr-2' />
                       <SkeletonLoader>
-                        <span className='capitalize'>{jobInfo.weight}</span>
+                        <span className='capitalize'>
+                          Tonaj: {jobInfo.weight}
+                        </span>
                       </SkeletonLoader>
                     </div>
                     <div className='flex items-center'>
                       <BusFront className='w-5 h-5 mr-2' />
                       <SkeletonLoader>
                         <span className='capitalize'>
-                          {jobInfo.vehicleType}
+                          Araç Tipi: {jobInfo.vehicleType}
                         </span>
                       </SkeletonLoader>
                     </div>
@@ -96,7 +105,7 @@ export default async function SingleJobPage(props: PageProps) {
                       <Ruler className='w-5 h-5 mr-2' />
                       <SkeletonLoader>
                         <span className='capitalize'>
-                          {jobInfo.vehicleSize}
+                          Boyut: {jobInfo.vehicleSize}
                         </span>
                       </SkeletonLoader>
                     </div>
@@ -104,7 +113,7 @@ export default async function SingleJobPage(props: PageProps) {
                       <MapPinHouse className='w-5 h-5 mr-2' />
                       <SkeletonLoader>
                         <span>
-                          {jobInfo.countryFrom}, {jobInfo.cityFrom}
+                          Nereden: {jobInfo.countryFrom}, {jobInfo.cityFrom}
                         </span>
                       </SkeletonLoader>
                     </div>
@@ -112,7 +121,7 @@ export default async function SingleJobPage(props: PageProps) {
                       <Flag className='w-5 h-5 mr-2' />
                       <SkeletonLoader>
                         <span>
-                          {jobInfo.countryTo}, {jobInfo.cityTo}
+                          Nereye: {jobInfo.countryTo}, {jobInfo.cityTo}
                         </span>
                       </SkeletonLoader>
                     </div>

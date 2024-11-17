@@ -18,8 +18,14 @@ export default async function Header() {
 
   return (
     <header className='flex items-center justify-between mx-auto p-4'>
-      <Button className='sm:text-2xl text-sm items-center gap-2 inline-flex rounded-md bg-white px-2 hover:bg-orange-50 transition-colors duration-300'>
-        <Image src={logoIcon} width={45} height={45} alt='Platform Logo' />
+      <Button className='mr-6 sm:text-2xl text-sm items-center gap-2 inline-flex rounded-md bg-white hover:bg-orange-50 transition-colors duration-300'>
+        <Image
+          src={logoIcon}
+          width={35}
+          height={35}
+          alt='Platform Logo'
+          className='sm:h-[45px] w-[45px]'
+        />
         <Link href='/' className='text-orange-400 bg-clip-text font-bold '>
           Yük İlanları.net
         </Link>
@@ -35,7 +41,7 @@ export default async function Header() {
         <DropdownMenuTrigger asChild>
           <Button
             variant='ghost'
-            className='md:hidden block focus:outline-none'
+            className='md:hidden block focus:outline-none -mr-10'
           >
             <div className='space-y-1'>
               <span className='block w-6 h-0.5 bg-yellow-400'></span>
@@ -84,6 +90,7 @@ export default async function Header() {
           )}
         </DropdownMenuContent>
       </DropdownMenu>
+
       <nav className='hidden md:flex gap-4'>
         {!user && (
           <Link href={signInUrl}>
