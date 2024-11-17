@@ -18,7 +18,7 @@ const ShareDialog: React.FC<ShareDialogProps> = ({ jobId }) => {
   const [open, setOpen] = useState(false);
 
   const handleShare = (platform: string) => {
-    const jobLink = `https://yukilanlari.vercel.app/show/${jobId}`;
+    const jobLink = `https://yukilanlari.net/show/${jobId}`;
     let shareUrl = '';
 
     if (platform === 'Twitter') {
