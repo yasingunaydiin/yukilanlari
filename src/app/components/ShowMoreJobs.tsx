@@ -35,10 +35,10 @@ export default function ShowMoreJobs({ initialJobs }: ShowMoreJobs) {
   };
 
   return (
-    <div className='space-y-6'>
+    <div>
       <Jobs jobs={jobs} />
       {ifMoreJobs && (
-        <div className='flex justify-center'>
+        <div className='flex justify-center mt-5'>
           <button
             onClick={loadMore}
             disabled={loading}

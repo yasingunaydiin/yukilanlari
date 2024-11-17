@@ -189,23 +189,23 @@ export default function JobFilter({
         </Select>
       </div>
 
-      <div className='sm:flex sm:gap-2 sm:flex-row flex gap-2'>
+      <div className='flex flex-col sm:flex-row gap-4'>
         <div className='w-full gap-2 flex flex-col'>
           {/* Select Country From */}
           <Select
             value={selectedCountryFrom || ''}
             onValueChange={(value) => {
               setSelectedCountryFrom(value || '');
-              setIsCountryFromOpen(false); // Close the dropdown after selection
-            }} // Set it to null on clearing
-            open={isCountryFromOpen} // Control dropdown visibility
-            onOpenChange={(open) => setIsCountryFromOpen(open)} // Update dropdown state on toggle
+              setIsCountryFromOpen(false);
+            }}
+            open={isCountryFromOpen}
+            onOpenChange={(open) => setIsCountryFromOpen(open)}
           >
             <SelectTrigger
-              onClick={() => setIsCountryFromOpen(!isCountryFromOpen)} // Toggle dropdown visibility
+              onClick={() => setIsCountryFromOpen(!isCountryFromOpen)}
               className='flex justify-start gap-1 w-full text-gray-500'
             >
-              {selectedCountryFrom ? selectedCountryFrom : 'Hangi Ülkeden?'}
+              {selectedCountryFrom || 'Hangi Ülkeden?'}
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
@@ -213,18 +213,17 @@ export default function JobFilter({
                   className='hover:bg-gray-100 flex justify-start bg-white text-black w-full'
                   onClick={() => {
                     setSelectedCountryFrom('');
-                    setIsCountryFromOpen(false); // Close dropdown after clicking
+                    setIsCountryFromOpen(false);
                   }}
                 >
                   Tümünü Göster
                 </Button>
-
                 {CountriesArray.map(({ name, emoji }) => (
                   <SelectItem
                     key={name}
                     value={name}
                     className='hover:bg-gray-100'
-                    onClick={() => setIsCountryFromOpen(false)} // Close dropdown after clicking
+                    onClick={() => setIsCountryFromOpen(false)}
                   >
                     {emoji} {name}
                   </SelectItem>
@@ -238,16 +237,16 @@ export default function JobFilter({
             value={selectedCityFrom || ''}
             onValueChange={(value) => {
               setSelectedCityFrom(value || '');
-              setIsCityFromOpen(false); // Close the dropdown after selection
-            }} // Set it to null on clearing
-            open={isCityFromOpen} // Control dropdown visibility
-            onOpenChange={(open) => setIsCityFromOpen(open)} // Update dropdown state on toggle
+              setIsCityFromOpen(false);
+            }}
+            open={isCityFromOpen}
+            onOpenChange={(open) => setIsCityFromOpen(open)}
           >
             <SelectTrigger
-              onClick={() => setIsCityFromOpen(!isCityFromOpen)} // Toggle dropdown visibility
+              onClick={() => setIsCityFromOpen(!isCityFromOpen)}
               className='flex justify-start gap-1 w-full text-gray-500'
             >
-              {selectedCityFrom ? selectedCityFrom : 'Hangi Şehirden?'}
+              {selectedCityFrom || 'Hangi Şehirden?'}
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
@@ -255,20 +254,18 @@ export default function JobFilter({
                   className='hover:bg-gray-100 flex justify-start bg-white text-black w-full'
                   onClick={() => {
                     setSelectedCityFrom('');
-                    setIsCityFromOpen(false); // Close dropdown after clicking
+                    setIsCityFromOpen(false);
                   }}
                 >
                   Tümünü Göster
                 </Button>
-
-                {/* Loop through CitiesArray and then cities to get each city name */}
                 {CitiesArray.map(({ cities }) =>
                   cities.map(({ name }) => (
                     <SelectItem
                       key={name}
                       value={name}
                       className='hover:bg-gray-100'
-                      onClick={() => setIsCityFromOpen(false)} // Close dropdown after clicking
+                      onClick={() => setIsCityFromOpen(false)}
                     >
                       {name}
                     </SelectItem>
@@ -285,16 +282,16 @@ export default function JobFilter({
             value={selectedCountryTo || ''}
             onValueChange={(value) => {
               setSelectedCountryTo(value || '');
-              setIsCountryToOpen(false); // Close the dropdown after selection
-            }} // Set it to null on clearing
-            open={isCountryToOpen} // Control dropdown visibility
-            onOpenChange={(open) => setIsCountryToOpen(open)} // Update dropdown state on toggle
+              setIsCountryToOpen(false);
+            }}
+            open={isCountryToOpen}
+            onOpenChange={(open) => setIsCountryToOpen(open)}
           >
             <SelectTrigger
-              onClick={() => setIsCountryToOpen(!isCountryToOpen)} // Toggle dropdown visibility
+              onClick={() => setIsCountryToOpen(!isCountryToOpen)}
               className='flex justify-start gap-1 w-full text-gray-500'
             >
-              {selectedCountryTo ? selectedCountryTo : 'Hangi Ülkeye?'}
+              {selectedCountryTo || 'Hangi Ülkeye?'}
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
@@ -302,7 +299,7 @@ export default function JobFilter({
                   className='hover:bg-gray-100 flex justify-start bg-white text-black w-full'
                   onClick={() => {
                     setSelectedCountryTo('');
-                    setIsCountryToOpen(false); // Close dropdown after clicking
+                    setIsCountryToOpen(false);
                   }}
                 >
                   Tümünü Göster
@@ -312,7 +309,7 @@ export default function JobFilter({
                     key={name}
                     value={name}
                     className='hover:bg-gray-100'
-                    onClick={() => setIsCountryToOpen(false)} // Close dropdown after clicking
+                    onClick={() => setIsCountryToOpen(false)}
                   >
                     {emoji} {name}
                   </SelectItem>
@@ -326,16 +323,16 @@ export default function JobFilter({
             value={selectedCityTo || ''}
             onValueChange={(value) => {
               setSelectedCityTo(value || '');
-              setIsCityToOpen(false); // Close the dropdown after selection
-            }} // Set it to null on clearing
-            open={isCityToOpen} // Control dropdown visibility
-            onOpenChange={(open) => setIsCityToOpen(open)} // Update dropdown state on toggle
+              setIsCityToOpen(false);
+            }}
+            open={isCityToOpen}
+            onOpenChange={(open) => setIsCityToOpen(open)}
           >
             <SelectTrigger
-              onClick={() => setIsCityToOpen(!isCityToOpen)} // Toggle dropdown visibility
+              onClick={() => setIsCityToOpen(!isCityToOpen)}
               className='flex justify-start gap-1 w-full text-gray-500'
             >
-              {selectedCityTo ? selectedCityTo : 'Hangi Şehire?'}
+              {selectedCityTo || 'Hangi Şehire?'}
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
@@ -343,19 +340,18 @@ export default function JobFilter({
                   className='hover:bg-gray-100 flex justify-start bg-white text-black w-full'
                   onClick={() => {
                     setSelectedCityTo('');
-                    setIsCityToOpen(false); // Close dropdown after clicking
+                    setIsCityToOpen(false);
                   }}
                 >
                   Tümünü Göster
                 </Button>
-
                 {CitiesArray.map(({ cities }) =>
                   cities.map(({ name }) => (
                     <SelectItem
                       key={name}
                       value={name}
                       className='hover:bg-gray-100'
-                      onClick={() => setIsCityToOpen(false)} // Close dropdown after clicking
+                      onClick={() => setIsCityToOpen(false)}
                     >
                       {name}
                     </SelectItem>

@@ -32,82 +32,20 @@ export default async function CompanyInfo({ params }: PageProps) {
     return (
       <CardContent>
         <div className='space-y-4'>
-          <div>
-            <h2 className='text-xl font-semibold mb-2'>İletişim Bilgileri</h2>
-            {companyDetails ? (
-              <div className='space-y-2'>
-                <div className='flex items-center'>
-                  <User className='w-5 h-5 mr-2 text-muted-foreground' />
-                  <GuestSignIn signInUrl={signInUrl} />
-                </div>
-                <div className='flex items-center'>
-                  <Mail className='w-5 h-5 mr-2 text-muted-foreground' />
-                  <GuestSignIn signInUrl={signInUrl} />
-                </div>
-                <div className='flex items-center'>
-                  <Phone className='w-5 h-5 mr-2 text-muted-foreground' />
-                  <GuestSignIn signInUrl={signInUrl} />
-                </div>
-                <div className='flex items-center'>
-                  <Map className='w-5 h-5 mr-2 text-muted-foreground' />
-                  <span>{companyDetails.newCompanyLocation}</span>
-                </div>
-                {companyDetails.newCompanyWebsite && (
-                  <div className='flex items-center'>
-                    <Globe className='w-5 h-5 mr-2 text-muted-foreground' />
-                    <a
-                      href={companyDetails.newCompanyWebsite}
-                      target='_blank'
-                      rel='noopener noreferrer'
-                      className='text-blue-500 hover:underline'
-                    >
-                      {companyDetails.newCompanyWebsite}
-                    </a>
-                  </div>
-                )}
-                {companyDetails.newCompanySocialFacebook && (
-                  <div className='flex items-center'>
-                    <Facebook className='w-5 h-5 mr-2 text-muted-foreground' />
-                    <a
-                      href={companyDetails.newCompanySocialFacebook}
-                      target='_blank'
-                      rel='noopener noreferrer'
-                      className='text-blue-500 hover:underline'
-                    >
-                      {companyDetails.newCompanySocialFacebook}
-                    </a>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <p>Şirket bilgileri şu anda mevcut değil.</p>
-            )}
-          </div>
-        </div>
-      </CardContent>
-    );
-  }
-
-  return (
-    <CardContent>
-      <div className='space-y-4'>
-        <div>
           <h2 className='text-xl font-semibold mb-2'>İletişim Bilgileri</h2>
           {companyDetails ? (
             <div className='space-y-2'>
               <div className='flex items-center'>
                 <User className='w-5 h-5 mr-2 text-muted-foreground' />
-                <span className='capitalize'>
-                  {companyDetails.newCompanyContactName}
-                </span>
+                <GuestSignIn signInUrl={signInUrl} />
               </div>
               <div className='flex items-center'>
                 <Mail className='w-5 h-5 mr-2 text-muted-foreground' />
-                <span>{companyDetails.newCompanyEmail}</span>
+                <GuestSignIn signInUrl={signInUrl} />
               </div>
               <div className='flex items-center'>
                 <Phone className='w-5 h-5 mr-2 text-muted-foreground' />
-                <span>{companyDetails.newCompanyPhone}</span>
+                <GuestSignIn signInUrl={signInUrl} />
               </div>
               <div className='flex items-center'>
                 <Map className='w-5 h-5 mr-2 text-muted-foreground' />
@@ -144,6 +82,64 @@ export default async function CompanyInfo({ params }: PageProps) {
             <p>Şirket bilgileri şu anda mevcut değil.</p>
           )}
         </div>
+      </CardContent>
+    );
+  }
+
+  return (
+    <CardContent>
+      <div className='space-y-4'>
+        <h2 className='text-xl font-semibold mb-2'>İletişim Bilgileri</h2>
+        {companyDetails ? (
+          <div className='space-y-2'>
+            <div className='flex items-center'>
+              <User className='w-5 h-5 mr-2 text-muted-foreground' />
+              <span className='capitalize'>
+                {companyDetails.newCompanyContactName}
+              </span>
+            </div>
+            <div className='flex items-center'>
+              <Mail className='w-5 h-5 mr-2 text-muted-foreground' />
+              <span>{companyDetails.newCompanyEmail}</span>
+            </div>
+            <div className='flex items-center'>
+              <Phone className='w-5 h-5 mr-2 text-muted-foreground' />
+              <span>{companyDetails.newCompanyPhone}</span>
+            </div>
+            <div className='flex items-center'>
+              <Map className='w-5 h-5 mr-2 text-muted-foreground' />
+              <span>{companyDetails.newCompanyLocation}</span>
+            </div>
+            {companyDetails.newCompanyWebsite && (
+              <div className='flex items-center'>
+                <Globe className='w-5 h-5 mr-2 text-muted-foreground' />
+                <a
+                  href={companyDetails.newCompanyWebsite}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='text-blue-500 hover:underline'
+                >
+                  {companyDetails.newCompanyWebsite}
+                </a>
+              </div>
+            )}
+            {companyDetails.newCompanySocialFacebook && (
+              <div className='flex items-center'>
+                <Facebook className='w-5 h-5 mr-2 text-muted-foreground' />
+                <a
+                  href={companyDetails.newCompanySocialFacebook}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='text-blue-500 hover:underline'
+                >
+                  {companyDetails.newCompanySocialFacebook}
+                </a>
+              </div>
+            )}
+          </div>
+        ) : (
+          <p>Şirket bilgileri şu anda mevcut değil.</p>
+        )}
       </div>
     </CardContent>
   );

@@ -2,7 +2,7 @@
 import JobRow from '@/app/components/JobRow';
 import { ProfileType } from '@/app/types/shared';
 import type { Job } from '@/models/Job';
-import { Building2, Truck } from 'lucide-react';
+import { Building2, ChevronDown, Truck } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import JobFilter from './JobFilter';
@@ -80,54 +80,80 @@ export default function Jobs({ jobs }: { jobs: Job[] }) {
 
     .filter((job) => (selectedCityTo ? job.cityTo === selectedCityTo : true));
 
+  // Filters dropdown
+  const [filtersVisible, setFiltersVisible] = useState(false);
+
+  const toggleFilters = () => {
+    setFiltersVisible((prev) => !prev);
+  };
+
   return (
-    <Card className='bg-slate-50 p-6 rounded-2xl shadow-md'>
-      <CardHeader>
-        <CardTitle>Güncel İlanlar</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <JobFilter
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-          selectedUrgency={selectedUrgency}
-          setSelectedUrgency={setSelectedUrgency}
-          selectedVehicleType={selectedVehicleType}
-          setSelectedVehicleType={setSelectedVehicleType}
-          selectedCountryFrom={selectedCountryFrom}
-          setSelectedCountryFrom={setSelectedCountryFrom}
-          selectedCityFrom={selectedCityFrom}
-          setSelectedCityFrom={setSelectedCityFrom}
-          selectedCountryTo={selectedCountryTo}
-          setSelectedCountryTo={setSelectedCountryTo}
-          selectedCityTo={selectedCityTo}
-          setSelectedCityTo={setSelectedCityTo}
-        />
-      </CardContent>
-      <CardContent>
-        {/* Tabs for switching between company and chauffeur jobs */}
-        <Tabs
-          value={activeTab}
-          onValueChange={(value) => setActiveTab(value as ProfileType)}
-        >
-          <TabsList className='grid w-full grid-cols-2'>
-            <TabsTrigger value='company'>
-              <Building2 className='mr-2 h-5 w-5' />
-              Şirketler
-            </TabsTrigger>
-            <TabsTrigger value='chauffeur'>
-              <Truck className='mr-2 h-5 w-5' />
-              Şoförler
-            </TabsTrigger>
-          </TabsList>
-          <TabsContent value='company'>
-            <ShowJobsList jobs={companyJobs} />
-          </TabsContent>
-          <TabsContent value='chauffeur'>
-            <ShowJobsList jobs={chauffeurJobs} />
-          </TabsContent>
-        </Tabs>
-      </CardContent>
-    </Card>
+    <div className='flex flex-col gap-2'>
+      <div>
+        <CardHeader onClick={toggleFilters} className='cursor-pointer'>
+          <div className='flex flex-row gap-2'>
+            <CardTitle>Filtreler</CardTitle>
+            <div
+              className={`transform transition-transform ${
+                filtersVisible ? 'rotate-180' : ''
+              }`}
+            >
+              <ChevronDown />
+            </div>
+          </div>
+        </CardHeader>
+        {filtersVisible && (
+          <CardContent>
+            <JobFilter
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+              selectedUrgency={selectedUrgency}
+              setSelectedUrgency={setSelectedUrgency}
+              selectedVehicleType={selectedVehicleType}
+              setSelectedVehicleType={setSelectedVehicleType}
+              selectedCountryFrom={selectedCountryFrom}
+              setSelectedCountryFrom={setSelectedCountryFrom}
+              selectedCityFrom={selectedCityFrom}
+              setSelectedCityFrom={setSelectedCityFrom}
+              selectedCountryTo={selectedCountryTo}
+              setSelectedCountryTo={setSelectedCountryTo}
+              selectedCityTo={selectedCityTo}
+              setSelectedCityTo={setSelectedCityTo}
+            />
+          </CardContent>
+        )}
+      </div>
+
+      <Card className='bg-slate-50 rounded-2xl shadow-md'>
+        <CardHeader>
+          <CardTitle>Güncel İlanlar</CardTitle>
+        </CardHeader>
+        <CardContent>
+          {/* Tabs for switching between company and chauffeur jobs */}
+          <Tabs
+            value={activeTab}
+            onValueChange={(value) => setActiveTab(value as ProfileType)}
+          >
+            <TabsList className='grid w-full grid-cols-2'>
+              <TabsTrigger value='company'>
+                <Building2 className='mr-2 h-5 w-5' />
+                Şirketler
+              </TabsTrigger>
+              <TabsTrigger value='chauffeur'>
+                <Truck className='mr-2 h-5 w-5' />
+                Şoförler
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value='company'>
+              <ShowJobsList jobs={companyJobs} />
+            </TabsContent>
+            <TabsContent value='chauffeur'>
+              <ShowJobsList jobs={chauffeurJobs} />
+            </TabsContent>
+          </Tabs>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
 

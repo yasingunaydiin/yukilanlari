@@ -190,12 +190,10 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
               </div>
             </div>
             <div className='mt-2 sm:gap-x-4 text-sm text-gray-600'>
-              <div>
-                <span className='flex items-center gap-1'>
-                  <CalendarDays className='size-4' /> Tarih:{' '}
-                  <SkeletonLoader>{formattedJobDate}</SkeletonLoader>
-                </span>
-              </div>
+              <span className='flex items-center gap-1'>
+                <CalendarDays className='size-4' /> Tarih:{' '}
+                <SkeletonLoader>{formattedJobDate}</SkeletonLoader>
+              </span>
             </div>
           </div>
         </div>

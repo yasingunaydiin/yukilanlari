@@ -19,6 +19,13 @@
   animation: pulse 1.5s infinite ease-in-out;
 }
 
+.chevron {
+  transition: transform 0.3s ease;
+}
+.chevron-up {
+  transform: rotate(180deg);
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
