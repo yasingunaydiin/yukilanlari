@@ -64,8 +64,8 @@ const JobSchema = new Schema(
   }
 );
 
-// TTL index to automatically delete jobs after 7 days (7 * 24 * 60 * 60 = 604800 seconds)
-JobSchema.index({ jobDate: 1 }, { expireAfterSeconds: 600000 }); // 7 days in seconds
+// // TTL index to automatically delete jobs after 7 days (7 * 24 * 60 * 60 = 604800 seconds)
+// JobSchema.index({ jobDate: 1 }, { expireAfterSeconds: 600000 }); // 7 days in seconds
 
 export const JobModel = models?.Job || model('Job', JobSchema);
 
