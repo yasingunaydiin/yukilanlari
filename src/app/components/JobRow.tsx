@@ -104,13 +104,14 @@ export default function JobRow({ jobInfo }: { jobInfo: Job }) {
         <div className='flex gap-4'>
           <div className='content-center text-4xl'>{categoryEmoji}</div>
           <div className='grow'>
-            <div className='flex justify-between gap-5 items-center'>
-              <div className='flex gap-2'>
+            <div className='flex justify-between items-center'>
+              <div className='flex flex-row gap-2 -mr-3'>
                 <button
                   onClick={handleOrgClick}
                   className='text-primary text-sm font-medium hover:underline'
                 >
-                  {jobInfo.orgName}
+                  {jobInfo.orgName}{' '}
+                  <span className='text-xs'>• Tüm ilanları</span>
                 </button>
                 <div className='gap-1 inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10 hover:bg-red-100 transition-colors duration-300'>
                   <div>{urgencyBadge}</div>
