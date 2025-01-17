@@ -9,7 +9,7 @@ const SkeletonLoader = ({
   children: React.ReactNode;
   className?: string;
 }) => {
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -19,7 +19,7 @@ const SkeletonLoader = ({
     return () => clearTimeout(timer);
   }, []);
 
-  return <div>{loading ? <Skeleton className={className} /> : children}</div>;
+  return <div>{isLoading ? <Skeleton className={className} /> : children}</div>;
 };
 
 export default SkeletonLoader;

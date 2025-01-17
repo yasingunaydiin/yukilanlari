@@ -9,7 +9,7 @@ interface ShowMoreJobs {
 
 export default function ShowMoreJobs({ initialJobs }: ShowMoreJobs) {
   const [jobs, setJobs] = useState(initialJobs);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(false);
   const [ifMoreJobs, setIfMoreJobs] = useState(true);
   const [currentLimit, setCurrentLimit] = useState(5); // Start with 3 items
 
@@ -41,10 +41,10 @@ export default function ShowMoreJobs({ initialJobs }: ShowMoreJobs) {
         <div className='flex justify-center mt-5'>
           <button
             onClick={loadMore}
-            disabled={loading}
+            disabled={isLoading}
             className='bg-yellow-400 text-white py-2 px-4 rounded-md'
           >
-            {loading ? 'Yükleniyor...' : 'Daha fazla ilan göster'}
+            {isLoading ? 'Yükleniyor...' : 'Daha fazla ilan göster'}
           </button>
         </div>
       )}
