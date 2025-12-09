@@ -1,47 +1,47 @@
 import { addOrgAndUserData, JobModel } from '@/models/Job';
 import { withAuth } from '@workos-inc/authkit-nextjs';
 import mongoose from 'mongoose';
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-// GET handler for loading more jobs
+const MONGO_URI = process.env.MONGO_URI as string;
+
 export async function GET(req: NextRequest) {
   try {
     const url = new URL(req.url);
     const skip = parseInt(url.searchParams.get('skip') || '0');
     const limit = parseInt(url.searchParams.get('limit') || '5');
 
-    await mongoose.connect(process.env.MONGO_URI as string);
-    const { user } = await withAuth();
+    if (!mongoose.connection.readyState) {
+      await mongoose.connect(MONGO_URI);
+    }
+    
+    const { user } = await withAuth(); 
 
     const jobs = await addOrgAndUserData(
-      await JobModel.find(
-        {},
-        {},
-        {
-          skip,
-          limit,
-          sort: '-createdAt',
-        }
-      ),
+      await JobModel.find({}, {}, { skip, limit, sort: '-createdAt' }),
       user
     );
 
-    return Response.json(jobs);
+    return NextResponse.json(jobs);
   } catch (error) {
     console.error('Error loading jobs:', error);
-    return Response.json({ error: 'Failed to load jobs' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to load jobs' }, { status: 500 });
   }
 }
 
-// Existing DELETE handler
 export async function DELETE(req: NextRequest) {
-  const url = new URL(req.url);
-  const id = url.searchParams.get('id');
+  try {
+    const url = new URL(req.url);
+    const id = url.searchParams.get('id');
 
-  await mongoose.connect(process.env.MONGO_URI as string);
-  await JobModel.deleteOne({
-    _id: id,
-  });
+    if (!mongoose.connection.readyState) {
+      await mongoose.connect(MONGO_URI);
+    }
 
-  return Response.json(true);
+    await JobModel.deleteOne({ _id: id });
+    return NextResponse.json(true);
+  } catch (error) {
+    console.error('Error deleting job:', error);
+    return NextResponse.json({ error: 'Failed to delete job' }, { status: 500 });
+  }
 }
